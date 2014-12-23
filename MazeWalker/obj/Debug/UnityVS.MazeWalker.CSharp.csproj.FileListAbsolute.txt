@@ -1,0 +1,11 @@
+C:\Users\Public\Documents\Unity Projects\MazeWalker\obj\Debug\UnityVS.MazeWalker.CSharp.csprojResolveAssemblyReference.cache
+C:\Users\Public\Documents\Unity Projects\MazeWalker\Temp\UnityVS_bin\Debug\Assembly-CSharp.dll
+C:\Users\Public\Documents\Unity Projects\MazeWalker\Temp\UnityVS_bin\Debug\Assembly-CSharp.pdb
+C:\Users\Public\Documents\Unity Projects\MazeWalker\Temp\UnityVS_bin\Debug\UnityEditor.dll
+C:\Users\Public\Documents\Unity Projects\MazeWalker\Temp\UnityVS_bin\Debug\UnityEngine.dll
+C:\Users\Public\Documents\Unity Projects\MazeWalker\Temp\UnityVS_bin\Debug\UnityEngine.UI.dll
+C:\Users\Public\Documents\Unity Projects\MazeWalker\Temp\UnityVS_bin\Debug\UnityEngine.xml
+C:\Users\Public\Documents\Unity Projects\MazeWalker\Temp\UnityVS_bin\Debug\UnityEditor.xml
+C:\Users\Public\Documents\Unity Projects\MazeWalker\Temp\UnityVS_bin\Debug\UnityEngine.UI.xml
+C:\Users\Public\Documents\Unity Projects\MazeWalker\obj\Debug\Assembly-CSharp.dll
+C:\Users\Public\Documents\Unity Projects\MazeWalker\obj\Debug\Assembly-CSharp.pdb
