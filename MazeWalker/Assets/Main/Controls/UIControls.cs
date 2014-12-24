@@ -1,19 +1,15 @@
-﻿using System;
-using UnityEngine;
-using System.Collections;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
-using UnitySampleAssets.Vehicles.Ball;
 
 public class UIControls : MonoBehaviour , IPointerDownHandler , IPointerUpHandler , IDragHandler {
 
 	// Use this for initialization
-    public Ball ball;
+    private Ball ball;
     private Vector2 basePosition;
     private Vector2 curPower;
     public float distancePercent = 0.5f;
     private float d;
-    public Image StartDragImage;
+    //public Image StartDragImage;
     private Vector2 _v;
     private Vector2 _r;
     public float maxAcc  = 1;
@@ -23,19 +19,25 @@ public class UIControls : MonoBehaviour , IPointerDownHandler , IPointerUpHandle
 	    basePosition = new Vector2(Screen.width/2, Screen.height/2);
         //distancePercent
         d = Mathf.Min(Screen.width / 2, Screen.height / 2) * distancePercent;
-        Debug.Log(basePosition);
+        //Debug.Log(basePosition);
 	}
+
+    public void Init(Ball ball)
+    {
+        this.ball = ball;
+    }
 	
 	// Update is called once per frame
 	void Update () {
-	    ball.Move(curPower);
+        if (ball != null)
+	        ball.Move(curPower);
 	}
 
     public void OnPointerDown(PointerEventData eventData)
     {
        // basePosition = eventData.position;
-        StartDragImage.gameObject.SetActive(false);
-        StartDragImage.transform.position = basePosition;
+        //StartDragImage.gameObject.SetActive(false);
+        //StartDragImage.transform.position = basePosition;
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -51,7 +53,7 @@ public class UIControls : MonoBehaviour , IPointerDownHandler , IPointerUpHandle
         if (_v.magnitude > d)
         {
             _r = _v - _v.normalized*distancePercent;
-            _r = _r/100;
+            _r = _r/200;
             curPower = new Vector2(Mathf.Clamp(_r.x, -maxAcc, maxAcc), Mathf.Clamp(_r.y, -maxAcc, maxAcc));
         }
         else

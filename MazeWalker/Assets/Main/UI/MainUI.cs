@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
 public class MainUI : MonoBehaviour
@@ -8,6 +7,7 @@ public class MainUI : MonoBehaviour
     public Text startlabel;
     private int maxStars;
     private GameController gameController;
+    public GameObject gameCamera;
 	// Use this for initialization
 	void Start () {
 	    
@@ -20,14 +20,29 @@ public class MainUI : MonoBehaviour
 
     public void OnStartClick(Button btn)
     {
+        Debug.Log("OnStartClick");
         gameController.StartGame();
-        btn.gameObject.SetActive(false);
+        gameCamera.gameObject.SetActive(true);
+       // btn.gameObject.SetActive(false);
+    }
+
+    public void OnRestartClick()
+    {
+        Debug.Log("OnRestartClick");
+        
     }
 
     public void InitUI(int maxStars, GameController gameController)
     {
         this.gameController = gameController;
         this.maxStars = maxStars;
+        SetStar(0);
+    }
+
+    public void SetMaxStar(int count)
+    {
+        maxStars = count;
+        startlabel.text = count + "/" + maxStars;
     }
 
     public void SetStar(int count)

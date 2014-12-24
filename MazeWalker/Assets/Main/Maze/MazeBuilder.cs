@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.Diagnostics;
+using System.Collections.Generic;
 using System.Linq;
 using Random = UnityEngine.Random;
-using UnityEngine;
 using Debug = UnityEngine.Debug;
 
 public struct IntPos
@@ -33,62 +31,112 @@ public struct IntPos
     }
 }
 
+public class GridInfo
+{
+    public CellType cell;
+    public IntPos pos;
+
+    public GridInfo(CellType cellType,int i,int j)
+    {
+        cell = cellType;
+        pos = new IntPos(i,j);
+    }
+}
+
 public enum CellType
 {
     wall,
     free,
     star,
+    end,
 }
 
 public class MazeBuilder
 {
     private int size = 20;
-    private CellType[,] grid;
+    private GridInfo[,] grid;
     //private IntPos curPosition;
     private IntPos[] directions = new IntPos[4] { new IntPos(0, 1), new IntPos(0, -1), new IntPos(1, 0), new IntPos(-1, 0) };
     private System.Random random;
     private int step = 0;
 
-    public MazeBuilder(Action<CellType[,], IntPos> onBuildComplete, int seed ,int size,int maxStarCount)
+    public MazeBuilder(Action<GridInfo[,], IntPos> onBuildComplete, int seed, int size, int maxStarCount)
     {
         this.size = size;
         random = new System.Random(seed);
-        grid = new CellType[size, size];
+        grid = new GridInfo[size, size];
         for (int i = 0; i < size; ++i)
         {
             for (int j = 0; j < size; ++j)
-                grid[i,j] = CellType.wall;
+                grid[i, j] = new GridInfo(CellType.wall,i,j);
         }
         IntPos startPos = new IntPos(1,1);
         for (int i = 0; i <6; i++)
         {
             startPos = new IntPos(random.Next(size / 4, size / 2), random.Next(size / 4, size / 2));
             SetNewStep(startPos, startPos);
-            grid[startPos.I, startPos.J] = CellType.free;
+            grid[startPos.I, startPos.J].cell = CellType.free;
             
         }
-        //setting star
-        int curStars = 0;
+        //setting blockElement
+        /*int curStars = 0;
         for (int i = 0; i < size; ++i)
         {
             for (int j = 0; j < size; ++j)
             {
-                if (grid[i, j] == CellType.free && curStars <= maxStarCount)
+                if (grid[i, j].cell == CellType.free && curStars <= maxStarCount)
                 {
                     if (Random.Range(0f, 1f) < 0.3f)
                     {
-                        grid[i, j] = CellType.star;
+                        grid[i, j].cell = CellType.star;
                     }
                 }
                 if (curStars > maxStarCount)
                     break;
             }
-        }
+        }*/
+        var f = GetrandomList(maxStarCount,GetFreePos());
+        foreach (var a in f)
+            a.cell = CellType.star;
+
+        var l = GetrandomList(2, GetFreePos());
+        foreach (var a in l)
+            a.cell = CellType.end;
+
+
         Debug.Log("MazeBuilder start from " + startPos);
-        
         Debug.Log("finsish " + step);
-        
         onBuildComplete(grid, startPos);
+    }
+
+    public List<T> GetrandomList<T>(int count, List<T> list)
+    {
+        if (list.Count < count)
+            return list;
+        List<T> outher = new List<T>();
+        int index = 0;
+        while (outher.Count <= count)
+        {
+            index = Random.Range(0, list.Count);
+            var rndelement = list[index];
+            if (!outher.Contains(rndelement));
+                outher.Add(rndelement);
+        }
+        return outher;
+    }
+
+    public List<GridInfo> GetFreePos()
+    {
+        List<GridInfo> list = new List<GridInfo>();
+        for (int i = 0; i < size; ++i)
+        {
+            for (int j = 0; j < size; ++j)
+            {
+                if (grid[i, j].cell == CellType.free)
+                    list.Add(grid[i, j]);
+            }
+        }
+        return list;
     }
 
     private IntPos SetNewStep(IntPos curPos, IntPos fromPos, int c = 0)
@@ -109,7 +157,7 @@ public class MazeBuilder
                 //Debug.Log(i + "||||   "+ directions[i] + " res " + res);
                 fromPos = curPos;
                 curPos = res;
-                grid[curPos.I, curPos.J] = CellType.free;
+                grid[curPos.I, curPos.J].cell = CellType.free;
                 SetNewStep(curPos, fromPos, c);
 
                 //if (UnityEngine.Random.Range(0f, 1f) < 0.2f)
@@ -134,12 +182,12 @@ public class MazeBuilder
             {
                 if (fromPos.I == curPos.I && fromPos.J == curPos.J + offset.J)
                     return curPos;
-                if (grid[curPos.I, curPos.J + offset.J] == CellType.wall)
+                if (grid[curPos.I, curPos.J + offset.J].cell == CellType.wall)
                 {
                     if (curPos.I - 1 >= 0 && curPos.I + 1 < size)
                     {
-                        if (grid[curPos.I - 1, curPos.J + offset.J] == CellType.wall &&
-                            grid[curPos.I + 1, curPos.J + offset.J] == CellType.wall)
+                        if (grid[curPos.I - 1, curPos.J + offset.J].cell == CellType.wall &&
+                            grid[curPos.I + 1, curPos.J + offset.J].cell == CellType.wall)
                         {
                             return new IntPos(curPos.I, curPos.J + offset.J);
                         }
@@ -156,12 +204,12 @@ public class MazeBuilder
                 {
                     return curPos;
                 }
-                if (grid[curPos.I + offset.I, curPos.J] == CellType.wall)
+                if (grid[curPos.I + offset.I, curPos.J].cell == CellType.wall)
                 {
                     if (curPos.J - 1 >= 0 && curPos.J + 1 < size)
                     {
-                        if (grid[curPos.I + offset.I, curPos.J - 1] == CellType.wall &&
-                            grid[curPos.I + offset.I, curPos.J + 1] == CellType.wall)
+                        if (grid[curPos.I + offset.I, curPos.J - 1].cell == CellType.wall &&
+                            grid[curPos.I + offset.I, curPos.J + 1].cell == CellType.wall)
                         {
                             return new IntPos(curPos.I + offset.I, curPos.J);
                         }
