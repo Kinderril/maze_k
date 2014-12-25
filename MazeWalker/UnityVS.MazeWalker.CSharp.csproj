@@ -7,16 +7,14 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{4E1243BD-973D-DA21-7B88-CD1000AE7010}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <AssemblyName>Assembly-CSharp</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>5.0.0b14</UnityVersion>
@@ -54,14 +52,12 @@
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Main\Controls\GControls.cs" />
     <Compile Include="Assets\Main\Controls\UIControls.cs" />
     <Compile Include="Assets\Main\GameController.cs" />
+    <Compile Include="Assets\Main\Maze\MazeBranch.cs" />
     <Compile Include="Assets\Main\Maze\MazeBuilder.cs" />
     <Compile Include="Assets\Main\Maze\MazeController.cs" />
     <Compile Include="Assets\Main\Maze\MazeMeshBuilder.cs" />
@@ -72,7 +68,7 @@
     <Compile Include="Assets\Main\UI\WindowStart.cs" />
     <Compile Include="Assets\Main\Units\Ball.cs" />
     <Compile Include="Assets\Main\Units\BallChecker.cs" />
-    <Compile Include="Assets\Main\Units\blockElement.cs" />
+    <Compile Include="Assets\Main\Units\BlockElement.cs" />
     <Compile Include="Assets\Main\Utils\Enums.cs" />
     <Compile Include="Assets\Main\Utils\FollowTarget.cs" />
     <Compile Include="Assets\SampleAssets\ParticleSystems\Scripts\AfterburnerPhysicsForce.cs" />

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Random = UnityEngine.Random;
 using Debug = UnityEngine.Debug;
 
 public struct IntPos
@@ -49,6 +48,7 @@ public enum CellType
     free,
     star,
     end,
+    jumer,
 }
 
 public class MazeBuilder
@@ -59,6 +59,7 @@ public class MazeBuilder
     private IntPos[] directions = new IntPos[4] { new IntPos(0, 1), new IntPos(0, -1), new IntPos(1, 0), new IntPos(-1, 0) };
     private System.Random random;
     private int step = 0;
+    private List<GridInfo> history = new List<GridInfo>();
 
     public MazeBuilder(Action<GridInfo[,], IntPos> onBuildComplete, int seed, int size, int maxStarCount)
     {
@@ -71,37 +72,35 @@ public class MazeBuilder
                 grid[i, j] = new GridInfo(CellType.wall,i,j);
         }
         IntPos startPos = new IntPos(1,1);
+        /*
         for (int i = 0; i <6; i++)
         {
             startPos = new IntPos(random.Next(size / 4, size / 2), random.Next(size / 4, size / 2));
             SetNewStep(startPos, startPos);
             grid[startPos.I, startPos.J].cell = CellType.free;
             
-        }
-        //setting blockElement
-        /*int curStars = 0;
-        for (int i = 0; i < size; ++i)
-        {
-            for (int j = 0; j < size; ++j)
-            {
-                if (grid[i, j].cell == CellType.free && curStars <= maxStarCount)
-                {
-                    if (Random.Range(0f, 1f) < 0.3f)
-                    {
-                        grid[i, j].cell = CellType.star;
-                    }
-                }
-                if (curStars > maxStarCount)
-                    break;
-            }
         }*/
-        var f = GetrandomList(maxStarCount,GetFreePos());
-        foreach (var a in f)
+        MazeBranch branch = new MazeBranch(grid,random,size,0);
+        startPos = new IntPos(random.Next(size / 4, size / 2), random.Next(size / 4, size / 2));
+        grid[startPos.I, startPos.J].cell = CellType.free;
+        branch.DoBranch(grid[startPos.I, startPos.J]);
+        /*
+        grid[startPos.I, startPos.J].cell = CellType.free;
+        history.Add(grid[startPos.I, startPos.J]);
+        SetNewStepT2(startPos, startPos);
+        */
+        //setting BlockElement
+        var stars = GetrandomList(maxStarCount-1,GetFreePos());
+        foreach (var a in stars)
             a.cell = CellType.star;
 
-        var l = GetrandomList(2, GetFreePos());
-        foreach (var a in l)
+        var exits = GetrandomList(2-1, GetFreePos());
+        foreach (var a in exits)
             a.cell = CellType.end;
+
+        var jumps = GetrandomList(6, GetFreePos());
+        foreach (var a in jumps)
+            a.cell = CellType.jumer;
 
 
         Debug.Log("MazeBuilder start from " + startPos);
@@ -117,7 +116,7 @@ public class MazeBuilder
         int index = 0;
         while (outher.Count <= count)
         {
-            index = Random.Range(0, list.Count);
+            index = random.Next(0, list.Count);
             var rndelement = list[index];
             if (!outher.Contains(rndelement));
                 outher.Add(rndelement);
@@ -137,6 +136,47 @@ public class MazeBuilder
             }
         }
         return list;
+    }
+
+    private IntPos SetNewStepT2(IntPos curPos, IntPos fromPos, int c = 0)
+    {
+
+        if (c > 1)
+        {
+            directions = directions.OrderBy(x => random.Next()).ToArray();
+            c = 0;
+        }
+        c++;
+        bool findSmt = false;
+        for (int i = 0; i < 4; i++)
+        {
+            IntPos res = CheckCell(curPos, fromPos, directions[i],1);
+            //Debug.Log("CheckCell  " + directions[i] + " res " + res + "  :   " + (res != curPos) + " cur:pos " + curPos + "  from " + fromPos);
+            if (res != curPos)
+            {
+                fromPos = curPos;
+                curPos = res;
+                grid[curPos.I, curPos.J].cell = CellType.free;
+                history.Add(grid[curPos.I, curPos.J]);
+                SetNewStepT2(curPos, fromPos, c);
+                findSmt = true;
+                break;
+            }
+        }
+        if (!findSmt)
+        {
+            Debug.Log("else " + history.Count);
+            for (int i = history.Count-1; i >0; --i)
+            {
+                IntPos res = CheckCell(history[i].pos, history[i].pos, directions[i], 1);
+                if (res != curPos)
+                {
+                    SetNewStepT2(history[i].pos, history[i].pos, c);
+                }
+            }
+            
+        }
+        return curPos;
     }
 
     private IntPos SetNewStep(IntPos curPos, IntPos fromPos, int c = 0)
@@ -174,11 +214,11 @@ public class MazeBuilder
         return curPos;
     }
     
-    private IntPos CheckCell(IntPos curPos, IntPos fromPos,IntPos offset)
+    private IntPos CheckCell(IntPos curPos, IntPos fromPos,IntPos offset,int t2 = 0)
     {
         if (offset.I == 0)
         {
-            if (curPos.J + offset.J < size && curPos.J + offset.J >= 0)
+            if (curPos.J + offset.J < size-t2 && curPos.J + offset.J >= t2)
             {
                 if (fromPos.I == curPos.I && fromPos.J == curPos.J + offset.J)
                     return curPos;
@@ -198,7 +238,7 @@ public class MazeBuilder
         }
         else if (offset.J == 0)
         {
-            if (curPos.I + offset.I < size && curPos.I + offset.I >= 0)
+            if (curPos.I + offset.I < size-t2 && curPos.I + offset.I >= t2)
             {
                 if (fromPos.I == curPos.I + offset.I && fromPos.J == curPos.J)
                 {

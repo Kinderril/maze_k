@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -7,9 +8,11 @@ public class MazeController : MonoBehaviour {
 
 	// Use this for initialization
     private MazeBuilder mazeGrid;
-    public GameObject block;
-    public GameObject Star;
-    public GameObject EndElement;
+    //public BlockElement block;
+    //public BlockElement Star;
+    //public BlockElement EndElement;
+    //public BlockElement Jumper;
+    public List<BlockElement> blocks = new List<BlockElement>(); 
     public int seed;
     private int size;
     private int stars;
@@ -23,8 +26,8 @@ public class MazeController : MonoBehaviour {
     public void Init(Action<Vector3> onComplete)
     {
         this.onComplete = onComplete;
-        if (block == null || Star == null)
-            Debug.LogError("BLOCK OR STAR IS NULL!!!");
+     //   if (block == null || Star == null)
+      //      Debug.LogError("BLOCK OR STAR IS NULL!!!");
     }
 
     public void BuildMaze(int size,int stars)
@@ -42,22 +45,11 @@ public class MazeController : MonoBehaviour {
         {
             for (int j = 0; j < size; j++)
             {
-                switch (obj[i,j].cell)
+                var b = blocks.FirstOrDefault(x => x.type == obj[i, j].cell);
+                if (b != null)
                 {
-                    case CellType.wall:
-                        GameObject go = Instantiate(block, new Vector3(i, 0, j), Quaternion.identity) as GameObject;
-                        go.transform.parent = transform;
-                        break;
-                    case CellType.end:
-                        GameObject e = Instantiate(EndElement.gameObject, new Vector3(i, 0, j), Quaternion.identity) as GameObject;
-                        e.transform.parent = transform;
-                        break;
-                    case CellType.free:
-                        break;
-                    case CellType.star:
-                        GameObject s = Instantiate(Star.gameObject, new Vector3(i, 0, j), Quaternion.identity) as GameObject;
-                        s.transform.parent = transform;
-                        break;
+                    GameObject go = Instantiate(b.gameObject, new Vector3(i, 0, j), Quaternion.identity) as GameObject;
+                    go.transform.parent = transform;
                 }
             }
             
@@ -70,7 +62,7 @@ public class MazeController : MonoBehaviour {
     {
         var cc = GetComponentsInChildren<BoxCollider>();
         Debug.Log("cc " + cc.Length);
-        var tt = cc.Where(x => x.name.Contains(block.gameObject.name) || x.name.Contains(EndElement.gameObject.name) || x.name.Contains(Star.gameObject.name));
+        var tt = cc.Where(x => !x.name.Contains("Plane") && !x.name.Contains("Maze"));
         Debug.Log("cc " + tt.Count());
         foreach (var componentsInChild in tt)
         {

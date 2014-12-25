@@ -7,7 +7,7 @@ public class MainUI : MonoBehaviour
     public Text startlabel;
     private int maxStars;
     private GameController gameController;
-    public GameObject gameCamera;
+   // public GameObject gameCamera;
 	// Use this for initialization
 	void Start () {
 	    
@@ -22,7 +22,7 @@ public class MainUI : MonoBehaviour
     {
         Debug.Log("OnStartClick");
         gameController.StartGame();
-        gameCamera.gameObject.SetActive(true);
+//        gameCamera.gameObject.SetActive(true);
        // btn.gameObject.SetActive(false);
     }
 

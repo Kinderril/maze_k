@@ -43,4 +43,9 @@ public class Ball : MonoBehaviour
     {
         this.gameController = gameController;
     }
+
+    public void AddForse(Vector3 moveDirection)
+    {
+        m_Rigidbody.AddForce(moveDirection);
+    }
 }

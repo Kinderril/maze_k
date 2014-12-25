@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class blockElement : MonoBehaviour {
+public class BlockElement : MonoBehaviour {
 
-    public BlockType type = BlockType.star;
+    public CellType type = CellType.star;
 }

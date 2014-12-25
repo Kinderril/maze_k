@@ -8,18 +8,21 @@ public class BallChecker : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        var star = other.GetComponent<blockElement>();
+        var star = other.GetComponent<BlockElement>();
         if (star != null)
         {
             switch (star.type)
             {
-                case BlockType.star:
+                case CellType.star:
                     Destroy(star.gameObject);
                     ball.gameController.GetStar();
                     break;
-                case BlockType.end:
+                case CellType.end:
                     Destroy(star.gameObject);
                     ball.gameController.EndGame();
+                    break;
+                case CellType.jumer:
+                    ball.AddForse(new Vector3(0,105,0));
                     break;
             }
 

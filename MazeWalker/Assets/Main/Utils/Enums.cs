@@ -10,9 +10,3 @@ public enum GameStage
     game,
     end,
 }
-
-public enum BlockType
-{
-    star,
-    end,
-}
