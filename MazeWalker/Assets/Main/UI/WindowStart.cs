@@ -3,7 +3,7 @@ public class WindowStart : BaseWindow
 {
     public void OnStartClicked()
     {
-        gameController.StartGame();
+        GameController.StartGame();
     }
 }
 

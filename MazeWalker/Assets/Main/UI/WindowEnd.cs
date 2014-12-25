@@ -7,7 +7,7 @@ public class WindowEnd : BaseWindow
 
     public void OnOkClicked()
     {
-        gameController.OnEndConfirm();
+        GameController.OnEndConfirm();
     }
 
     public override void Init(GameController gc)

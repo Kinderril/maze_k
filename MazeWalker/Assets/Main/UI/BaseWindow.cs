@@ -8,7 +8,13 @@ using UnityEngine;
 public class BaseWindow : MonoBehaviour
 {
     public GameStage gameStage;
-    public GameController gameController;
+    private GameController gameController;
+
+    public GameController GameController
+    {
+        get { return gameController; }
+        set { gameController = value; }
+    }
 
     public virtual void Init(GameController gc)
     {

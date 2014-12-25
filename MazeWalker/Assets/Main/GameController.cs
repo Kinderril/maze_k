@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    public MainUI mainUI;
+    public MainUI main_UI;
+    public WindowStart startWindow;
     public MazeController maze;
     public Ball ball;
     public int maxStars;
@@ -31,20 +32,21 @@ public class GameController : MonoBehaviour
 
     void Awake()
     {
-        mainUI.InitUI(maxStars, this);
         uiControls = maze.GetComponent<UIControls>();
         gControls = maze.GetComponent<GControls>();
         ball.Init(this);
         WindowManager.Init(allWindows,this);
+        WindowManager.WindowOn(startWindow);
     }
 
     public void StartGame()
     {
         startTime = Time.time;
         curStars = 0;
-        mainUI.SetMaxStar(maxStars);
-        mainUI.SetStar(curStars);
+        //main_UI.SetMaxStar(maxStars);
+        //main_UI.SetStar(curStars);
         GameStage = GameStage.game;
+        main_UI.InitUI(maze.seed);
         ball.gameObject.SetActive(true);
         switch (ctype)
         {
@@ -73,12 +75,17 @@ public class GameController : MonoBehaviour
     public void GetStar()
     {
         curStars++;
-        mainUI.SetStar(curStars);
+        main_UI.SetStar(curStars);
     }
 
     public void OnEndConfirm()
     {
         GameStage = GameStage.mainMenu;
+    }
+
+    public string GetCurSpendTime()
+    {
+        return (Time.time - startTime).ToString("##.##");
     }
 
     public string GetTime()
