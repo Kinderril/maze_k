@@ -36,6 +36,10 @@ public class MainUI : BaseWindow
         {
             starContainer.Close();
         }
+        for (int i = 0; i < gc.curStars; i++)
+        {
+            allStars[i].Open();
+        }
     }
 
     public override void Dispose()
@@ -56,7 +60,7 @@ public class MainUI : BaseWindow
     public void OnPauseClick()
     {
         Debug.Log("OnPauseClick");
-
+        GameController.Pause();
     }
 
     public void InitUI(int levelId)

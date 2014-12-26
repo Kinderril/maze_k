@@ -6,6 +6,7 @@ public class StarContainer : MonoBehaviour
 
     public GameObject closeStar;
     public GameObject openStar;
+    public ParticleSystem openSystem;
     private bool isOpen = false;
     
     public bool Open()
@@ -15,8 +16,16 @@ public class StarContainer : MonoBehaviour
         closeStar.gameObject.SetActive(false);
         openStar.gameObject.SetActive(true);
         isOpen = true;
+        if (openSystem != null)
+            openSystem.Simulate(0.5f);
         return true;
     }
+
+    /*
+    void OnEnable()
+    {
+        Debug.Log("OnEnable");
+    }*/
 
     public void Close()
     {

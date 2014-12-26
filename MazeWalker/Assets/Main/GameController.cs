@@ -11,15 +11,17 @@ public class GameController : MonoBehaviour
     public int maxStars;
     public int curStars;
     public int size;
-    private UIControls uiControls;
+    private UIControls bControls;
     private GControls gControls;
-    private ControlType ctype = ControlType.ui;
+    private SwipeControls sControls;
+    private ControlType ctype = ControlType.border;
     public List<BaseWindow> allWindows = new List<BaseWindow>();
     private GameStage gameStage = GameStage.mainMenu;
     private float startTime;
     private float endTime;
+    private Result lastLevelResult;
 
-    public GameStage GameStage
+    private GameStage GameStage
     {
         get { return gameStage; }
         set
@@ -32,8 +34,9 @@ public class GameController : MonoBehaviour
 
     void Awake()
     {
-        uiControls = maze.GetComponent<UIControls>();
+        bControls = maze.GetComponent<UIControls>();
         gControls = maze.GetComponent<GControls>();
+        sControls = maze.GetComponent<SwipeControls>();
         ball.Init(this);
         WindowManager.Init(allWindows,this);
         WindowManager.WindowOn(startWindow);
@@ -48,24 +51,40 @@ public class GameController : MonoBehaviour
         GameStage = GameStage.game;
         main_UI.InitUI(maze.seed);
         ball.gameObject.SetActive(true);
+        Debug.Log("StartGame " + ctype);
         switch (ctype)
         {
-            case ControlType.ui:
-                uiControls.Init(ball);
+            case ControlType.border:
+                bControls.enabled = true;
+                bControls.Init(ball);
                 break;
-            case ControlType.g:
+            case ControlType.gyroscope:
+                break;
+            case ControlType.swipe:
+                sControls.enabled = true;
+                sControls.Init(ball);
                 break;
         }
         maze.Init(onComplete);
         maze.BuildMaze(size,maxStars);
     }
 
-    public void EndGame()
+    public void EndGame(bool withExitWindow = true)
     {
-        endTime = Time.time;
-        GameStage = GameStage.end;
         ball.gameObject.SetActive(false);
+        if (withExitWindow)
+        {
+            endTime = Time.time;
+            lastLevelResult = new Result(endTime - startTime, maze.seed, curStars, maxStars);
+            GameStage = GameStage.end;
+        }
+        else
+        {
+            Time.timeScale = 1;
+            GameStage = GameStage.mainMenu;
+        }
     }
+
 
     private void onComplete(Vector3 startPos)
     {
@@ -88,9 +107,43 @@ public class GameController : MonoBehaviour
         return (Time.time - startTime).ToString("##.##");
     }
 
-    public string GetTime()
+    public Result GetLastResult()
     {
-        return (endTime - startTime).ToString("##.##");
+        return lastLevelResult;
+    }
+
+    public void SaveResult()
+    {
+        lastLevelResult.Save();
+    }
+
+    public List<Result> LoadResults()
+    {
+        List<Result> list = new List<Result>();
+        if (PlayerPrefs.HasKey(Result.RESULT_SAVE))
+        {
+            string s= PlayerPrefs.GetString(Result.RESULT_SAVE);
+            //Debug.Log("RESULT_SAVE " + s);
+            list.AddRange(from item in s.Split(Result.DELEMITER_HIGH) where item.Length > 5 select new Result(item));
+        }
+        return list;
+    }
+
+    public void Pause()
+    {
+        Time.timeScale = 0;
+        GameStage = GameStage.pause;
+    }
+
+    public void UnPause()
+    {
+        Time.timeScale = 1;
+        GameStage = GameStage.game;
+    }
+
+    public void ChangeControlType(ControlType controlType)
+    {
+        ctype = controlType;
     }
 }
 

@@ -41,6 +41,7 @@ public class MazeController : MonoBehaviour {
 
     private void OnBuildComplete(GridInfo[,] obj,IntPos startPos)
     {
+       // var f = blocks.FirstOrDefault(x => x.type == CellType.free);
         for (int i = 0; i < size; i++)
         {
             for (int j = 0; j < size; j++)
@@ -48,6 +49,11 @@ public class MazeController : MonoBehaviour {
                 var b = blocks.FirstOrDefault(x => x.type == obj[i, j].cell);
                 if (b != null)
                 {
+                   /* if (b.type != CellType.wall)
+                    {
+                        GameObject go1 = Instantiate(f.gameObject, new Vector3(i, 0, j), Quaternion.identity) as GameObject;
+                        go1.transform.parent = transform;
+                    }*/
                     GameObject go = Instantiate(b.gameObject, new Vector3(i, 0, j), Quaternion.identity) as GameObject;
                     go.transform.parent = transform;
                 }

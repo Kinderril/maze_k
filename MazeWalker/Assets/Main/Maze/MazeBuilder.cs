@@ -49,6 +49,7 @@ public enum CellType
     star,
     end,
     jumer,
+    floor,
 }
 
 public class MazeBuilder

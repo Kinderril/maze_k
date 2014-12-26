@@ -13,7 +13,8 @@ public class WindowEnd : BaseWindow
     public override void Init(GameController gc)
     {
         base.Init(gc);
-        endMsg.text = "Your results is:" + "\n" + gc.curStars + "/" + gc.maxStars + "\n time is: " + gc.GetTime();
+        endMsg.text = gc.GetLastResult().ToString();
+        gc.SaveResult();
     }
 }
 

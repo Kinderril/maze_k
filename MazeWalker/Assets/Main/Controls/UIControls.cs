@@ -54,7 +54,7 @@ public class UIControls : MonoBehaviour , IPointerDownHandler , IPointerUpHandle
         {
             _r = _v - _v.normalized*distancePercent;
             _r = _r/200;
-            curPower = new Vector2(Mathf.Clamp(_r.x, -maxAcc, maxAcc), Mathf.Clamp(_r.y, -maxAcc, maxAcc));
+            curPower = _r.normalized*maxAcc;// new Vector2(Mathf.Clamp(_r.x, -maxAcc, maxAcc), Mathf.Clamp(_r.y, -maxAcc, maxAcc));
         }
         else
         {

@@ -1,7 +1,8 @@
 ﻿public enum ControlType
 {
-    ui,
-    g,
+    border,
+    swipe,
+    gyroscope,
 }
 
 public enum GameStage
@@ -9,4 +10,5 @@ public enum GameStage
     mainMenu,
     game,
     end,
+    pause,
 }

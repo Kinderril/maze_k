@@ -23,18 +23,33 @@ public class Ball : MonoBehaviour
     public void Move(Vector2 moveDirection)
     {
         moveDirection *= power;
+
+        if (Physics.Raycast(transform.position, -Vector3.up, k_GroundRayLength))
+        {
+            if (m_UseTorque)
+            {
+                // ... add torque around the axis defined by the move direction.
+                m_Rigidbody.AddTorque(new Vector3(moveDirection.x, 0, moveDirection.y));
+            }
+            else
+            {
+                // Otherwise add force in the move direction.
+                m_Rigidbody.AddForce(new Vector3(moveDirection.x, 0, moveDirection.y));
+            }
+
+        }
         // If using torque to rotate the ball...
-        if (m_UseTorque)
+        /*if (m_UseTorque)
         {
             // ... add torque around the axis defined by the move direction.
-            m_Rigidbody.AddTorque(new Vector3(moveDirection.x, 0, moveDirection.y));
+            //m_Rigidbody.AddTorque(new Vector3(moveDirection.x, 0, moveDirection.y));
         }
         else
         {
             // Otherwise add force in the move direction.
-            m_Rigidbody.AddForce(new Vector3(moveDirection.x, 0, moveDirection.y));
         }
-        var d = Mathf.Clamp(moveDirection.magnitude - 2, 0, 9);
+        */
+        var d = Mathf.Clamp(m_Rigidbody.angularVelocity.magnitude/2 -3, 0, 9);
         if (emmiter != null)
             emmiter.emissionRate = d*11;
     }
