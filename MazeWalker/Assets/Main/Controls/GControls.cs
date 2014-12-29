@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class GControls : MonoBehaviour
 {
 
-    //public Text label;
+    private Ball ball;
+
+   // public Text label;
 	// Use this for initialization
 	void Start ()
 	{
@@ -13,8 +16,12 @@ public class GControls : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-           //label.text = ""+ Input.acceleration;
-        /*
+	    Vector3 a = Input.acceleration*10;
+	    Vector3 b = new Vector3(a.x, 0, a.y);
+        ball.AddForse(b);
+	    //label.text = b.ToString();
+
+	    /*
         if (Input.gyro.enabled)
         else
         {
@@ -22,4 +29,9 @@ public class GControls : MonoBehaviour
             Input.gyro.enabled = true;
         }*/
 	}
+
+    internal void Init(Ball ball)
+    {
+        this.ball = ball;
+    }
 }

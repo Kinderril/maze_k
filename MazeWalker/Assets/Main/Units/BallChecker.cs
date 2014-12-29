@@ -14,15 +14,15 @@ public class BallChecker : MonoBehaviour {
             switch (star.type)
             {
                 case CellType.star:
-                    Destroy(star.gameObject);
-                    ball.gameController.GetStar();
-                    break;
-                case CellType.end:
-                    Destroy(star.gameObject);
-                    ball.gameController.EndGame();
+                    ball.GetStar(star);
+                    Destroy(star);
+                    star.transform.position = Vector3.up*-10000;
                     break;
                 case CellType.jumer:
                     ball.AddForse(new Vector3(0,105,0));
+                    break;
+                case CellType.respawn:
+                    ball.ToRespawn();
                     break;
             }
 

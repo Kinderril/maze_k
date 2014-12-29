@@ -54,7 +54,7 @@ public class MainUI : BaseWindow
 
     public void OnStartClick(Button btn)
     {
-        GameController.StartGame();
+        //GameController.StartGame();
     }
 
     public void OnPauseClick()

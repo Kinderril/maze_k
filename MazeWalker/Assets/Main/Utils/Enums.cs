@@ -1,8 +1,8 @@
 ﻿public enum ControlType
 {
-    border,
-    swipe,
-    gyroscope,
+    border = 0,
+    swipe = 1,
+    gyroscope = 2,
 }
 
 public enum GameStage

@@ -47,9 +47,9 @@ public enum CellType
     wall,
     free,
     star,
-    end,
     jumer,
     floor,
+    respawn,
 }
 
 public class MazeBuilder
@@ -92,14 +92,19 @@ public class MazeBuilder
         */
         //setting BlockElement
         var stars = GetrandomList(maxStarCount-1,GetFreePos());
+        if (stars.Count != maxStarCount)
+        {
+            Debug.LogError("GFR45 " + stars.Count  + "   " + (maxStarCount));
+        }
         foreach (var a in stars)
             a.cell = CellType.star;
 
+        /*
         var exits = GetrandomList(2-1, GetFreePos());
         foreach (var a in exits)
             a.cell = CellType.end;
-
-        var jumps = GetrandomList(6, GetFreePos());
+        */
+        var jumps = GetrandomList(3, GetFreePos());
         foreach (var a in jumps)
             a.cell = CellType.jumer;
 

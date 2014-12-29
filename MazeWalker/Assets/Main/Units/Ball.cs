@@ -11,6 +11,7 @@ public class Ball : MonoBehaviour
     private Rigidbody m_Rigidbody;
     public GameController gameController;
     private ParticleSystem emmiter;
+    private Vector3 respawnPoint;
 
 
     private void Start()
@@ -38,6 +39,11 @@ public class Ball : MonoBehaviour
             }
 
         }
+        else
+        {
+            m_Rigidbody.AddForce(new Vector3(moveDirection.x/5, 0, moveDirection.y/5));
+            
+        }
         // If using torque to rotate the ball...
         /*if (m_UseTorque)
         {
@@ -62,5 +68,22 @@ public class Ball : MonoBehaviour
     public void AddForse(Vector3 moveDirection)
     {
         m_Rigidbody.AddForce(moveDirection);
+    }
+
+    public void GetStar(BlockElement star)
+    {
+        gameController.GetStar();
+        respawnPoint = star.transform.position;
+    }
+
+    public void ToRespawn()
+    {
+        transform.position = respawnPoint;
+    }
+
+    public void StartPlay(Vector3 startPos)
+    {
+        transform.position = startPos;
+        respawnPoint = startPos;
     }
 }

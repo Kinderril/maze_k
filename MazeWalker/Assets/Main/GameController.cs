@@ -42,16 +42,14 @@ public class GameController : MonoBehaviour
         WindowManager.WindowOn(startWindow);
     }
 
-    public void StartGame()
+    public void StartGame(int p)
     {
         startTime = Time.time;
         curStars = 0;
-        //main_UI.SetMaxStar(maxStars);
-        //main_UI.SetStar(curStars);
         GameStage = GameStage.game;
-        main_UI.InitUI(maze.seed);
         ball.gameObject.SetActive(true);
         Debug.Log("StartGame " + ctype);
+        bControls.enabled = sControls.enabled = false;
         switch (ctype)
         {
             case ControlType.border:
@@ -59,6 +57,8 @@ public class GameController : MonoBehaviour
                 bControls.Init(ball);
                 break;
             case ControlType.gyroscope:
+                gControls.enabled = true;
+                gControls.Init(ball);
                 break;
             case ControlType.swipe:
                 sControls.enabled = true;
@@ -66,7 +66,7 @@ public class GameController : MonoBehaviour
                 break;
         }
         maze.Init(onComplete);
-        maze.BuildMaze(size,maxStars);
+        maze.BuildMaze(size, maxStars,p);
     }
 
     public void EndGame(bool withExitWindow = true)
@@ -75,7 +75,7 @@ public class GameController : MonoBehaviour
         if (withExitWindow)
         {
             endTime = Time.time;
-            lastLevelResult = new Result(endTime - startTime, maze.seed, curStars, maxStars);
+            lastLevelResult = new Result(endTime - startTime, maze.seed, ctype);
             GameStage = GameStage.end;
         }
         else
@@ -88,13 +88,18 @@ public class GameController : MonoBehaviour
 
     private void onComplete(Vector3 startPos)
     {
-        ball.transform.position = startPos;
+        ball.StartPlay(startPos);
+        main_UI.InitUI(maze.seed);
     }
 
     public void GetStar()
     {
         curStars++;
         main_UI.SetStar(curStars);
+        if (curStars == maxStars)
+        {
+            EndGame(true);
+        }
     }
 
     public void OnEndConfirm()
@@ -145,5 +150,6 @@ public class GameController : MonoBehaviour
     {
         ctype = controlType;
     }
+
 }
 

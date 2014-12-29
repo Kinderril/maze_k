@@ -12,6 +12,7 @@ public class MazeController : MonoBehaviour {
     //public BlockElement Star;
     //public BlockElement EndElement;
     //public BlockElement Jumper;
+    public Transform WallContainer;
     public List<BlockElement> blocks = new List<BlockElement>(); 
     public int seed;
     private int size;
@@ -30,12 +31,17 @@ public class MazeController : MonoBehaviour {
       //      Debug.LogError("BLOCK OR STAR IS NULL!!!");
     }
 
-    public void BuildMaze(int size,int stars)
+    public void BuildMaze(int size,int stars,int isRandom)
     {
         Clear();
         this.size = size;
         this.stars = stars;
-        seed = Random.Range(0, 99999);
+        if (isRandom <= 0)
+            seed = Random.Range(1, 99999);
+        else
+        {
+            seed = isRandom;
+        }
         mazeGrid = new MazeBuilder(OnBuildComplete, seed, size, stars);
     }
 
@@ -54,8 +60,13 @@ public class MazeController : MonoBehaviour {
                         GameObject go1 = Instantiate(f.gameObject, new Vector3(i, 0, j), Quaternion.identity) as GameObject;
                         go1.transform.parent = transform;
                     }*/
+                    Transform parent = transform;
+                    if (b.type == CellType.wall)
+                    {
+                        parent = WallContainer;
+                    }
                     GameObject go = Instantiate(b.gameObject, new Vector3(i, 0, j), Quaternion.identity) as GameObject;
-                    go.transform.parent = transform;
+                    go.transform.parent = parent;
                 }
             }
             
