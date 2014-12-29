@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,12 +16,19 @@ public class MainUI : BaseWindow
 
     public Text levelIdLabel;
     public Text TimeLabel;
+    public Button buttonScale;
+    public Button buttonExit;
 
 	// Update is called once per frame
 	void Update ()
 	{
 	    TimeLabel.text = GameController.GetCurSpendTime();
 	}
+
+    void OnEnable()
+    {
+        buttonScale.gameObject.SetActive(true);
+    }
 
     public override void Init(GameController gc)
     {
@@ -87,4 +95,25 @@ public class MainUI : BaseWindow
                 break;
         }
     }
+
+    public void OnClickZoom(Button btn)
+    {
+        btn.gameObject.SetActive(false);
+        Time.timeScale = 1;
+        buttonExit.gameObject.SetActive(false);
+        StartCoroutine(zooming());
+    }
+
+    IEnumerator zooming()
+    {
+        Vector3 a = GameController.mainCameraHolder.transform.position;
+        float yy = a.y;
+        //GameController.mainCameraHolder.transform.position = new Vector3(a.x, 50, a.z);
+        GameController.mainCameraHolder.StartFly();
+        yield return new WaitForSeconds(2.2f);
+        buttonExit.gameObject.SetActive(true);
+        GameController.mainCameraHolder.EndFly();
+        GameController.mainCameraHolder.transform.position = new Vector3(a.x, yy, a.z);
+    
+    }  
 }

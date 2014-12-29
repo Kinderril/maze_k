@@ -19,7 +19,9 @@ public class GameController : MonoBehaviour
     private GameStage gameStage = GameStage.mainMenu;
     private float startTime;
     private float endTime;
-    private Result lastLevelResult;
+    private ResultController resultController;
+    public FollowTarget mainCameraHolder;
+   // private ResultLevel _lastLevelResultLevel;
 
     private GameStage GameStage
     {
@@ -37,6 +39,7 @@ public class GameController : MonoBehaviour
         bControls = maze.GetComponent<UIControls>();
         gControls = maze.GetComponent<GControls>();
         sControls = maze.GetComponent<SwipeControls>();
+        resultController =new ResultController();
         ball.Init(this);
         WindowManager.Init(allWindows,this);
         WindowManager.WindowOn(startWindow);
@@ -49,7 +52,7 @@ public class GameController : MonoBehaviour
         GameStage = GameStage.game;
         ball.gameObject.SetActive(true);
         Debug.Log("StartGame " + ctype);
-        bControls.enabled = sControls.enabled = false;
+        bControls.enabled = sControls.enabled = gControls.enabled = false;
         switch (ctype)
         {
             case ControlType.border:
@@ -75,7 +78,7 @@ public class GameController : MonoBehaviour
         if (withExitWindow)
         {
             endTime = Time.time;
-            lastLevelResult = new Result(endTime - startTime, maze.seed, ctype);
+            resultController.AddResult(endTime - startTime, maze.seed, ctype);
             GameStage = GameStage.end;
         }
         else
@@ -114,24 +117,17 @@ public class GameController : MonoBehaviour
 
     public Result GetLastResult()
     {
-        return lastLevelResult;
+        return resultController.LastResult;
     }
 
     public void SaveResult()
     {
-        lastLevelResult.Save();
+        resultController.Save();
     }
 
     public List<Result> LoadResults()
     {
-        List<Result> list = new List<Result>();
-        if (PlayerPrefs.HasKey(Result.RESULT_SAVE))
-        {
-            string s= PlayerPrefs.GetString(Result.RESULT_SAVE);
-            //Debug.Log("RESULT_SAVE " + s);
-            list.AddRange(from item in s.Split(Result.DELEMITER_HIGH) where item.Length > 5 select new Result(item));
-        }
-        return list;
+        return resultController.Load();
     }
 
     public void Pause()
@@ -151,5 +147,9 @@ public class GameController : MonoBehaviour
         ctype = controlType;
     }
 
+    public void CleatResults()
+    {
+        resultController.Clear();
+    }
 }
 

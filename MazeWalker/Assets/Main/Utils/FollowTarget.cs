@@ -7,9 +7,12 @@ using UnityEngine;
         public Vector3 offset = new Vector3(0f, 7.5f, 0f);
         public FollowType type = FollowType.full;
         private Action action;
+        public Animator anim;
+        private bool isAnim = false;
 
         void Awake()
         {
+            anim = GetComponent<Animator>();
             switch (type)
             {
                 case FollowType.full:
@@ -25,7 +28,8 @@ using UnityEngine;
 
         private void LateUpdate()
         {
-            action();
+            //if (!isAnim)
+                action();
         }
 
         private void FullFollow()
@@ -35,8 +39,21 @@ using UnityEngine;
 
         private void XZFollow()
         {
-            transform.position = new Vector3(target.position.x, 0, target.position.z) + offset;
+            transform.position = new Vector3(target.position.x, transform.position.y, target.position.z);// + offset;
         }
+
+        public void StartFly()
+        {
+            anim.SetBool("go",true);
+            isAnim = true;
+        }
+
+        public void EndFly()
+        {
+            anim.SetBool("go", false);
+            isAnim = false;
+        }
+
     }
 
 public enum FollowType

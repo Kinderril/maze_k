@@ -23,9 +23,18 @@ public class WindowStart : BaseWindow
     public override void Init(GameController gc)
     {
         base.Init(gc);
-        var results = gc.LoadResults();
-        string r = results.Aggregate("", (current, result) => current + (result.ToStringAlternative() + "\n"));
-        resultsText.text = r;
+        try
+        {
+
+            var results = gc.LoadResults();
+            string r = results.Aggregate("", (current, result) => current + (result.ToStringAlternative() + "\n"));
+            resultsText.text = r;
+        }
+        catch (Exception)
+        {
+            gc.CleatResults();
+            resultsText.text = "Results \n was \n cracked";
+        }
     }
 
     public void OnBorderClicked(bool ok)
@@ -53,7 +62,7 @@ public class WindowStart : BaseWindow
         }
         else
         {
-            randomNumberText.text = "1";
+           // randomNumberText.text = "1";
         }
     }
 

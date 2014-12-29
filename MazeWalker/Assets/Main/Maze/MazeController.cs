@@ -16,7 +16,7 @@ public class MazeController : MonoBehaviour {
     public List<BlockElement> blocks = new List<BlockElement>(); 
     public int seed;
     private int size;
-    private int stars;
+    //private int stars;
     private Action<Vector3> onComplete;
 
 	void Start ()
@@ -35,13 +35,8 @@ public class MazeController : MonoBehaviour {
     {
         Clear();
         this.size = size;
-        this.stars = stars;
-        if (isRandom <= 0)
-            seed = Random.Range(1, 99999);
-        else
-        {
-            seed = isRandom;
-        }
+       // this.stars = stars;
+        seed = isRandom <= 0 ? Random.Range(1, 99999) : isRandom;
         mazeGrid = new MazeBuilder(OnBuildComplete, seed, size, stars);
     }
 

@@ -61,6 +61,7 @@
     <Compile Include="Assets\Main\Controls\UIControls.cs" />
     <Compile Include="Assets\Main\GameController.cs" />
     <Compile Include="Assets\Main\Helpers\Result.cs" />
+    <Compile Include="Assets\Main\Helpers\ResultController.cs" />
     <Compile Include="Assets\Main\Maze\MazeBranch.cs" />
     <Compile Include="Assets\Main\Maze\MazeBuilder.cs" />
     <Compile Include="Assets\Main\Maze\MazeController.cs" />

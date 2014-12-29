@@ -1,59 +1,63 @@
-﻿
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using UnityEngine;
 
 public class Result
 {
-    public const string RESULT_SAVE = "save_key";
+    public Dictionary<ControlType, float> list = new Dictionary<ControlType, float>();
     public const char DELEMITER = ';';
-    public const char DELEMITER_HIGH = ':';
-    public float levelTime;
     public int levelId;
-    public ControlType controlType;
-   // public int curStars;
-   // public int totalStars;
-
-    public Result(float levelTime, int levelId, ControlType controlType)
+ 
+    public Result(int level)
     {
-        this.levelTime = levelTime;
-        this.levelId = levelId;
-        this.controlType = controlType;
-        // this.curStars = curStars;
-        // this.totalStars = totalStars;
+        levelId = level;
     }
 
-    public Result(string s)
+    public Result(string load)
     {
-        var r = s.Split(DELEMITER);
-        levelId = Convert.ToInt32(r[0]);
-        levelTime =  Convert.ToSingle(r[1]);
-        //Debug.Log("gg  " + r[2]);
-        controlType = (ControlType)Enum.Parse(typeof(ControlType), r[2]);
-        // totalStars = Convert.ToInt32(r[3]);
-//        Debug.Log("result load " + levelId);
+        UnityEngine.Debug.Log(load);
+        string[] ss =  load.Split(DELEMITER);
+        levelId = Convert.ToInt32(ss[0]);
+        for (int i = 1; i < ss.Length-1; i+=2)
+        {
+            UnityEngine.Debug.Log(i + "   " + ss[i]);
+            var a = (ControlType)Enum.Parse(typeof(ControlType), ss[i]);
+            float t = Convert.ToSingle(ss[i + 1]);
+            list.Add(a,t);
+        }
+    }
+
+    public void AddResultLevel(ControlType control,float time)
+    {
+        if (!list.ContainsKey(control))
+            list.Add(control, time);
+        else
+        {
+            list[control] = Mathf.Min(time, list[control]);
+        }
     }
 
     public override string ToString()
     {
-        return "Id:" + levelId + "\n time:" + levelTime + "\n controlType:" + controlType ;
+        string ss = "Id:" + levelId + "\n";
+        ss = list.Aggregate(ss, (current, f) => current + ("time:" + f.Value + "\n Control:" + f.Key));
+        return ss;
     }
 
     public string ToStringAlternative()
     {
-        return "Id:" + levelId + "\t " + levelTime.ToString("##.#") + "s. \t " + controlType ;
+        string ss = "Id:" + levelId + "\t";
+        ss = list.Aggregate(ss, (current, f) => current + ("\n \t" + f.Key + "\t" + f.Value.ToString("00.00")));
+        return ss;
     }
 
-    public void Save()
+    public string GetSaveString()
     {
-        string allres = "";
-        string r = levelId + DELEMITER.ToString() + levelTime + DELEMITER + controlType + DELEMITER_HIGH;
-        if (PlayerPrefs.HasKey(RESULT_SAVE))
-        {
-            allres = PlayerPrefs.GetString(RESULT_SAVE);
-            allres += r;
-        }
-       // Debug.Log("result allres " + allres);
-        PlayerPrefs.SetString(RESULT_SAVE, allres);
+        string ss = ""+ levelId + DELEMITER;
+        ss= list.Aggregate(ss, (current, f) => current + ("" + f.Key + DELEMITER + f.Value + DELEMITER));
+        return ss;
     }
 }
 
