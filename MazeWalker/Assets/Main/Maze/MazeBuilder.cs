@@ -45,6 +45,7 @@ public class GridInfo
     public CellType cell;
     public IntPos pos;
     public int Id;
+    public Side rotate;
 
     public GridInfo(CellType cellType,int i,int j)
     {

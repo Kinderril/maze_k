@@ -25,7 +25,7 @@ public class GameController : MonoBehaviour
 
     private GameStage GameStage
     {
-        get { return gameStage; }
+        //get { return gameStage; }
         set
         {
             var curWindow = allWindows.FirstOrDefault(x => x.gameStage == value);

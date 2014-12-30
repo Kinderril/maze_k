@@ -17,6 +17,7 @@ public class Obstacle : MonoBehaviour
 
     public void Init()
     {
+        rotation = Side.up;
         enter = new IntPos((int)Enter.x, (int)Enter.y);
         exit = new IntPos((int)Exit.x, (int)Exit.y);
         parameters = new ObstacleParameters(w, h, enter, exit, rotation, withStar);
@@ -52,16 +53,18 @@ public class Obstacle : MonoBehaviour
                 case Side.down:
                     IntPos e1 = enter;
                     enter.J = exit.J;
+                    enter.I = exit.I;
                     exit.J = e1.J;
+                    exit.I = e1.I;
                     break;
                 case Side.left:
                     IntPos en2 = enter;
                     IntPos ex2 = exit;
 
-                    exit.I = w - en2.J;
+                    exit.I = h - en2.J - 1;
                     exit.J = en2.I;
 
-                    enter.I = w - ex2.J;
+                    enter.I = h - ex2.J - 1;
                     enter.J = ex2.I;
                     break;
                 case Side.right:
@@ -69,10 +72,10 @@ public class Obstacle : MonoBehaviour
                     IntPos ex1 = exit;
 
                     enter.I = en1.J;
-                    enter.J = h - en1.I;
+                    enter.J = w- en1.I - 1;
 
                     exit.I = ex1.J;
-                    exit.J = h - ex1.I;
+                    exit.J = w - ex1.I - 1;
 
                     break;
             }
@@ -98,6 +101,9 @@ public class Obstacle : MonoBehaviour
         {
             for (int j = sJ; j < sJ + h; j++)
             {
+                if (i < 0 || j < 0 || i>grid.Length || j>grid.Length)
+                    return false;
+
                 if (grid[i, j].cell != CellType.wall)
                     return false;
 
@@ -106,18 +112,37 @@ public class Obstacle : MonoBehaviour
         return true;
     }
 
-    public IntPos DoGrid(IntPos pos, GridInfo[,] grid)
+
+    public IntPos DoGrid(IntPos GSP, GridInfo[,] grid)
     {
-        int sI = pos.I - enter.I;
-        int sJ = pos.J - enter.J;
+
+
+        IntPos GEP = new IntPos(GSP.I + exit.I, GSP.J + exit.J);
+
+        int sI = GSP.I - enter.I;
+        int sJ = GSP.J - enter.J;
+
+        
+       // IntPos starPos = new IntPos(sI + enter.I, sJ + enter.J);
+       // IntPos endPos = new IntPos(sI + exit.I, sJ + exit.J);
+
+        Debug.Log("DoGrid start " + GSP + "  " + sI + "  " + sJ + "   " + rotation + " core " + enter + "   GSP: " + GSP + "  GEP:" + GEP);// + (sI - enter == enter) + );
         for (int i = sI; i < sI + w; i++)
         {
             for (int j = sJ; j < sJ + h; j++)
             {
                 grid[i, j].cell = CellType.obstacle;
+                Debug.Log("check..."  + i + "  " + j);
+                if (i == GSP.I && j == GSP.J)
+                {
+                    Debug.Log("find core " + grid[i, j].pos);
+                    grid[i, j].Id = 999;
+                }
             }
         }
-        return exit + pos;
+        
+        Debug.Log("DoGrid end" + (exit + GSP) + "   " + rotation + "  exit:"+exit);
+        return GEP;
     }
 }
 

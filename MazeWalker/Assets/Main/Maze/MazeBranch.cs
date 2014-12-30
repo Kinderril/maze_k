@@ -123,7 +123,6 @@ public class MazeBranch
 
     private IntPos DoOstacle(IntPos curPos, IntPos fromPos, Side side)
     {
-        Debug.Log("Do abstacle");
         int c = mazeController.Obstacles.Count;
         int index = random.Next(0, c - 1);
         Obstacle o = mazeController.Obstacles[index];
@@ -132,7 +131,7 @@ public class MazeBranch
         bool b = o.Check(curPos, grid);
         if (b)
         {
-            Debug.Log("All fine do obs " +curPos );
+            Debug.Log("fromPos " + fromPos);
             return o.DoGrid(curPos, grid);
         }
         return curPos;

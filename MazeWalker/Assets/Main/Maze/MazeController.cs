@@ -59,6 +59,8 @@ public class MazeController : MonoBehaviour {
                 var b = blocks.FirstOrDefault(x => x.type == obj[i, j].cell);
                 if (b != null)
                 {
+                    Quaternion q = Quaternion.identity;
+                    Vector3 v = new Vector3(i, 0, j);
                    /* if (b.type != CellType.wall)
                     {
                         GameObject go1 = Instantiate(f.gameObject, new Vector3(i, 0, j), Quaternion.identity) as GameObject;
@@ -69,8 +71,18 @@ public class MazeController : MonoBehaviour {
                     {
                         parent = WallContainer;
                     }
-                    GameObject go = Instantiate(b.gameObject, new Vector3(i, 0, j), Quaternion.identity) as GameObject;
+                    else if (b.type == CellType.obstacle)
+                    {
+                        if (obj[i, j].Id > 1)
+                        {
+                            v = new Vector3(i,1,j);
+                        }
+                    }
+                    GameObject go = Instantiate(b.gameObject, v, q) as GameObject;
                     go.transform.parent = parent;
+                    BlockElement block = go.GetComponent<BlockElement>();
+                    block.I = i;
+                    block.J = j;
                 }
             }
             
