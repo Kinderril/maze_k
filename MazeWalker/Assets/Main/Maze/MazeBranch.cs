@@ -1,21 +1,45 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 
+public struct Direction
+{
+    public IntPos intPos;
+    public Side side;
+
+    public Direction(IntPos p, Side s)
+    {
+        intPos = p;
+        side = s;
+    }
+}
+
+public enum Side
+{
+    up,
+    down,
+    left,
+    right
+}
+
 public class MazeBranch
 {
     private GridInfo[,] grid;
-    private IntPos[] directions = new IntPos[4] { new IntPos(0, 1), new IntPos(0, -1), new IntPos(1, 0), new IntPos(-1, 0) };
+    private Direction[] directions = new Direction[4] { new Direction(new IntPos(0, 1), Side.up), new Direction(new IntPos(1, 0), Side.right), new Direction(new IntPos(0, -1),Side.down), new Direction(new IntPos(-1, 0),Side.left) };
     private System.Random random;
     private int size;
     private List<GridInfo> history = new List<GridInfo>();
     private int brachLevel;
     private int childBranchNumber = 0;
+    private MazeController mazeController;
 
-    public MazeBranch(GridInfo[,] grid, System.Random random, int size,int prevBranchLevel)
+
+    public MazeBranch(GridInfo[,] grid, System.Random random, int size, int prevBranchLevel, MazeController mazeController)
     {
+        this.mazeController = mazeController;
         this.grid = grid;
         this.random = random;
         this.size = size;
@@ -39,19 +63,38 @@ public class MazeBranch
         bool findSmt = false;
         for (int i = 0; i < 4; i++)
         {
-            IntPos res = CheckCell(curPos, fromPos, directions[i], 1);
+            IntPos res = CheckCell(curPos, fromPos, directions[i].intPos, 1);
             //Debug.Log("CheckCell  " + directions[i] + " res " + res + "  :   " + (res != curPos) + " cur:pos " + curPos + "  from " + fromPos);
             if (res != curPos)
             {
+
                 fromPos = curPos;
                 curPos = res;
-                grid[curPos.I, curPos.J].cell = CellType.free;
-                history.Add(grid[curPos.I, curPos.J]);
-                SetNewStepT2(curPos, fromPos, c);
-                findSmt = true;
-                break;
+
+                if (random.Next(0, 100) < 13)
+                {
+                    var resObs = DoOstacle(curPos, fromPos, directions[i].side);
+                    if (resObs != curPos)
+                    {
+                        fromPos = curPos;
+                        curPos = resObs;
+                        grid[curPos.I, curPos.J].cell = CellType.free;
+                        SetNewStepT2(curPos, fromPos, c);
+                        break;
+                    }
+                }
+                else
+                {
+
+                    grid[curPos.I, curPos.J].cell = CellType.free;
+                    history.Add(grid[curPos.I, curPos.J]);
+                    SetNewStepT2(curPos, fromPos, c);
+                    findSmt = true;
+                    break;
+                }
             }
         }
+        /*
         if (!findSmt)
         {
             //Debug.Log("branch is over " + history.Count);
@@ -60,12 +103,12 @@ public class MazeBranch
             {
                 for (int j = 0; j < 4; j++)
                 {
-                    IntPos res = CheckCell(history[i].pos, history[i].pos, directions[j], 1);
+                    IntPos res = CheckCell(history[i].pos, history[i].pos, directions[j].intPos, 1);
                     if (res != curPos)
                     {
                         if (brachLevel < 4 && childBranchNumber < 22)
                         {
-                            MazeBranch mb = new MazeBranch(grid, random, size, brachLevel);
+                            MazeBranch mb = new MazeBranch(grid, random, size, brachLevel,mazeController);
                             childBranchNumber++;
                             mb.DoBranch(history[i]);
                         }
@@ -73,7 +116,24 @@ public class MazeBranch
                     }
                 }
             }
+        }
+        */
+        return curPos;
+    }
 
+    private IntPos DoOstacle(IntPos curPos, IntPos fromPos, Side side)
+    {
+        Debug.Log("Do abstacle");
+        int c = mazeController.Obstacles.Count;
+        int index = random.Next(0, c - 1);
+        Obstacle o = mazeController.Obstacles[index];
+        o.LoadDefaut();
+        o.Rotate(side);
+        bool b = o.Check(curPos, grid);
+        if (b)
+        {
+            Debug.Log("All fine do obs " +curPos );
+            return o.DoGrid(curPos, grid);
         }
         return curPos;
     }

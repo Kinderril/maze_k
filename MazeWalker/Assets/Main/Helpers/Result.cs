@@ -17,12 +17,12 @@ public class Result
 
     public Result(string load)
     {
-        UnityEngine.Debug.Log(load);
+//        UnityEngine.Debug.Log(load);
         string[] ss =  load.Split(DELEMITER);
         levelId = Convert.ToInt32(ss[0]);
         for (int i = 1; i < ss.Length-1; i+=2)
         {
-            UnityEngine.Debug.Log(i + "   " + ss[i]);
+          //  UnityEngine.Debug.Log(i + "   " + ss[i]);
             var a = (ControlType)Enum.Parse(typeof(ControlType), ss[i]);
             float t = Convert.ToSingle(ss[i + 1]);
             list.Add(a,t);

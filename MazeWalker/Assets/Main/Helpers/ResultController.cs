@@ -80,5 +80,17 @@ public class ResultController
     {
         PlayerPrefs.SetString(RESULT_SAVE, "");
     }
+
+    public float GetMidByControlType(ControlType ct)
+    {
+        float m = 0;
+        int i = 0;
+        foreach (var result in results.Where(result => result.list.ContainsKey(ct)))
+        {
+            m += result.list[ct];
+            i++;
+        }
+        return m/i;
+    }
 }
 

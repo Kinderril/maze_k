@@ -28,12 +28,23 @@ public struct IntPos
     {
         return c1.I != c2.I || c1.J != c2.J;
     }
+
+    public static IntPos operator -(IntPos x, IntPos y)
+    {
+        return new IntPos(x.I-y.I,x.J-y.J);
+    }
+
+    public static IntPos operator +(IntPos x, IntPos y)
+    {
+        return new IntPos(x.I + y.I, x.J + y.J);
+    }
 }
 
 public class GridInfo
 {
     public CellType cell;
     public IntPos pos;
+    public int Id;
 
     public GridInfo(CellType cellType,int i,int j)
     {
@@ -50,6 +61,7 @@ public enum CellType
     jumer,
     floor,
     respawn,
+    obstacle,
 }
 
 public class MazeBuilder
@@ -62,7 +74,8 @@ public class MazeBuilder
     private int step = 0;
     private List<GridInfo> history = new List<GridInfo>();
 
-    public MazeBuilder(Action<GridInfo[,], IntPos> onBuildComplete, int seed, int size, int maxStarCount)
+
+    public MazeBuilder(Action<GridInfo[,], IntPos> onBuildComplete, int seed, int size, int maxStarCount,MazeController mcontroller)
     {
         this.size = size;
         random = new System.Random(seed);
@@ -81,7 +94,7 @@ public class MazeBuilder
             grid[startPos.I, startPos.J].cell = CellType.free;
             
         }*/
-        MazeBranch branch = new MazeBranch(grid,random,size,0);
+        MazeBranch branch = new MazeBranch(grid, random, size, 0, mcontroller);
         startPos = new IntPos(random.Next(size / 4, size / 2), random.Next(size / 4, size / 2));
         grid[startPos.I, startPos.J].cell = CellType.free;
         branch.DoBranch(grid[startPos.I, startPos.J]);

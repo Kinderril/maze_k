@@ -16,12 +16,21 @@ public class MazeController : MonoBehaviour {
     public List<BlockElement> blocks = new List<BlockElement>(); 
     public int seed;
     private int size;
+
+    public List<Obstacle> Obstacles = new List<Obstacle>();
+
     //private int stars;
     private Action<Vector3> onComplete;
 
 	void Start ()
 	{
-
+	    foreach (var obstacle in Obstacles)
+	    {
+	        obstacle.Init();
+	    }
+     //   Debug.Log(TestObstacle);
+     //   TestObstacle.Rotate(Side.right);
+     //   Debug.Log(TestObstacle);
 	}
 
     public void Init(Action<Vector3> onComplete)
@@ -37,7 +46,7 @@ public class MazeController : MonoBehaviour {
         this.size = size;
        // this.stars = stars;
         seed = isRandom <= 0 ? Random.Range(1, 99999) : isRandom;
-        mazeGrid = new MazeBuilder(OnBuildComplete, seed, size, stars);
+        mazeGrid = new MazeBuilder(OnBuildComplete, seed, size, stars,this);
     }
 
     private void OnBuildComplete(GridInfo[,] obj,IntPos startPos)
@@ -73,9 +82,9 @@ public class MazeController : MonoBehaviour {
     public void Clear()
     {
         var cc = GetComponentsInChildren<BoxCollider>();
-        Debug.Log("cc " + cc.Length);
+      //  Debug.Log("cc " + cc.Length);
         var tt = cc.Where(x => !x.name.Contains("Plane") && !x.name.Contains("Maze"));
-        Debug.Log("cc " + tt.Count());
+      //  Debug.Log("cc " + tt.Count());
         foreach (var componentsInChild in tt)
         {
             componentsInChild.transform.position = Vector3.down*-100000;
