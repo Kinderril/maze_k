@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class Obstacle : MonoBehaviour
+public class Obstacle //: MonoBehaviour
 {
     public int w;
     public int h;
@@ -15,13 +15,24 @@ public class Obstacle : MonoBehaviour
     public Vector2 Enter;
     public Vector2 Exit;
 
+    public Obstacle()
+    {
+        w = 2;
+        h = 3;
+        enter = new IntPos(1, 0);
+        exit = new IntPos(1, 2);
+        rotation = Side.up;
+    }
+
     public void Init()
     {
+    /*
         rotation = Side.up;
         enter = new IntPos((int)Enter.x, (int)Enter.y);
         exit = new IntPos((int)Exit.x, (int)Exit.y);
         parameters = new ObstacleParameters(w, h, enter, exit, rotation, withStar);
         Debug.Log("parameters " + parameters);
+     */ 
     }
 
     public void LoadDefaut()
@@ -35,48 +46,51 @@ public class Obstacle : MonoBehaviour
         Debug.Log("load default " + rotation);
     }
 
-    public void Rotate(Side side)
+    public void Rotate(Side totateTo)
     {
-        if (side == Side.up)
+        if (totateTo == Side.up)
             return;
 
         if (rotation == Side.up)
         {
-            if (side != Side.down)
-            {
-                int w1 = w;
-                w = h;
-                h = w1;
-            }
-            switch (side)
+            switch (totateTo)
             {
                 case Side.down:
-                    IntPos e1 = enter;
-                    enter.J = exit.J;
-                    enter.I = exit.I;
-                    exit.J = e1.J;
-                    exit.I = e1.I;
+                    enter.I = -exit.I;
+                    enter.J = -exit.J;
+
+                    exit.I = -exit.I;
+                    exit.J = -exit.J;
+                    w = -w;
+                    h = -h;
                     break;
                 case Side.left:
                     IntPos en2 = enter;
                     IntPos ex2 = exit;
 
-                    exit.I = h - en2.J - 1;
-                    exit.J = en2.I;
+                    exit.I = -ex2.J;
+                    exit.J = ex2.I;
 
-                    enter.I = h - ex2.J - 1;
-                    enter.J = ex2.I;
+                    enter.I = -en2.J;
+                    enter.J = en2.I;
+                    int h1 = h;
+                    h = w;
+                    w = -h1;
+
                     break;
                 case Side.right:
                     IntPos en1 = enter;
                     IntPos ex1 = exit;
 
-                    enter.I = en1.J;
-                    enter.J = w- en1.I - 1;
-
                     exit.I = ex1.J;
-                    exit.J = w - ex1.I - 1;
+                    exit.J = -ex1.I;
 
+                    enter.I = en1.J;
+                    enter.J = -en1.I;
+
+                    int h2 = h;
+                    h = -w;
+                    w = h2;
                     break;
             }
         }
@@ -84,7 +98,7 @@ public class Obstacle : MonoBehaviour
         {
             Debug.LogError("Can rotate only from up " + rotation);
         }
-        rotation = side;
+        rotation = totateTo;
     }
 
     public override string ToString()
@@ -94,12 +108,17 @@ public class Obstacle : MonoBehaviour
 
     public bool Check(IntPos pos,GridInfo[,] grid)
     {
-        Debug.Log("check start " + pos);
-        int sI = pos.I - enter.I;
-        int sJ = pos.J - enter.J;
-        for (int i = sI; i < sI + w; i++)
+        IntPos GSP = pos - enter;
+        IntPos GEP = new IntPos(GSP.I + w, GSP.J + h);
+        
+        int minI = Mathf.Min(GSP.I, GEP.I);
+        int minJ = Mathf.Min(GSP.J, GEP.J);
+
+        int maxI = Mathf.Max(GSP.I, GEP.I);
+        int maxJ = Mathf.Max(GSP.J, GEP.J);
+        for (int i = minI; i < maxI; i++)
         {
-            for (int j = sJ; j < sJ + h; j++)
+            for (int j = minJ; j < maxJ; j++)
             {
                 if (i < 0 || j < 0 || i>grid.Length || j>grid.Length)
                     return false;
@@ -113,21 +132,38 @@ public class Obstacle : MonoBehaviour
     }
 
 
-    public IntPos DoGrid(IntPos GSP, GridInfo[,] grid)
+    public IntPos DoGrid(IntPos pos, GridInfo[,] grid)
     {
+        
+        IntPos GSP = pos - enter;
+        IntPos GEP = new IntPos(GSP.I + w, GSP.J + h);
+        int minI = Mathf.Min(GSP.I, GEP.I);
+        int minJ = Mathf.Min(GSP.J, GEP.J);
 
+        int maxI = Mathf.Max(GSP.I, GEP.I);
+        int maxJ = Mathf.Max(GSP.J, GEP.J);
+        Debug.Log("DoGrid start minI:" + minI + " minJ:" + minJ + "maxI:" + maxI + " maxJ:" + maxJ);
+        for (int i = minI; i < maxI; i++)
+        {
+            for (int j = minJ; j < maxJ; j++)
+            {
+                grid[i, j].cell = CellType.obstacle;
+                Debug.Log("check..." + i + "  " + j);
+                if (i == pos.I && j == pos.J)
+                {
+                    Debug.Log("find core " + grid[i, j].pos);
+                    grid[i, j].Id = 999;
+                }
 
-        IntPos GEP = new IntPos(GSP.I + exit.I, GSP.J + exit.J);
-
-        int sI = GSP.I - enter.I;
-        int sJ = GSP.J - enter.J;
+            }
+        }
 
         
        // IntPos starPos = new IntPos(sI + enter.I, sJ + enter.J);
        // IntPos endPos = new IntPos(sI + exit.I, sJ + exit.J);
 
-        Debug.Log("DoGrid start " + GSP + "  " + sI + "  " + sJ + "   " + rotation + " core " + enter + "   GSP: " + GSP + "  GEP:" + GEP);// + (sI - enter == enter) + );
-        for (int i = sI; i < sI + w; i++)
+        //Debug.Log("DoGrid start " + GSP + "  " + sI + "  " + sJ + "   " + rotation + " core " + enter + "   GSP: " + GSP + "  GEP:" + GEP);// + (sI - enter == enter) + );
+        /*for (int i = sI; i < sI + w; i++)
         {
             for (int j = sJ; j < sJ + h; j++)
             {
@@ -140,8 +176,8 @@ public class Obstacle : MonoBehaviour
                 }
             }
         }
-        
-        Debug.Log("DoGrid end" + (exit + GSP) + "   " + rotation + "  exit:"+exit);
+        */
+        Debug.Log("DoGrid end" + (GSP) + "  GEP:" + GEP + "  rot:"+ rotation + "  exit:" + exit);
         return GEP;
     }
 }

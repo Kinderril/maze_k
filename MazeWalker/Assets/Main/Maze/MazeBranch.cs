@@ -123,10 +123,10 @@ public class MazeBranch
 
     private IntPos DoOstacle(IntPos curPos, IntPos fromPos, Side side)
     {
-        int c = mazeController.Obstacles.Count;
-        int index = random.Next(0, c - 1);
-        Obstacle o = mazeController.Obstacles[index];
-        o.LoadDefaut();
+        //int c = mazeController.Obstacles.Count;
+        //int index = random.Next(0, c - 1);
+        Obstacle o = new Obstacle();//mazeController.Obstacles[index];
+        //o.LoadDefaut();
         o.Rotate(side);
         bool b = o.Check(curPos, grid);
         if (b)
