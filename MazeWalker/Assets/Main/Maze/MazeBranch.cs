@@ -78,7 +78,7 @@ public class MazeBranch
                     {
                         fromPos = curPos;
                         curPos = resObs;
-                        grid[curPos.I, curPos.J].cell = CellType.free;
+                        //grid[curPos.I, curPos.J].cell = CellType.free;
                         SetNewStepT2(curPos, fromPos, c);
                         break;
                     }
@@ -132,54 +132,65 @@ public class MazeBranch
         if (b)
         {
             Debug.Log("fromPos " + fromPos);
-            return o.DoGrid(curPos, grid);
+            return o.FillGrid(curPos, grid);
         }
         return curPos;
     }
 
     private IntPos CheckCell(IntPos curPos, IntPos fromPos, IntPos offset, int t2 = 0)
     {
-        if (offset.I == 0)
-        {
-            if (curPos.J + offset.J < size - t2 && curPos.J + offset.J >= t2)
-            {
-                if (fromPos.I == curPos.I && fromPos.J == curPos.J + offset.J)
-                    return curPos;
-                if (grid[curPos.I, curPos.J + offset.J].cell == CellType.wall)
-                {
-                    if (curPos.I - 1 >= 0 && curPos.I + 1 < size)
-                    {
-                        if (grid[curPos.I - 1, curPos.J + offset.J].cell == CellType.wall &&
-                            grid[curPos.I + 1, curPos.J + offset.J].cell == CellType.wall)
-                        {
-                            return new IntPos(curPos.I, curPos.J + offset.J);
-                        }
-                    }
-                }
-            }
+        if (curPos.I < 0 || curPos.J < 0)
             return curPos;
-        }
-        else if (offset.J == 0)
+        try
         {
-            if (curPos.I + offset.I < size - t2 && curPos.I + offset.I >= t2)
+            if (offset.I == 0)
             {
-                if (fromPos.I == curPos.I + offset.I && fromPos.J == curPos.J)
+                if (curPos.J + offset.J < size - t2 && curPos.J + offset.J >= t2)
                 {
-                    return curPos;
-                }
-                if (grid[curPos.I + offset.I, curPos.J].cell == CellType.wall)
-                {
-                    if (curPos.J - 1 >= 0 && curPos.J + 1 < size)
+                    if (fromPos.I == curPos.I && fromPos.J == curPos.J + offset.J)
+                        return curPos;
+                    if (grid[curPos.I, curPos.J + offset.J].cell == CellType.wall)
                     {
-                        if (grid[curPos.I + offset.I, curPos.J - 1].cell == CellType.wall &&
-                            grid[curPos.I + offset.I, curPos.J + 1].cell == CellType.wall)
+                        if (curPos.I - 1 >= 0 && curPos.I + 1 < size)
                         {
-                            return new IntPos(curPos.I + offset.I, curPos.J);
+                            if (grid[curPos.I - 1, curPos.J + offset.J].cell == CellType.wall &&
+                                grid[curPos.I + 1, curPos.J + offset.J].cell == CellType.wall)
+                            {
+                                return new IntPos(curPos.I, curPos.J + offset.J);
+                            }
+                        }
+                    }
+                }
+                return curPos;
+            }
+            else if (offset.J == 0)
+            {
+                if (curPos.I + offset.I < size - t2 && curPos.I + offset.I >= t2)
+                {
+                    if (fromPos.I == curPos.I + offset.I && fromPos.J == curPos.J)
+                    {
+                        return curPos;
+                    }
+                    if (grid[curPos.I + offset.I, curPos.J].cell == CellType.wall)
+                    {
+                        if (curPos.J - 1 >= 0 && curPos.J + 1 < size)
+                        {
+                            if (grid[curPos.I + offset.I, curPos.J - 1].cell == CellType.wall &&
+                                grid[curPos.I + offset.I, curPos.J + 1].cell == CellType.wall)
+                            {
+                                return new IntPos(curPos.I + offset.I, curPos.J);
+                            }
                         }
                     }
                 }
             }
         }
+        catch (Exception ex)
+        {
+            Debug.Log("bug " + fromPos + "  " + curPos);
+            throw ex;
+        }
+        
         return curPos;
     }
 }

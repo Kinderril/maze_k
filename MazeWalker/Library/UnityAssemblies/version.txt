@@ -1,2 +1,2 @@
 5.0.0b14:1.9.8.0
-E:/Unity5b14/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll
+C:/Unity 5.0.0b14/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll

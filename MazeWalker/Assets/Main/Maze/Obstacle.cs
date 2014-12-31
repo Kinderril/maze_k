@@ -17,7 +17,7 @@ public class Obstacle //: MonoBehaviour
 
     public Obstacle()
     {
-        w = 2;
+        w = 3;
         h = 3;
         enter = new IntPos(1, 0);
         exit = new IntPos(1, 2);
@@ -110,75 +110,88 @@ public class Obstacle //: MonoBehaviour
     {
         IntPos GSP = pos - enter;
         IntPos GEP = new IntPos(GSP.I + w, GSP.J + h);
-        
+        int gl = grid.GetLength(0);
+        /*
         int minI = Mathf.Min(GSP.I, GEP.I);
         int minJ = Mathf.Min(GSP.J, GEP.J);
 
         int maxI = Mathf.Max(GSP.I, GEP.I);
         int maxJ = Mathf.Max(GSP.J, GEP.J);
-        for (int i = minI; i < maxI; i++)
+        */
+        int sI = GSP.I;
+        int sJ = GSP.J;
+
+        int eI = GEP.I;
+        int eJ = GEP.J;
+
+        var signI = Math.Sign(eI - sI);
+        var signJ = Math.Sign(eJ - sJ);
+
+        if (signI == 0 || signJ == 0)
         {
-            for (int j = minJ; j < maxJ; j++)
+            Debug.Log("bad bad abdad");
+            return false;
+        }
+
+        for (int i = sI; signI == -1 ? i > eI : i < eI ; i += signI)
+        {
+            for (int j = sJ; signJ == -1 ? j > eJ : j < eJ; j += signJ)
             {
-                if (i < 0 || j < 0 || i>grid.Length || j>grid.Length)
+                if (i < 0 || j < 0 || i >= gl || j >= gl)
                     return false;
 
                 if (grid[i, j].cell != CellType.wall)
                     return false;
-
             }
         }
         return true;
     }
 
 
-    public IntPos DoGrid(IntPos pos, GridInfo[,] grid)
+    public IntPos FillGrid(IntPos pos, GridInfo[,] grid)
     {
-        
         IntPos GSP = pos - enter;
         IntPos GEP = new IntPos(GSP.I + w, GSP.J + h);
-        int minI = Mathf.Min(GSP.I, GEP.I);
+        /*int minI = Mathf.Min(GSP.I, GEP.I);
         int minJ = Mathf.Min(GSP.J, GEP.J);
 
         int maxI = Mathf.Max(GSP.I, GEP.I);
         int maxJ = Mathf.Max(GSP.J, GEP.J);
-        Debug.Log("DoGrid start minI:" + minI + " minJ:" + minJ + "maxI:" + maxI + " maxJ:" + maxJ);
-        for (int i = minI; i < maxI; i++)
+        */
+        Debug.Log("FillGrid start ");
+        Debug.Log("GSP" + (GSP) + "  GEP:" + GEP + "  rot:" + rotation + "  exit:" + exit);
+        int sI = GSP.I;
+        int sJ = GSP.J;
+
+        int eI = GEP.I;
+        int eJ = GEP.J;
+
+        var signI = Math.Sign(eI - sI);
+        var signJ = Math.Sign(eJ - sJ);
+        int i = 0;
+        int j = 0;
+        for (i = sI; signI == -1 ? i > eI : i < eI; i += signI)
         {
-            for (int j = minJ; j < maxJ; j++)
+            for (j = sJ; signJ == -1 ? j > eJ : j < eJ; j += signJ)
             {
                 grid[i, j].cell = CellType.obstacle;
                 Debug.Log("check..." + i + "  " + j);
                 if (i == pos.I && j == pos.J)
                 {
-                    Debug.Log("find core " + grid[i, j].pos);
+                    //Debug.Log("find core " + grid[i, j].pos);
                     grid[i, j].Id = 999;
                 }
-
-            }
-        }
-
-        
-       // IntPos starPos = new IntPos(sI + enter.I, sJ + enter.J);
-       // IntPos endPos = new IntPos(sI + exit.I, sJ + exit.J);
-
-        //Debug.Log("DoGrid start " + GSP + "  " + sI + "  " + sJ + "   " + rotation + " core " + enter + "   GSP: " + GSP + "  GEP:" + GEP);// + (sI - enter == enter) + );
-        /*for (int i = sI; i < sI + w; i++)
-        {
-            for (int j = sJ; j < sJ + h; j++)
-            {
-                grid[i, j].cell = CellType.obstacle;
-                Debug.Log("check..."  + i + "  " + j);
-                if (i == GSP.I && j == GSP.J)
+                /*
+                if (i == pos.I && j == pos.J)
                 {
-                    Debug.Log("find core " + grid[i, j].pos);
+                    //Debug.Log("find core " + grid[i, j].pos);
                     grid[i, j].Id = 999;
-                }
+                }*/
+
             }
         }
-        */
-        Debug.Log("DoGrid end" + (GSP) + "  GEP:" + GEP + "  rot:"+ rotation + "  exit:" + exit);
-        return GEP;
+        Debug.Log("FillGrid end ");
+        return grid[i, j].pos;
     }
 }
 

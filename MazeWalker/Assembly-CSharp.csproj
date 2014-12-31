@@ -39,10 +39,10 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>E:/Unity5b14/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>C:/Unity 5.0.0b14/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>E:/Unity5b14/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Unity 5.0.0b14/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -56,6 +56,8 @@
      <Compile Include="Assets\Main\Maze\MazeBuilder.cs" />
      <Compile Include="Assets\Main\Maze\MazeController.cs" />
      <Compile Include="Assets\Main\Maze\MazeMeshBuilder.cs" />
+     <Compile Include="Assets\Main\Maze\Obstacle.cs" />
+     <Compile Include="Assets\Main\Maze\ObstacleParameters.cs" />
      <Compile Include="Assets\Main\UI\BaseWindow.cs" />
      <Compile Include="Assets\Main\UI\MainUI.cs" />
      <Compile Include="Assets\Main\UI\StarContainer.cs" />
@@ -89,7 +91,7 @@
      <None Include="Assets\SampleAssets\Effects\ToonShading\Shaders\ToonLit.shader" />
      <None Include="Assets\SampleAssets\ParticleSystems\Shaders\PriorityParticleAdd.shader" />
  <Reference Include="UnityEngine.UI">
- <HintPath>E:/Unity5b14/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ <HintPath>C:/Unity 5.0.0b14/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
