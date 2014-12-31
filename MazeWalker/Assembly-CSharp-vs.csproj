@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+	<ProductVersion>10.0.20506</ProductVersion>
+	<SchemaVersion>2.0</SchemaVersion>
+	<ProjectGuid>{438C37FE-2EAB-ECE5-141D-D47D8F8A4ECF}</ProjectGuid>
+	<OutputType>Library</OutputType>
+	<AppDesignerFolder>Properties</AppDesignerFolder>
+	<RootNamespace></RootNamespace>
+	<AssemblyName>Assembly-CSharp</AssemblyName>
+	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+	<FileAlignment>512</FileAlignment>
+	<BaseDirectory>Assets</BaseDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+	<DebugSymbols>true</DebugSymbols>
+	<DebugType>full</DebugType>
+	<Optimize>false</Optimize>
+	<OutputPath>Temp\bin\Debug\</OutputPath>
+	<DefineConstants>DEBUG;TRACE;UNITY_5_0_0;UNITY_5_0;ENABLE_2D_PHYSICS;ENABLE_4_6_FEATURES;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_NEW_HIERARCHY;ENABLE_OBSOLETE_API_UPDATING;ENABLE_PHYSICS;ENABLE_PHYSICS_PHYSX3;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_AUDIOMIXER_SUSPEND;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;UNITY_ANDROID;UNITY_ANDROID_API;ENABLE_SUBSTANCE;ENABLE_TEXTUREID_MAP;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_MONO;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN;UNITY_PRO_LICENSE;CROSS_PLATFORM_INPUT;MOBILE_INPUT</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+	<DebugType>pdbonly</DebugType>
+	<Optimize>true</Optimize>
+	<OutputPath>Temp\bin\Release\</OutputPath>
+	<DefineConstants>TRACE</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+	<Reference Include="System" />
+    <Reference Include="System.XML" />
+	<Reference Include="System.Core" />
+	<Reference Include="System.Xml.Linq" />
+	<Reference Include="UnityEngine">
+	  <HintPath>E:/Unity5b14/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	</Reference>
+	<Reference Include="UnityEditor">
+	  <HintPath>E:/Unity5b14/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	</Reference>
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\Main\Controls\GControls.cs" />
+     <Compile Include="Assets\Main\Controls\SwipeControls.cs" />
+     <Compile Include="Assets\Main\Controls\UIControls.cs" />
+     <Compile Include="Assets\Main\GameController.cs" />
+     <Compile Include="Assets\Main\Helpers\Result.cs" />
+     <Compile Include="Assets\Main\Helpers\ResultController.cs" />
+     <Compile Include="Assets\Main\Maze\MazeBranch.cs" />
+     <Compile Include="Assets\Main\Maze\MazeBuilder.cs" />
+     <Compile Include="Assets\Main\Maze\MazeController.cs" />
+     <Compile Include="Assets\Main\Maze\MazeMeshBuilder.cs" />
+     <Compile Include="Assets\Main\UI\BaseWindow.cs" />
+     <Compile Include="Assets\Main\UI\MainUI.cs" />
+     <Compile Include="Assets\Main\UI\StarContainer.cs" />
+     <Compile Include="Assets\Main\UI\WindowEnd.cs" />
+     <Compile Include="Assets\Main\UI\WindowManager.cs" />
+     <Compile Include="Assets\Main\UI\WindowPause.cs" />
+     <Compile Include="Assets\Main\UI\WindowStart.cs" />
+     <Compile Include="Assets\Main\Units\Ball.cs" />
+     <Compile Include="Assets\Main\Units\BallChecker.cs" />
+     <Compile Include="Assets\Main\Units\BlockElement.cs" />
+     <Compile Include="Assets\Main\Utils\CheckList.cs" />
+     <Compile Include="Assets\Main\Utils\Enums.cs" />
+     <Compile Include="Assets\Main\Utils\FollowTarget.cs" />
+     <Compile Include="Assets\SampleAssets\Characters\RollerBall\Scripts\Ball.cs" />
+     <Compile Include="Assets\SampleAssets\ParticleSystems\Scripts\AfterburnerPhysicsForce.cs" />
+     <Compile Include="Assets\SampleAssets\ParticleSystems\Scripts\ExplosionFireAndDebris.cs" />
+     <Compile Include="Assets\SampleAssets\ParticleSystems\Scripts\ExplosionPhysicsForce.cs" />
+     <Compile Include="Assets\SampleAssets\ParticleSystems\Scripts\ExtinguishableParticleSystem.cs" />
+     <Compile Include="Assets\SampleAssets\ParticleSystems\Scripts\FireLight.cs" />
+     <Compile Include="Assets\SampleAssets\ParticleSystems\Scripts\Hose.cs" />
+     <Compile Include="Assets\SampleAssets\ParticleSystems\Scripts\ParticleSystemMultiplier.cs" />
+     <Compile Include="Assets\SampleAssets\ParticleSystems\Scripts\SmokeParticles.cs" />
+     <Compile Include="Assets\SampleAssets\ParticleSystems\Scripts\WaterHoseParticles.cs" />
+     <Compile Include="Assets\Scripts\GyroController.cs" />
+     <None Include="Assets\SampleAssets\Effects\ToonShading\Shaders\ToonBasic.shader" />
+     <None Include="Assets\SampleAssets\Effects\ToonShading\Shaders\ToonBasicOutline.shader" />
+     <None Include="Assets\SampleAssets\ParticleSystems\Shaders\PriorityParticleAlpha.shader" />
+     <None Include="Assets\SampleAssets\ParticleSystems\ParticleSystemsGuidelines.txt" />
+     <None Include="Assets\SampleAssets\ParticleSystems\Shaders\PriorityParticleAddSoft.shader" />
+     <None Include="Assets\SampleAssets\Effects\ToonShading\Shaders\ToonLitOutline.shader" />
+     <None Include="Assets\SampleAssets\Effects\ToonShading\Shaders\ToonLit.shader" />
+     <None Include="Assets\SampleAssets\ParticleSystems\Shaders\PriorityParticleAdd.shader" />
+ <Reference Include="UnityEngine.UI">
+ <HintPath>E:/Unity5b14/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+	   Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+</Project>

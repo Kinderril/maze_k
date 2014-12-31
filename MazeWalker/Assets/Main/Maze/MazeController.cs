@@ -56,6 +56,7 @@ public class MazeController : MonoBehaviour {
         {
             for (int j = 0; j < size; j++)
             {
+				Debug.Log("WTF??");
                 var b = blocks.FirstOrDefault(x => x.type == obj[i, j].cell);
                 if (b != null)
                 {
