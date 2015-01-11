@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Result
 {
-    public Dictionary<ControlType, float> list = new Dictionary<ControlType, float>();
+    public Dictionary<ControlType, int> list = new Dictionary<ControlType, int>();
     public const char DELEMITER = ';';
     public int levelId;
  
@@ -24,9 +24,21 @@ public class Result
         {
           //  UnityEngine.Debug.Log(i + "   " + ss[i]);
             var a = (ControlType)Enum.Parse(typeof(ControlType), ss[i]);
-            float t = Convert.ToSingle(ss[i + 1]);
+            int t = Convert.ToInt32(ss[i + 1]);
             list.Add(a,t);
         }
+    }
+
+    public int GetBestStars()
+    {
+        int r = 0;
+        foreach (var item in list)
+        {
+            if (item.Value > r)
+                r = (int)item.Value;
+        }
+
+        return r;
     }
 
     public void AddResultLevel(ControlType control,float time,int starsCount)

@@ -7,11 +7,12 @@ using UnityEngine.UI;
 public class WindowStart : BaseWindow
 {
     public Text resultsText;
-    public Text currentLevelField;
+   // public Text currentLevelField;
     //public InputField randomNumberText;
-    public Text selectedLevel;
+    //public Text selectedLevel;
     //public Toggle randomButton;
     private int curLevel = 1;
+    public CurrentResult uiResultWindow;
 
     public void OnStartClicked()
     {
@@ -34,12 +35,15 @@ public class WindowStart : BaseWindow
 
     private void UpdateCurTevelField()
     {
-        currentLevelField.text = curLevel + "";
+       // currentLevelField.text = curLevel + "";
         Result r = GameController.ResultController.GetBestResultResult(curLevel);
+        uiResultWindow.SetResult(r, curLevel);
+        /*
         if (r != null)
             selectedLevel.text = r.ToString();
         else
             selectedLevel.text = "No Result";
+         */
     }
 
     public void OnExitClick(){

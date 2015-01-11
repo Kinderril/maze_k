@@ -87,6 +87,7 @@
     <Compile Include="Assets\Main\Maze\ObstacleParameters.cs" />
     <Compile Include="Assets\Main\Maze\Obstacles\ControlChanger.cs" />
     <Compile Include="Assets\Main\UI\BaseWindow.cs" />
+    <Compile Include="Assets\Main\UI\CurrentResult.cs" />
     <Compile Include="Assets\Main\UI\MainUI.cs" />
     <Compile Include="Assets\Main\UI\StarContainer.cs" />
     <Compile Include="Assets\Main\UI\WindowEnd.cs" />
@@ -98,7 +99,7 @@
     <Compile Include="Assets\Main\Units\BlockElement.cs" />
     <Compile Include="Assets\Main\Utils\CheckList.cs" />
     <Compile Include="Assets\Main\Utils\Enums.cs" />
-    <Compile Include="Assets\Main\Utils\FBTesting.cs" />
+    <Compile Include="Assets\Main\Utils\FaceBookController.cs" />
     <Compile Include="Assets\Main\Utils\FollowTarget.cs" />
     <Compile Include="Assets\Main\Utils\GameUtils.cs" />
     <Compile Include="Assets\SampleAssets\Characters\RollerBall\Scripts\Ball.cs" />

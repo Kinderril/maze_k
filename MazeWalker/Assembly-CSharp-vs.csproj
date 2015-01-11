@@ -76,6 +76,7 @@
      <Compile Include="Assets\Main\Maze\ObstacleParameters.cs" />
      <Compile Include="Assets\Main\Maze\Obstacles\ControlChanger.cs" />
      <Compile Include="Assets\Main\UI\BaseWindow.cs" />
+     <Compile Include="Assets\Main\UI\CurrentResult.cs" />
      <Compile Include="Assets\Main\UI\MainUI.cs" />
      <Compile Include="Assets\Main\UI\StarContainer.cs" />
      <Compile Include="Assets\Main\UI\WindowEnd.cs" />
