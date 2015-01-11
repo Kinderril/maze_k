@@ -6,31 +6,51 @@ using Random = UnityEngine.Random;
 
 public class MazeController : MonoBehaviour {
 
-	// Use this for initialization
     private MazeBuilder mazeGrid;
-    //public BlockElement block;
-    //public BlockElement Star;
-    //public BlockElement EndElement;
-    //public BlockElement Jumper;
+    public Transform ObstacleContainer;
+    public Transform StarContainer;
+    public Transform FreeContainer;
     public Transform WallContainer;
-    public List<BlockElement> blocks = new List<BlockElement>(); 
+    public Transform OtherContainer;
+    public List<BlockElement> blocks = new List<BlockElement>();
     public int seed;
     private int size;
+    private List<Obstacle> obstacles;
+    private Action<Vector3> onComplete;
 
-    public List<Obstacle> Obstacles = new List<Obstacle>();
+    private Dictionary<CellType, List<BlockElement>> currentBlocks;
+
+
+    public List<Obstacle> Obstacles
+    {
+        get { return obstacles; }
+    }
+    public Dictionary<CellType, List<BlockElement>> CurrentBlocks
+    {
+        get { return currentBlocks; }
+    }
 
     //private int stars;
-    private Action<Vector3> onComplete;
 
 	void Start ()
 	{
-	    foreach (var obstacle in Obstacles)
+        obstacles = new List<Obstacle>();
+        foreach (var block in blocks)
+        {
+            Obstacle obs = block.GetComponent<Obstacle>();
+            if (obs != null)
+            {
+                block.type = CellType.obstacle;
+                obstacles.Add(obs);
+            }
+        }
+
+	    foreach (var obstacle in obstacles)
 	    {
 	        obstacle.Init();
 	    }
-     //   Debug.Log(TestObstacle);
-     //   TestObstacle.Rotate(Side.right);
-     //   Debug.Log(TestObstacle);
+
+        Debug.Log("Obstacle count = " + obstacles.Count);
 	}
 
     public void Init(Action<Vector3> onComplete)
@@ -51,39 +71,82 @@ public class MazeController : MonoBehaviour {
 
     private void OnBuildComplete(GridInfo[,] obj,IntPos startPos)
     {
-       // var f = blocks.FirstOrDefault(x => x.type == CellType.free);
+        currentBlocks = new Dictionary<CellType, List<BlockElement>>();
+        var f = blocks.FirstOrDefault(x => x.type == CellType.free);
         for (int i = 0; i < size; i++)
         {
             for (int j = 0; j < size; j++)
             {
-//				Debug.Log("WTF??");
-                var b = blocks.FirstOrDefault(x => x.type == obj[i, j].cell);
+                GridInfo gi = obj[i, j];
+                var b = blocks.FirstOrDefault(x => x.Id == gi.Id);
                 if (b != null)
                 {
                     Quaternion q = Quaternion.identity;
                     Vector3 v = new Vector3(i, 0, j);
-                   /* if (b.type != CellType.wall)
+                    if (b.type == CellType.teleport)
+                    {
+                        Debug.Log("!!!!!!!!!!");
+                    }
+
+                    if (b.type != CellType.wall && b.type != CellType.obstacle) 
                     {
                         GameObject go1 = Instantiate(f.gameObject, new Vector3(i, 0, j), Quaternion.identity) as GameObject;
-                        go1.transform.parent = transform;
-                    }*/
-                    Transform parent = transform;
-                    if (b.type == CellType.wall)
-                    {
-                        parent = WallContainer;
+                        go1.transform.parent = FreeContainer;
                     }
-                    else if (b.type == CellType.obstacle)
+                    Transform parent = transform;
+                    //Debug.Log("!!!!!!!   " + i + "   " + j + "   " + b.type + "  " +obj[i, j].Id);
+                    switch (b.type)
                     {
-                        if (obj[i, j].Id > 1)
+                        case CellType.wall:
+                            parent = WallContainer;
+                            break;
+                        case CellType.obstacle:
+                            parent = ObstacleContainer;
+                            break;
+                        case CellType.star:
+                            parent = StarContainer;
+                            break;
+                        case CellType.free:
+                            parent = FreeContainer;
+                            break;
+                        default:
+                            parent = OtherContainer;
+                            break;
+                    }
+                    if (b.type == CellType.obstacle)
+                    {
+                        if (gi.obsParams != null)
                         {
-                            v = new Vector3(i,1,j);
+                            int w_obst =  gi.obsParams.w ;
+                            int h_obst = gi.obsParams.h ;
+                            float cw = (w_obst - 1 * (Math.Sign(w_obst))) / 2f;
+                            float ch = (h_obst - 1 * (Math.Sign(h_obst))) / 2f;
+                            //Debug.Log("Obstacle setting   " + cw + "   " + ch + "  rotate:" + gi.rotate + " enter:" + gi.obsParams.enter + "  w_obst:" + w_obst + "  h_obst:" + h_obst + "  id:" + gi.obsParams.id);
+                            q = Quaternion.Euler(GameUtils.GetV3BySide(gi.rotate));
+                            //v = new Vector3(i , 0, j );
+                            v = new Vector3(i + (cw - gi.obsParams.enter.I), 0, j + (ch - gi.obsParams.enter.J));
+                            //Debug.Log("vvvv " + v);
+                        }
+                        else
+                        {
+                            continue;
                         }
                     }
                     GameObject go = Instantiate(b.gameObject, v, q) as GameObject;
                     go.transform.parent = parent;
+
                     BlockElement block = go.GetComponent<BlockElement>();
-                    block.I = i;
-                    block.J = j;
+                    //block.I = i;
+                    //block.J = j;
+                    block.Init(i,j);
+                    if (!currentBlocks.ContainsKey(block.type))
+                        currentBlocks.Add(block.type,new List<BlockElement>());
+                    currentBlocks[block.type].Add(block);
+                }
+                else
+                {
+                   // if (obj[i, j].Id > 10)
+                      //  Debug.Log("can't find id " + obj[i, j].Id);
                 }
             }
             
@@ -94,17 +157,32 @@ public class MazeController : MonoBehaviour {
 
     public void Clear()
     {
-        var cc = GetComponentsInChildren<BoxCollider>();
+
+        //var cc = GetComponentsInChildren<BoxCollider>();
       //  Debug.Log("cc " + cc.Length);
-        var tt = cc.Where(x => !x.name.Contains("Plane") && !x.name.Contains("Maze"));
+      //  var tt = cc.Where(x => !x.name.Contains("Plane") && !x.name.Contains("Maze"));
       //  Debug.Log("cc " + tt.Count());
+        ClearContainer(ObstacleContainer);
+        ClearContainer(StarContainer);
+        ClearContainer(WallContainer);
+        ClearContainer(FreeContainer);
+        ClearContainer(OtherContainer);
+        
+            /*
         foreach (var componentsInChild in tt)
         {
-            componentsInChild.transform.position = Vector3.down*-100000;
             Destroy(componentsInChild.gameObject);
-        }
+        }*/
         //BuildMaze(size, stars);
     }
+
+    private void ClearContainer(Transform tr)
+    {
+
+        foreach (Transform child in tr.transform)
+            Destroy(child.gameObject);
+    }
+
 	
 	// Update is called once per frame
 	void Update () {

@@ -71,7 +71,7 @@ public class MazeBranch
                 fromPos = curPos;
                 curPos = res;
 
-                if (random.Next(0, 100) < 13)
+                if (random.Next(0, 100) < 4)
                 {
                     var resObs = DoOstacle(curPos, fromPos, directions[i].side);
                     if (resObs != curPos)
@@ -86,7 +86,7 @@ public class MazeBranch
                 else
                 {
 
-                    grid[curPos.I, curPos.J].cell = CellType.free;
+                    grid[curPos.I, curPos.J].Cell = CellType.free;
                     history.Add(grid[curPos.I, curPos.J]);
                     SetNewStepT2(curPos, fromPos, c);
                     findSmt = true;
@@ -94,7 +94,7 @@ public class MazeBranch
                 }
             }
         }
-        /*
+        
         if (!findSmt)
         {
             //Debug.Log("branch is over " + history.Count);
@@ -117,22 +117,24 @@ public class MazeBranch
                 }
             }
         }
-        */
+        
         return curPos;
     }
 
     private IntPos DoOstacle(IntPos curPos, IntPos fromPos, Side side)
     {
-        //int c = mazeController.Obstacles.Count;
-        //int index = random.Next(0, c - 1);
-        Obstacle o = new Obstacle();//mazeController.Obstacles[index];
+
+        int c = mazeController.Obstacles.Count;
+        int index = random.Next(0, c);
+        //Debug.Log("c " + c + "   index " + index);
+        Obstacle o = mazeController.Obstacles[index];
+        ObstacleParameters obsP = o.GetParams();
         //o.LoadDefaut();
-        o.Rotate(side);
-        bool b = o.Check(curPos, grid);
+        obsP.Rotate(side);
+        bool b = obsP.Check(curPos, grid);
         if (b)
         {
-            Debug.Log("fromPos " + fromPos);
-            return o.FillGrid(curPos, grid);
+            return obsP.FillGrid(curPos, grid);
         }
         return curPos;
     }
@@ -149,12 +151,12 @@ public class MazeBranch
                 {
                     if (fromPos.I == curPos.I && fromPos.J == curPos.J + offset.J)
                         return curPos;
-                    if (grid[curPos.I, curPos.J + offset.J].cell == CellType.wall)
+                    if (grid[curPos.I, curPos.J + offset.J].Cell == CellType.wall)
                     {
                         if (curPos.I - 1 >= 0 && curPos.I + 1 < size)
                         {
-                            if (grid[curPos.I - 1, curPos.J + offset.J].cell == CellType.wall &&
-                                grid[curPos.I + 1, curPos.J + offset.J].cell == CellType.wall)
+                            if (grid[curPos.I - 1, curPos.J + offset.J].Cell == CellType.wall &&
+                                grid[curPos.I + 1, curPos.J + offset.J].Cell == CellType.wall)
                             {
                                 return new IntPos(curPos.I, curPos.J + offset.J);
                             }
@@ -171,12 +173,12 @@ public class MazeBranch
                     {
                         return curPos;
                     }
-                    if (grid[curPos.I + offset.I, curPos.J].cell == CellType.wall)
+                    if (grid[curPos.I + offset.I, curPos.J].Cell == CellType.wall)
                     {
                         if (curPos.J - 1 >= 0 && curPos.J + 1 < size)
                         {
-                            if (grid[curPos.I + offset.I, curPos.J - 1].cell == CellType.wall &&
-                                grid[curPos.I + offset.I, curPos.J + 1].cell == CellType.wall)
+                            if (grid[curPos.I + offset.I, curPos.J - 1].Cell == CellType.wall &&
+                                grid[curPos.I + offset.I, curPos.J + 1].Cell == CellType.wall)
                             {
                                 return new IntPos(curPos.I + offset.I, curPos.J);
                             }

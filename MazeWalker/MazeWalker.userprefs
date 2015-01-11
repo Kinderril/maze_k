@@ -1,10 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Main\Units\blockElement.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Main\Maze\MazeController.cs">
     <Files>
-      <File FileName="MazeWalker.sln" Line="1" Column="1" />
-      <File FileName="Assets\Main\Units\blockElement.cs" Line="1" Column="1" />
-      <File FileName="Assets\Main\Maze\MazeController.cs" Line="60" Column="49" />
+      <File FileName="Assets\Main\Maze\MazeMeshBuilder.cs" Line="1" Column="1" />
+      <File FileName="Assets\Main\Maze\MazeController.cs" Line="60" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

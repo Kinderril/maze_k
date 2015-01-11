@@ -29,13 +29,13 @@ public class Result
         }
     }
 
-    public void AddResultLevel(ControlType control,float time)
+    public void AddResultLevel(ControlType control,float time,int starsCount)
     {
         if (!list.ContainsKey(control))
-            list.Add(control, time);
+            list.Add(control, starsCount);
         else
         {
-            list[control] = Mathf.Min(time, list[control]);
+            list[control] = Mathf.Max(starsCount, list[control]);
         }
     }
 

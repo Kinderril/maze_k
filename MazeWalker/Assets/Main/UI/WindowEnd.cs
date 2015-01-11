@@ -3,7 +3,8 @@ using UnityEngine.UI;
 
 public class WindowEnd : BaseWindow
 {
-    public Text endMsg;
+    public Text cureentResult;
+    public Text bestResult;
 
     public void OnOkClicked()
     {
@@ -13,8 +14,15 @@ public class WindowEnd : BaseWindow
     public override void Init(GameController gc)
     {
         base.Init(gc);
-        endMsg.text = gc.GetLastResult().ToString();
-        gc.SaveResult();
+        var r  = gc.ResultController.LastResult;
+        cureentResult.text = r.ToString();
+        bestResult.text = gc.ResultController.GetBestResultResult(r.levelId).ToString();
+        gc.ResultController.Save();
+    }
+
+    public void OnFBClicked()
+    {
+        GameController.faceBook.SendImage();
     }
 }
 

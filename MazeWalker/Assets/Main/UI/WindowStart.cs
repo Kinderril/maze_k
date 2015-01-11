@@ -7,28 +7,57 @@ using UnityEngine.UI;
 public class WindowStart : BaseWindow
 {
     public Text resultsText;
-    public InputField randomNumberText;
-    public Toggle randomButton;
+    public Text currentLevelField;
+    //public InputField randomNumberText;
+    public Text selectedLevel;
+    //public Toggle randomButton;
+    private int curLevel = 1;
 
     public void OnStartClicked()
     {
-        GameController.StartGame(randomButton.isOn?-1:Convert.ToInt32(randomNumberText.text));
+        GameController.StartGame(curLevel);//randomButton.isOn?-1:Convert.ToInt32(randomNumberText.text));
     }
 
-    void Awake()
+    public void OnUpLevel()
     {
-        randomNumberText.onValueChange.AddListener((string ss) => OnLevelNumberChange1(randomNumberText.text));
+        if (curLevel < GameController.ResultController.lastLevelNumber)
+            curLevel++;
+        UpdateCurTevelField();
+    }
+
+    public void OnDownLevel()
+    {
+        if (curLevel > 1)
+            curLevel--;
+        UpdateCurTevelField();
+    } 
+
+    private void UpdateCurTevelField()
+    {
+        currentLevelField.text = curLevel + "";
+        Result r = GameController.ResultController.GetBestResultResult(curLevel);
+        if (r != null)
+            selectedLevel.text = r.ToString();
+        else
+            selectedLevel.text = "No Result";
+    }
+
+    public void OnExitClick(){
+        Application.Quit();
     }
 
     public override void Init(GameController gc)
     {
         base.Init(gc);
+        curLevel = gc.ResultController.lastLevelNumber;
+        UpdateCurTevelField();
+        //curLevel = Convert.ToInt32(currentLevelField.text);
         try
         {
 
             var results = gc.LoadResults();
-            string r = results.Aggregate("", (current, result) => current + (result.ToStringAlternative() + "\n"));
-            resultsText.text = r;
+            //string r = results.Aggregate("", (current, result) => current + (result.ToStringAlternative() + "\n"));
+            resultsText.text = gc.ResultController.GetOverview();
         }
         catch (Exception)
         {
@@ -48,7 +77,7 @@ public class WindowStart : BaseWindow
         if (ok)
             GameController.ChangeControlType(ControlType.swipe);
     }
-
+    /*
     public void OnLevelNumberChange1(string ss)
     {
         randomButton.isOn = (ss.Length == 0);
@@ -65,7 +94,7 @@ public class WindowStart : BaseWindow
            // randomNumberText.text = "1";
         }
     }
-
+    */
     public void OnGyroClicked(bool ok)
     {
         if (ok)

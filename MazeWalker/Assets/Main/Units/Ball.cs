@@ -78,6 +78,7 @@ public class Ball : MonoBehaviour
 
     public void ToRespawn()
     {
+        m_Rigidbody.velocity = Vector3.zero;
         transform.position = respawnPoint;
     }
 
@@ -85,5 +86,10 @@ public class Ball : MonoBehaviour
     {
         transform.position = startPos;
         respawnPoint = startPos;
+    }
+
+    public void StartGame()
+    {
+        power = Mathf.Abs(power);
     }
 }

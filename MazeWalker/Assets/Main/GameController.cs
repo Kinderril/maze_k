@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -21,6 +22,8 @@ public class GameController : MonoBehaviour
     private float endTime;
     private ResultController resultController;
     public FollowTarget mainCameraHolder;
+    public FaceBookController faceBook;
+    public int Sec2Level = 60;
    // private ResultLevel _lastLevelResultLevel;
 
     private GameStage GameStage
@@ -34,6 +37,11 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public ResultController ResultController
+    {
+        get { return resultController; }
+    }
+
     void Awake()
     {
         bControls = maze.GetComponent<UIControls>();
@@ -43,6 +51,7 @@ public class GameController : MonoBehaviour
         ball.Init(this);
         WindowManager.Init(allWindows,this);
         WindowManager.WindowOn(startWindow);
+        Screen.sleepTimeout = 120;
     }
 
     public void StartGame(int p)
@@ -68,8 +77,15 @@ public class GameController : MonoBehaviour
                 sControls.Init(ball);
                 break;
         }
+        ball.StartGame();
         maze.Init(onComplete);
         maze.BuildMaze(size, maxStars,p);
+    }
+
+    IEnumerator EndByTime(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        EndGame();
     }
 
     public void EndGame(bool withExitWindow = true)
@@ -78,7 +94,7 @@ public class GameController : MonoBehaviour
         if (withExitWindow)
         {
             endTime = Time.time;
-            resultController.AddResult(endTime - startTime, maze.seed, ctype);
+            resultController.AddResult(endTime - startTime, maze.seed, ctype,curStars);
             GameStage = GameStage.end;
         }
         else
@@ -86,6 +102,7 @@ public class GameController : MonoBehaviour
             Time.timeScale = 1;
             GameStage = GameStage.mainMenu;
         }
+        //StopAllCoroutines();
     }
 
 
@@ -93,8 +110,22 @@ public class GameController : MonoBehaviour
     {
         ball.StartPlay(startPos);
         main_UI.InitUI(maze.seed);
+        //StartCoroutine(EndByTime(20));
     }
 
+   
+    
+    void Update()
+    {
+        if (gameStage == GameStage.game && Time.time - startTime > 0)
+        {
+            if (Time.time - startTime > Sec2Level)
+            {
+                EndGame();
+            }
+        }
+    }
+    
     public void GetStar()
     {
         curStars++;
@@ -112,18 +143,9 @@ public class GameController : MonoBehaviour
 
     public string GetCurSpendTime()
     {
-        return (Time.time - startTime).ToString("##.##");
+        return (Sec2Level -( Time.time - startTime)).ToString("00.0");
     }
 
-    public Result GetLastResult()
-    {
-        return resultController.LastResult;
-    }
-
-    public void SaveResult()
-    {
-        resultController.Save();
-    }
 
     public List<Result> LoadResults()
     {
@@ -151,5 +173,6 @@ public class GameController : MonoBehaviour
     {
         resultController.Clear();
     }
+
 }
 

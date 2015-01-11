@@ -42,15 +42,42 @@ public struct IntPos
 
 public class GridInfo
 {
-    public CellType cell;
+    private CellType cell;
     public IntPos pos;
     public int Id;
     public Side rotate;
+    public ObstacleParameters obsParams;
 
     public GridInfo(CellType cellType,int i,int j)
     {
-        cell = cellType;
+        Cell = cellType;
         pos = new IntPos(i,j);
+    }
+
+    public CellType Cell
+    {
+        get { return cell; }
+        set { 
+            cell = value;
+            switch (cell)
+            {
+                case CellType.free:
+                    Id = 4;
+                    break;
+                case CellType.wall:
+                    Id = 1;
+                    break;
+                case CellType.star:
+                    Id = 3;
+                    break;
+                case CellType.jumer:
+                    Id = 2;
+                    break;
+                case CellType.teleport:
+                    Id = 5;
+                    break;
+            }
+        }
     }
 }
 
@@ -63,6 +90,7 @@ public enum CellType
     floor,
     respawn,
     obstacle,
+    teleport,
 }
 
 public class MazeBuilder
@@ -97,7 +125,7 @@ public class MazeBuilder
         }*/
         MazeBranch branch = new MazeBranch(grid, random, size, 0, mcontroller);
         startPos = new IntPos(random.Next(size / 4, size / 2), random.Next(size / 4, size / 2));
-        grid[startPos.I, startPos.J].cell = CellType.free;
+        grid[startPos.I, startPos.J].Cell = CellType.free;
         branch.DoBranch(grid[startPos.I, startPos.J]);
         /*
         grid[startPos.I, startPos.J].cell = CellType.free;
@@ -111,20 +139,24 @@ public class MazeBuilder
             Debug.LogError("GFR45 " + stars.Count  + "   " + (maxStarCount));
         }
         foreach (var a in stars)
-            a.cell = CellType.star;
+            a.Cell = CellType.star;
 
         /*
         var exits = GetrandomList(2-1, GetFreePos());
         foreach (var a in exits)
             a.cell = CellType.end;
         */
-        var jumps = GetrandomList(3, GetFreePos());
-        foreach (var a in jumps)
-            a.cell = CellType.jumer;
+        
+        var teleports = GetrandomList(2, GetFreePos());
+        foreach (var a in teleports)
+        {
+            Debug.Log("teleports " + a.pos);
+            a.Cell = CellType.teleport;
+        }
 
-
+        
         Debug.Log("MazeBuilder start from " + startPos);
-        Debug.Log("finsish " + step);
+        //Debug.Log("finsish " + step);
         onBuildComplete(grid, startPos);
     }
 
@@ -151,7 +183,7 @@ public class MazeBuilder
         {
             for (int j = 0; j < size; ++j)
             {
-                if (grid[i, j].cell == CellType.free)
+                if (grid[i, j].Cell == CellType.free)
                     list.Add(grid[i, j]);
             }
         }
@@ -176,7 +208,7 @@ public class MazeBuilder
             {
                 fromPos = curPos;
                 curPos = res;
-                grid[curPos.I, curPos.J].cell = CellType.free;
+                grid[curPos.I, curPos.J].Cell = CellType.free;
                 history.Add(grid[curPos.I, curPos.J]);
                 SetNewStepT2(curPos, fromPos, c);
                 findSmt = true;
@@ -217,7 +249,7 @@ public class MazeBuilder
                 //Debug.Log(i + "||||   "+ directions[i] + " res " + res);
                 fromPos = curPos;
                 curPos = res;
-                grid[curPos.I, curPos.J].cell = CellType.free;
+                grid[curPos.I, curPos.J].Cell = CellType.free;
                 SetNewStep(curPos, fromPos, c);
 
                 //if (UnityEngine.Random.Range(0f, 1f) < 0.2f)
@@ -242,12 +274,12 @@ public class MazeBuilder
             {
                 if (fromPos.I == curPos.I && fromPos.J == curPos.J + offset.J)
                     return curPos;
-                if (grid[curPos.I, curPos.J + offset.J].cell == CellType.wall)
+                if (grid[curPos.I, curPos.J + offset.J].Cell == CellType.wall)
                 {
                     if (curPos.I - 1 >= 0 && curPos.I + 1 < size)
                     {
-                        if (grid[curPos.I - 1, curPos.J + offset.J].cell == CellType.wall &&
-                            grid[curPos.I + 1, curPos.J + offset.J].cell == CellType.wall)
+                        if (grid[curPos.I - 1, curPos.J + offset.J].Cell == CellType.wall &&
+                            grid[curPos.I + 1, curPos.J + offset.J].Cell == CellType.wall)
                         {
                             return new IntPos(curPos.I, curPos.J + offset.J);
                         }
@@ -264,12 +296,12 @@ public class MazeBuilder
                 {
                     return curPos;
                 }
-                if (grid[curPos.I + offset.I, curPos.J].cell == CellType.wall)
+                if (grid[curPos.I + offset.I, curPos.J].Cell == CellType.wall)
                 {
                     if (curPos.J - 1 >= 0 && curPos.J + 1 < size)
                     {
-                        if (grid[curPos.I + offset.I, curPos.J - 1].cell == CellType.wall &&
-                            grid[curPos.I + offset.I, curPos.J + 1].cell == CellType.wall)
+                        if (grid[curPos.I + offset.I, curPos.J - 1].Cell == CellType.wall &&
+                            grid[curPos.I + offset.I, curPos.J + 1].Cell == CellType.wall)
                         {
                             return new IntPos(curPos.I + offset.I, curPos.J);
                         }

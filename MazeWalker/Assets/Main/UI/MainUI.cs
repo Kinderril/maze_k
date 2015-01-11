@@ -16,6 +16,7 @@ public class MainUI : BaseWindow
 
     public Text levelIdLabel;
     public Text TimeLabel;
+    public Text spendLabel;
     public Button buttonScale;
     public Button buttonExit;
 
@@ -47,7 +48,14 @@ public class MainUI : BaseWindow
         for (int i = 0; i < gc.curStars; i++)
         {
             allStars[i].Open();
-        }
+        } 
+        UpdateSpendLabel();
+
+    }
+
+    private void UpdateSpendLabel()
+    {
+        spendLabel.text = GameController.ResultController.StarsToSpend + "";
     }
 
     public override void Dispose()
@@ -98,10 +106,17 @@ public class MainUI : BaseWindow
 
     public void OnClickZoom(Button btn)
     {
+        if (GameController.ResultController.StarsToSpend < 5)
+        {
+            return;
+        }
+        GameController.ResultController.StarsToSpend -= 5;
+
         btn.gameObject.SetActive(false);
         Time.timeScale = 1;
         buttonExit.gameObject.SetActive(false);
         StartCoroutine(zooming());
+        UpdateSpendLabel();
     }
 
     IEnumerator zooming()

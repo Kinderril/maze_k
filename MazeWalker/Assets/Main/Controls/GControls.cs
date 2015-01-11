@@ -16,9 +16,9 @@ public class GControls : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-	    Vector3 a = Input.acceleration*20;
-	    Vector3 b = new Vector3(a.x, 0, a.y);
-        ball.AddForse(b);
+	    Vector3 a = Input.acceleration * 7;
+	    Vector2 b = new Vector2(a.x, a.y);
+        ball.Move(b);
 	    //label.text = b.ToString();
 
 	    /*
