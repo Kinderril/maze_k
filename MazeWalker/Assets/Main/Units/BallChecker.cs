@@ -4,12 +4,12 @@ using UnityEngine;
 public class BallChecker : MonoBehaviour {
 
     // Use this for initialization
-    private Ball ball;
+    private Ball _ballOwner;
     private bool teleported = false;
 
-    public Ball Ball
+    public Ball BallOwner
     {
-      get { return ball; }
+      get { return _ballOwner; }
     }
     void OnTriggerEnter(Collider other)
     {
@@ -19,15 +19,15 @@ public class BallChecker : MonoBehaviour {
             switch (block.type)
             {
                 case CellType.star:
-                    ball.GetStar(block);
+                    _ballOwner.GetStar(block);
                    // Destroy(block);
                     block.transform.position = Vector3.up*-10000;
                     break;
                 case CellType.jumer:
-                    ball.AddForse(new Vector3(0,105,0));
+                    _ballOwner.AddForse(new Vector3(0,105,0));
                     break;
                 case CellType.respawn:
-                    ball.ToRespawn();
+                    _ballOwner.ToRespawn();
                     break;
                 case CellType.teleport:
                     if (teleported)
@@ -36,7 +36,7 @@ public class BallChecker : MonoBehaviour {
                         return;
                     }
                    // Debug.Log("inc: " + block);
-                    var l = Ball.gameController.maze.CurrentBlocks[CellType.teleport];
+                    var l = BallOwner.gameController.maze.CurrentBlocks[CellType.teleport];
                     if (l.Count > 1)
                     {
                         BlockElement exitTeleport = block;
@@ -47,12 +47,15 @@ public class BallChecker : MonoBehaviour {
                         }
                        // Debug.Log("out: "+exitTeleport);
                         teleported = true;
-                        ball.transform.position = exitTeleport.transform.position;
+                        _ballOwner.transform.position = new Vector3(exitTeleport.transform.position.x, exitTeleport.transform.position.y + 2, exitTeleport.transform.position.z); ;
                     }
                     else
                     {
                         Debug.LogWarning("smt wrong only one teleport");
                     }
+                    break;
+                case CellType.wall:
+                    BallOwner.HitWall(block);
                     break;
             }
             block.Play();
@@ -62,7 +65,7 @@ public class BallChecker : MonoBehaviour {
 
 	void Start ()
 	{
-	    ball = GetComponentInParent<Ball>();
+	    _ballOwner = GetComponentInParent<Ball>();
 	}
 	
 	// Update is called once per frame

@@ -13,10 +13,12 @@ public class MazeController : MonoBehaviour {
     public Transform WallContainer;
     public Transform OtherContainer;
     public List<BlockElement> blocks = new List<BlockElement>();
+    public List<WallElement> walls = new List<WallElement>();
     public int seed;
     private int size;
     private List<Obstacle> obstacles;
     private Action<Vector3> onComplete;
+    public GameObject connector;
 
     private Dictionary<CellType, List<BlockElement>> currentBlocks;
 
@@ -69,7 +71,7 @@ public class MazeController : MonoBehaviour {
         mazeGrid = new MazeBuilder(OnBuildComplete, seed, size, stars,this);
     }
 
-    private void OnBuildComplete(GridInfo[,] obj,IntPos startPos)
+    private void OnBuildComplete(GridInfo[,] grid_maze,IntPos startPos)
     {
         currentBlocks = new Dictionary<CellType, List<BlockElement>>();
         var f = blocks.FirstOrDefault(x => x.type == CellType.free);
@@ -77,24 +79,19 @@ public class MazeController : MonoBehaviour {
         {
             for (int j = 0; j < size; j++)
             {
-                GridInfo gi = obj[i, j];
+                GridInfo gi = grid_maze[i, j];
+                Quaternion q = Quaternion.identity;
+                Vector3 v = new Vector3(i, 0, j);
                 var b = blocks.FirstOrDefault(x => x.Id == gi.Id);
                 if (b != null)
                 {
-                    Quaternion q = Quaternion.identity;
-                    Vector3 v = new Vector3(i, 0, j);
-                    if (b.type == CellType.teleport)
-                    {
-                        Debug.Log("!!!!!!!!!!");
-                    }
-
                     if (b.type != CellType.wall && b.type != CellType.obstacle) 
                     {
                         GameObject go1 = Instantiate(f.gameObject, new Vector3(i, 0, j), Quaternion.identity) as GameObject;
                         go1.transform.parent = FreeContainer;
                     }
                     Transform parent = transform;
-                    //Debug.Log("!!!!!!!   " + i + "   " + j + "   " + b.type + "  " +obj[i, j].Id);
+                    //Debug.Log("!!!!!!!   " + i + "   " + j + "   " + b.type + "  " +grid_maze[i, j].Id);
                     switch (b.type)
                     {
                         case CellType.wall:
@@ -132,12 +129,20 @@ public class MazeController : MonoBehaviour {
                             continue;
                         }
                     }
-                    GameObject go = Instantiate(b.gameObject, v, q) as GameObject;
-                    go.transform.parent = parent;
+                    GameObject go;
+                    if (b.type != CellType.wall)
+                    {
+                        go = Instantiate(b.gameObject, v, q) as GameObject;
+                        go.transform.parent = parent;
+                    }
+                    else
+                    {
+                        return;
+                       // go = SetWall(gi,v,q);
+                       // go.transform.parent = parent;
+                    }
 
                     BlockElement block = go.GetComponent<BlockElement>();
-                    //block.I = i;
-                    //block.J = j;
                     block.Init(i,j);
                     if (!currentBlocks.ContainsKey(block.type))
                         currentBlocks.Add(block.type,new List<BlockElement>());
@@ -145,14 +150,73 @@ public class MazeController : MonoBehaviour {
                 }
                 else
                 {
-                   // if (obj[i, j].Id > 10)
-                      //  Debug.Log("can't find id " + obj[i, j].Id);
+                    if (gi.Id == 1)
+                    {
+                        GameObject go;
+                        go = SetWall(gi,grid_maze, v, q);
+                        if (go != null)
+                        {
+                            gi.isBuild = true;
+                            go.transform.parent = WallContainer;
+                        }
+                    }
                 }
             }
             
         }
+        SeconProcess(grid_maze);
         onComplete(new Vector3(startPos.I, 2, startPos.J));
         //SBall.transform.position = new Vector3(startPos.I ,2,startPos.J);
+    }
+
+    private void SeconProcess(GridInfo[,] grid_maze)
+    {
+        float yy = 1.6f;
+        for (int i = 0; i < size; i++)
+        {
+            for (int j = 0; j < size; j++)
+            {
+                GridInfo gi = grid_maze[i, j];
+                if (gi.Id == 1 && gi.isBuild && gi.pos.I < size - 1 && gi.pos.J < size - 1)
+                {
+                    if (grid_maze[gi.pos.I + 1, gi.pos.J].isBuild)
+                    {
+                        SetConnector(new Vector3(gi.pos.I + 0.5f,yy, gi.pos.J), true);
+                    }
+                    else if (grid_maze[gi.pos.I, gi.pos.J + 1].isBuild)
+                    {
+                        SetConnector(new Vector3(gi.pos.I,yy ,gi.pos.J + 0.5f),false);
+                    }
+                }
+            }
+        }
+    }
+
+    private void SetConnector(Vector3 p, bool side)
+    {
+        Quaternion q = Quaternion.Euler(GameUtils.GetV3BySide(side?Side.up : Side.left));
+        Instantiate(connector, p, q);
+        //Debug.Log("Set connector " + vector2 + "   p"+p);
+    }
+
+
+    private GameObject SetWall(GridInfo gi,GridInfo[,] obj,Vector3 v,Quaternion q)
+    {
+        int index;
+        if (gi.pos.I > 0 && gi.pos.J > 0 && gi.pos.I < size-1 && gi.pos.J < size-1)
+        {
+            if (obj[gi.pos.I + 1, gi.pos.J].Cell == CellType.wall && 
+                obj[gi.pos.I, gi.pos.J + 1].Cell == CellType.wall &&
+                obj[gi.pos.I - 1, gi.pos.J].Cell == CellType.wall && 
+                obj[gi.pos.I, gi.pos.J - 1].Cell == CellType.wall)
+            {
+                return null;
+            }
+        }
+        index = Random.Range(0, walls.Count);
+        //GameObject go  = ;
+        //go.GetComponent<WallElement>().SetBuild(gi.pos.I, gi.pos.J);
+        return Instantiate(walls[index].gameObject, v, q) as GameObject;
     }
 
     public void Clear()

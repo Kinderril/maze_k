@@ -97,6 +97,8 @@
     <Compile Include="Assets\Main\Units\Ball.cs" />
     <Compile Include="Assets\Main\Units\BallChecker.cs" />
     <Compile Include="Assets\Main\Units\BlockElement.cs" />
+    <Compile Include="Assets\Main\Units\WallContainer.cs" />
+    <Compile Include="Assets\Main\Units\WallElement.cs" />
     <Compile Include="Assets\Main\Utils\CheckList.cs" />
     <Compile Include="Assets\Main\Utils\Enums.cs" />
     <Compile Include="Assets\Main\Utils\FaceBookController.cs" />

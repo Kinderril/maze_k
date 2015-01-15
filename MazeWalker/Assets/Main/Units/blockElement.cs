@@ -7,8 +7,8 @@ public class BlockElement : MonoBehaviour
     public int I;
     public int J;
     public int Id;
-
     public ParticleSystem psystem;
+
     public void Init(int i,int j)
     {
         I = i;
@@ -24,10 +24,7 @@ public class BlockElement : MonoBehaviour
         if (psystem != null)
         {
             psystem.enableEmission = true;
-         //   psystem.Stop();
             psystem.Play();
-           // psystem.Simulate(1);
-            Debug.Log("psystem.Play()");
         }
     }
 

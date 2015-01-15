@@ -47,6 +47,7 @@ public class GridInfo
     public int Id;
     public Side rotate;
     public ObstacleParameters obsParams;
+    public bool isBuild = false;
 
     public GridInfo(CellType cellType,int i,int j)
     {

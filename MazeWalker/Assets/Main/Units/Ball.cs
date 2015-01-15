@@ -73,7 +73,7 @@ public class Ball : MonoBehaviour
     public void GetStar(BlockElement star)
     {
         gameController.GetStar();
-        respawnPoint = star.transform.position;
+        respawnPoint = new Vector3(star.transform.position.x, star.transform.position.y + 4, star.transform.position.z); ;
     }
 
     public void ToRespawn()
@@ -91,5 +91,11 @@ public class Ball : MonoBehaviour
     public void StartGame()
     {
         power = Mathf.Abs(power);
+    }
+
+    public void HitWall(BlockElement block)
+    {
+        WallElement w = (WallElement) block;
+        w.ChangeColor();
     }
 }

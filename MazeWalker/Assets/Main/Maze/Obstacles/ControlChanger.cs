@@ -23,9 +23,9 @@ public class ControlChanger : MonoBehaviour {
            // Debug.Log("W111T???"); 
             return;
         }
-        b = bc.Ball;
+        b = bc.BallOwner;
         b.power *= -1;
-       // Debug.Log("Ball IN^^^^^");
+       // Debug.Log("BallOwner IN^^^^^");
     }
     void OnTriggerExit(Collider other)
     {
@@ -36,6 +36,6 @@ public class ControlChanger : MonoBehaviour {
             return;
         }
         b.power *= -1;
-       // Debug.Log("Ball OUT>>>>>");
+       // Debug.Log("BallOwner OUT>>>>>");
     }
 }
