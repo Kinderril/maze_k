@@ -147,11 +147,11 @@ public class MazeBuilder
         foreach (var a in exits)
             a.cell = CellType.end;
         */
-        
-        var teleports = GetrandomList(2, GetFreePos());
+
+        var teleports = GetrandomList(1, GetFreePos());
+        Debug.Log("teleports " + teleports.Count);
         foreach (var a in teleports)
         {
-            Debug.Log("teleports " + a.pos);
             a.Cell = CellType.teleport;
         }
 

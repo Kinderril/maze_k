@@ -164,7 +164,7 @@ public class MazeController : MonoBehaviour {
             }
             
         }
-        SeconProcess(grid_maze);
+       // SeconProcess(grid_maze);
         onComplete(new Vector3(startPos.I, 2, startPos.J));
         //SBall.transform.position = new Vector3(startPos.I ,2,startPos.J);
     }
