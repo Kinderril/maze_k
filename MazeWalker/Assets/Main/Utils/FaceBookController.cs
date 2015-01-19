@@ -11,7 +11,7 @@ public class FaceBookController : MonoBehaviour {
     public Text debugt;
 
 	void Awake () {
-        //FB.Init(SetInit, OnHideUnity);  
+       // FB.Init(SetInit, OnHideUnity);  
 	}
 	
 	// Update is called once per frame
@@ -22,7 +22,7 @@ public class FaceBookController : MonoBehaviour {
     private void SetInit()
     {
         //Util.Log("SetInit");
-        enabled = true; // "enabled" is a property inherited from MonoBehaviour                  
+        //enabled = true; // "enabled" is a property inherited from MonoBehaviour                  
         if (FB.IsLoggedIn)
         {
            // Util.Log("Already logged in");
@@ -30,7 +30,8 @@ public class FaceBookController : MonoBehaviour {
         }
         else
         {
-            debugt.text = "NOT !!! Logged in. ID: " + FB.UserId;
+
+           // debugt.text = "NOT !!! Logged in. ID: " + FB.UserId;
             CallFBLogin();
 
         }
@@ -53,7 +54,7 @@ public class FaceBookController : MonoBehaviour {
 
     void OnLoggedIn()
     {
-        debugt.text = "Logged in. ID: " + FB.UserId;
+       // debugt.text = "Logged in. ID: " + FB.UserId;
         Debug.Log("Logged in. ID: " + FB.UserId);
         MyPictureCallback();
         //CallFBFeed();
@@ -67,14 +68,16 @@ public class FaceBookController : MonoBehaviour {
     void LoginCallback(FBResult result)
     {
         if (result.Error != null)
-            debugt.text = "Error Response:\n" + result.Error;
+        {
+         //   debugt.text = "Error Response:\n" + result.Error;
+        }
         else if (!FB.IsLoggedIn)
         {
-            debugt.text = "Login cancelled by Player";
+            // debugt.text = "Login cancelled by Player";
         }
         else
         {
-            debugt.text = "Login was successful!";
+            // debugt.text = "Login was successful!";
             MyPictureCallback();
         }
     }
@@ -82,7 +85,7 @@ public class FaceBookController : MonoBehaviour {
     private void cb(FBResult result)
     {
         Debug.Log("result  " + result);
-        debugt.text = "MyPictureCallback";
+       // debugt.text = "MyPictureCallback";
     }
 
 
@@ -163,6 +166,6 @@ public class FaceBookController : MonoBehaviour {
 
     internal void SendImage()
     {
-        throw new NotImplementedException();
+        FB.Init(SetInit, OnHideUnity); 
     }
 }
