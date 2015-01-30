@@ -90,6 +90,7 @@
      <Compile Include="Assets\Main\Units\WallElement.cs" />
      <Compile Include="Assets\Main\Utils\CheckList.cs" />
      <Compile Include="Assets\Main\Utils\Enums.cs" />
+     <Compile Include="Assets\Main\Utils\FPS.cs" />
      <Compile Include="Assets\Main\Utils\FaceBookController.cs" />
      <Compile Include="Assets\Main\Utils\FollowTarget.cs" />
      <Compile Include="Assets\Main\Utils\GameUtils.cs" />
@@ -103,7 +104,17 @@
      <Compile Include="Assets\SampleAssets\ParticleSystems\Scripts\ParticleSystemMultiplier.cs" />
      <Compile Include="Assets\SampleAssets\ParticleSystems\Scripts\SmokeParticles.cs" />
      <Compile Include="Assets\SampleAssets\ParticleSystems\Scripts\WaterHoseParticles.cs" />
-     <Compile Include="Assets\Scripts\GyroController.cs" />
+     <Compile Include="Assets\SampleAssets\PhysicsMaterials\CrossPlatformInput\Scripts\AxisTouchButton.cs" />
+     <Compile Include="Assets\SampleAssets\PhysicsMaterials\CrossPlatformInput\Scripts\ButtonHandler.cs" />
+     <Compile Include="Assets\SampleAssets\PhysicsMaterials\CrossPlatformInput\Scripts\CrossPlatformInputManager.cs" />
+     <Compile Include="Assets\SampleAssets\PhysicsMaterials\CrossPlatformInput\Scripts\InputAxisScrollbar.cs" />
+     <Compile Include="Assets\SampleAssets\PhysicsMaterials\CrossPlatformInput\Scripts\Joystick.cs" />
+     <Compile Include="Assets\SampleAssets\PhysicsMaterials\CrossPlatformInput\Scripts\MobileControlRig.cs" />
+     <Compile Include="Assets\SampleAssets\PhysicsMaterials\CrossPlatformInput\Scripts\PlatformSpecific\MobileInput.cs" />
+     <Compile Include="Assets\SampleAssets\PhysicsMaterials\CrossPlatformInput\Scripts\PlatformSpecific\StandaloneInput.cs" />
+     <Compile Include="Assets\SampleAssets\PhysicsMaterials\CrossPlatformInput\Scripts\TiltInput.cs" />
+     <Compile Include="Assets\SampleAssets\PhysicsMaterials\CrossPlatformInput\Scripts\TouchPad.cs" />
+     <Compile Include="Assets\SampleAssets\PhysicsMaterials\CrossPlatformInput\Scripts\VirtualInput.cs" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_usersettingsfragment.xml" />
      <None Include="Assets\SampleAssets\Effects\ToonShading\Shaders\ToonBasic.shader" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_tooltip_bubble.xml" />
@@ -136,6 +147,7 @@
      <None Include="Assets\SampleAssets\ParticleSystems\ParticleSystemsGuidelines.txt" />
      <None Include="Assets\Plugins\Android\facebook\res\values-iw\strings.xml" />
      <None Include="Assets\Plugins\Android\facebook\build.xml" />
+     <None Include="Assets\SampleAssets\PhysicsMaterials\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
      <None Include="Assets\SampleAssets\ParticleSystems\Shaders\PriorityParticleAddSoft.shader" />
      <None Include="Assets\SampleAssets\Effects\ToonShading\Shaders\ToonLitOutline.shader" />
      <None Include="Assets\SampleAssets\Effects\ToonShading\Shaders\ToonLit.shader" />

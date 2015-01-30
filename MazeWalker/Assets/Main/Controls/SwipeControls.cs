@@ -44,13 +44,8 @@ public class SwipeControls : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        //curPower = Vector2.zero;
         _v = (eventData.position - basePosition);
-
-        //var m = Mathf.Max(Mathf.Abs(_v.x), Mathf.Abs(_v.y));
-        //if (m)
-        curPower = _v.normalized*maxAcc;// new Vector2(Mathf.Clamp(_v.x, -maxAcc, maxAcc), Mathf.Clamp(_v.y, -maxAcc, maxAcc));
-        Debug.Log("V    " + _v +  "  " + curPower);
+        curPower = _v.normalized*maxAcc;
         ball.Move(curPower);
         //StartDragImage.gameObject.SetActive(false);
     }

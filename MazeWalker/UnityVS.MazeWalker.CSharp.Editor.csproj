@@ -124,6 +124,8 @@
     <Compile Include="Assets\Facebook\Editor\iOS\third_party\XCodeEditor-for-Unity\XCProject.cs" />
     <Compile Include="Assets\Facebook\Editor\iOS\third_party\XCodeEditor-for-Unity\XCSourceFile.cs" />
     <Compile Include="Assets\Facebook\Editor\iOS\third_party\XCodeEditor-for-Unity\XCTarget.cs" />
+    <Compile Include="Assets\SampleAssets\PhysicsMaterials\CrossPlatformInput\Scripts\Editor\CrossPlatformInputInitialize.cs" />
+    <Compile Include="Assets\SampleAssets\PhysicsMaterials\CrossPlatformInput\Scripts\Editor\InputAxisScrollbarCI.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
@@ -178,6 +180,7 @@
     <None Include="Assets\SampleAssets\ParticleSystems\Shaders\PriorityParticleAdd.shader" />
     <None Include="Assets\SampleAssets\ParticleSystems\Shaders\PriorityParticleAddSoft.shader" />
     <None Include="Assets\SampleAssets\ParticleSystems\Shaders\PriorityParticleAlpha.shader" />
+    <None Include="Assets\SampleAssets\PhysicsMaterials\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />
 </Project>

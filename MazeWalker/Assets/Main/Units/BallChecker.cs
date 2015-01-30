@@ -11,6 +11,13 @@ public class BallChecker : MonoBehaviour {
     {
       get { return _ballOwner; }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("OnCollisionEnter");
+       
+    }
+
     void OnTriggerEnter(Collider other)
     {
         var block = other.GetComponent<BlockElement>();
@@ -55,6 +62,7 @@ public class BallChecker : MonoBehaviour {
                     }
                     break;
                 case CellType.wall:
+                    //Debug.Log("myNormal " + other.ra);
                     BallOwner.HitWall(block);
                     break;
             }

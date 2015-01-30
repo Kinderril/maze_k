@@ -17,9 +17,7 @@ public class UIControls : MonoBehaviour , IPointerDownHandler , IPointerUpHandle
 	void Start ()
 	{
 	    basePosition = new Vector2(Screen.width/2, Screen.height/2);
-        //distancePercent
         d = Mathf.Min(Screen.width / 2, Screen.height / 2) * distancePercent;
-        //Debug.Log(basePosition);
 	}
 
     public void Init(Ball ball)
@@ -27,28 +25,26 @@ public class UIControls : MonoBehaviour , IPointerDownHandler , IPointerUpHandle
         this.ball = ball;
     }
 	
-	// Update is called once per frame
 	void Update () {
-        if (ball != null)
-	        ball.Move(curPower);
+        //if (ball != null)
+	        //ball.Move(curPower);
 	}
 
     public void OnPointerDown(PointerEventData eventData)
     {
-       // basePosition = eventData.position;
-        //StartDragImage.gameObject.SetActive(false);
-        //StartDragImage.transform.position = basePosition;
+
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        curPower = Vector2.zero;
-        //StartDragImage.gameObject.SetActive(false);
+        //curPower = Vector2.zero;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-
+        curPower = eventData.delta*maxAcc;
+        ball.Move(curPower);
+        /*
         _v = (eventData.position - basePosition);
         if (_v.magnitude > d)
         {
@@ -59,6 +55,6 @@ public class UIControls : MonoBehaviour , IPointerDownHandler , IPointerUpHandle
         else
         {
             curPower = Vector2.zero;
-        }
+        }*/
     }
 }

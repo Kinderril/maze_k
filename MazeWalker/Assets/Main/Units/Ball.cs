@@ -12,6 +12,7 @@ public class Ball : MonoBehaviour
     public GameController gameController;
     private ParticleSystem emmiter;
     private Vector3 respawnPoint;
+    public Vector3 andVelocity;
 
 
     private void Start()
@@ -19,8 +20,9 @@ public class Ball : MonoBehaviour
         m_Rigidbody = GetComponent<Rigidbody>();
         emmiter = GetComponentInChildren<ParticleSystem>();
         // Set the maximum angular velocity.
-        GetComponent<Rigidbody>().maxAngularVelocity = m_MaxAngularVelocity;
+        m_Rigidbody.maxAngularVelocity = m_MaxAngularVelocity;
     }
+
     public void Move(Vector2 moveDirection)
     {
         moveDirection *= power;
@@ -29,13 +31,11 @@ public class Ball : MonoBehaviour
         {
             if (m_UseTorque)
             {
-                // ... add torque around the axis defined by the move direction.
                 m_Rigidbody.AddTorque(new Vector3(moveDirection.x, 0, moveDirection.y));
             }
             else
             {
-                // Otherwise add force in the move direction.
-                m_Rigidbody.AddForce(new Vector3(moveDirection.x, 0, moveDirection.y));
+                m_Rigidbody.AddForce(new Vector3(moveDirection.x, 0, moveDirection.y),ForceMode.Acceleration);
             }
 
         }
@@ -58,6 +58,11 @@ public class Ball : MonoBehaviour
         var d = Mathf.Clamp(m_Rigidbody.angularVelocity.magnitude/2 -3, 0, 9);
         if (emmiter != null)
             emmiter.emissionRate = d*11;
+    }
+
+    void Update()
+    {
+        andVelocity = m_Rigidbody.angularVelocity;
     }
 
     public void Init(GameController gameController)
@@ -96,6 +101,7 @@ public class Ball : MonoBehaviour
     public void HitWall(BlockElement block)
     {
         WallElement w = (WallElement) block;
+        //m_Rigidbody.AddForce(new Vector3(andVelocity.x, 0, andVelocity.z) * -0.5f, ForceMode.Impulse);
         w.ChangeColor();
     }
 }
