@@ -54,6 +54,7 @@ public class BallChecker : MonoBehaviour {
                         }
                        // Debug.Log("out: "+exitTeleport);
                         teleported = true;
+                        _ballOwner.StopVelocity();
                         _ballOwner.transform.position = new Vector3(exitTeleport.transform.position.x, exitTeleport.transform.position.y + 2, exitTeleport.transform.position.z); ;
                     }
                     else

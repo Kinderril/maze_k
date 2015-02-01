@@ -13,8 +13,13 @@ public class Ball : MonoBehaviour
     private ParticleSystem emmiter;
     private Vector3 respawnPoint;
     public Vector3 andVelocity;
+    public float emitRate = 15f;
+    private float p_emitRate = 15f;
 
+    void Awake()
+    {
 
+    }
     private void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
@@ -44,20 +49,10 @@ public class Ball : MonoBehaviour
             m_Rigidbody.AddForce(new Vector3(moveDirection.x/5, 0, moveDirection.y/5));
             
         }
-        // If using torque to rotate the ball...
-        /*if (m_UseTorque)
-        {
-            // ... add torque around the axis defined by the move direction.
-            //m_Rigidbody.AddTorque(new Vector3(moveDirection.x, 0, moveDirection.y));
-        }
-        else
-        {
-            // Otherwise add force in the move direction.
-        }
-        */
+
         var d = Mathf.Clamp(m_Rigidbody.angularVelocity.magnitude/2 -3, 0, 9);
         if (emmiter != null)
-            emmiter.emissionRate = d*11;
+            emmiter.emissionRate = d * p_emitRate;
     }
 
     void Update()
@@ -67,6 +62,7 @@ public class Ball : MonoBehaviour
 
     public void Init(GameController gameController)
     {
+        StopVelocity();
         this.gameController = gameController;
     }
 
@@ -83,14 +79,28 @@ public class Ball : MonoBehaviour
 
     public void ToRespawn()
     {
-        m_Rigidbody.velocity = Vector3.zero;
+        StopVelocity();
         transform.position = respawnPoint;
     }
 
-    public void StartPlay(Vector3 startPos)
+    public void StopVelocity()
+    {
+        if (m_Rigidbody != null)
+            m_Rigidbody.velocity = Vector3.zero;
+    }
+
+    public void StartPlay(Vector3 startPos,ControlType control)
     {
         transform.position = startPos;
         respawnPoint = startPos;
+        if (control == ControlType.gyroscope)
+        {
+            p_emitRate = emitRate*3;
+        }
+        else
+        {
+            p_emitRate = emitRate;
+        }
     }
 
     public void StartGame()

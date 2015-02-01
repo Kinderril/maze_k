@@ -109,7 +109,7 @@ public class GameController : MonoBehaviour
 
     private void onComplete(Vector3 startPos)
     {
-        ball.StartPlay(startPos);
+        ball.StartPlay(startPos,ctype);
         main_UI.InitUI(maze.seed);
         //StartCoroutine(EndByTime(20));
     }
