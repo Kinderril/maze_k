@@ -38,7 +38,7 @@ public class MainUI : BaseWindow
         {
             GameObject star2 = Instantiate(star.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
             star2.transform.parent = starsParent.transform;
-            star2.transform.localPosition = new Vector3(32 + 47*i, -26, 0);
+            star2.transform.localPosition = new Vector3(47 * i - 100, -4.6f, 0);
             allStars.Add(star2.GetComponent<StarContainer>());
         }
         foreach (var starContainer in allStars)
