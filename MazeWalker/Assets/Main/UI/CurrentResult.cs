@@ -10,6 +10,7 @@ public class CurrentResult : MonoBehaviour {
     private List<StarContainer> stars = new List<StarContainer>();
     public float step = 40f;
     public int starCount = 5;
+    public float y_offset = 0f;
 
     void Awake()
     {
@@ -19,7 +20,7 @@ public class CurrentResult : MonoBehaviour {
             StarContainer s = Instantiate(star);
             s.transform.parent = this.transform;
             stars.Add(s);
-            s.transform.localPosition = new Vector3(leftOffset + i * step, 0, 0);
+            s.transform.localPosition = new Vector3(leftOffset + i * step, y_offset, 0);
             s.Close();
         }
 

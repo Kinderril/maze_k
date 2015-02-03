@@ -95,7 +95,7 @@ public class Ball : MonoBehaviour
         respawnPoint = startPos;
         if (control == ControlType.gyroscope)
         {
-            p_emitRate = emitRate*3;
+            p_emitRate = emitRate*1.5f;
         }
         else
         {

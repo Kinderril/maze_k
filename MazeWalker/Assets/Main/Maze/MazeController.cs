@@ -52,7 +52,7 @@ public class MazeController : MonoBehaviour {
 	        obstacle.Init();
 	    }
 
-        Debug.Log("Obstacle count = " + obstacles.Count);
+//        Debug.Log("Obstacle count = " + obstacles.Count);
 	}
 
     public void Init(Action<Vector3> onComplete)

@@ -50,30 +50,18 @@ public class ResultController
 
     private void CalcPosibleLevel()
     {
-        /*
-        float c = 0.85f;
-        if (Between(lastLevelNumber, 0, 10))
-            c = 0.5f;
-        else if (Between(lastLevelNumber, 10, 20))
-            c = 0.6f;
-        else if (Between(lastLevelNumber, 20, 40))
-            c = 0.7f;
-        else if (Between(lastLevelNumber, 30, 50))
-            c = 0.8f;
-        */
-        //lastLevelNumber = (int)Mathf.Pow(starsCollected, 0.73f); //(int)(starsCollected / (5 * c)) + 1;
         if (starsCollected == 0)
             lastLevelNumber = 1;
         else
-            lastLevelNumber = (int)(Mathf.Pow(Mathf.Log(starsCollected + 2), 3) / 3f);
-        //Debug.Log("NextLevelStarsNeed " + NextLevelStarsNeed(lastLevelNumber) + "  " + lastLevelNumber);
-        //Debug.Log("NextLevelStarsNeed " + NextLevelStarsNeed(lastLevelNumber+1) + "  " + (1+lastLevelNumber));
-       // (log(x)^3)*4.5
+        {
+            lastLevelNumber = (int) (Mathf.Pow(Mathf.Log(starsCollected + 4), 3)/3f);
+          //  Debug.Log("lastLevelNumber " + lastLevelNumber + "  " + starsCollected);
+        }
     }
 
     private int NextLevelStarsNeed(int lvl)
     {
-        return (int)Mathf.Pow((float)Math.E, Mathf.Pow(lvl*3f, 1f / 3f)) - 2 + 1;
+        return (int)Mathf.Pow((float)Math.E, Mathf.Pow(lvl*3f, 1f/3f)) + 1 - 4;
     }
 
     private bool Between(this int num, int lower, int upper, bool inclusive = true)
@@ -168,10 +156,10 @@ public class ResultController
 
     public string GetOverview()
     {
-        string ss = "starsCollected:" + starsCollected;
-        ss += "\n starsToSpend:" + starsToSpend;
-        ss += "\n lastLevelNumber:" + (1+lastLevelNumber);
-        ss += "\n to next :" + NextLevelStarsNeed(lastLevelNumber + 1);
+        string ss = "Stars:" + starsCollected;
+        ss += "\n Points:" + starsToSpend;
+        ss += "\n Level:" + (1+lastLevelNumber);
+        ss += "\n Next:" + NextLevelStarsNeed(lastLevelNumber + 1);
         return ss;
 
     }

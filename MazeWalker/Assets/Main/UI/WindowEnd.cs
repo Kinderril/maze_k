@@ -15,8 +15,8 @@ public class WindowEnd : BaseWindow
     {
         base.Init(gc);
         var r  = gc.ResultController.LastResult;
-        cureentResult.text = r.ToString();
-        bestResult.text = gc.ResultController.GetBestResultResult(r.levelId).ToString();
+        cureentResult.text = "Current:\n"+r.ToString();
+        bestResult.text = "Best:\n" + gc.ResultController.GetBestResultResult(r.levelId).ToString();
         gc.ResultController.Save();
     }
 

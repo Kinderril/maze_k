@@ -53,8 +53,8 @@ public class Result
 
     public override string ToString()
     {
-        string ss = "Id:" + levelId + "\n";
-        ss = list.Aggregate(ss, (current, f) => current + ("time:" + f.Value + "\n Control:" + f.Key));
+        string ss = "Level:" + levelId + "\n";
+        ss = list.Aggregate(ss, (current, f) => current + ("Stars:" + f.Value + "/5\n " /*+ f.Key*/));
         return ss;
     }
 
