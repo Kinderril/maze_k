@@ -112,7 +112,7 @@ public class MainUI : BaseWindow
         }
         GameController.ResultController.StarsToSpend -= 5;
 
-        btn.gameObject.SetActive(false);
+        //btn.gameObject.SetActive(false);
         Time.timeScale = 1;
         buttonExit.gameObject.SetActive(false);
         StartCoroutine(zooming());
