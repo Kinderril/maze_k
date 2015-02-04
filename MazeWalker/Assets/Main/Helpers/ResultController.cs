@@ -64,13 +64,6 @@ public class ResultController
         return (int)Mathf.Pow((float)Math.E, Mathf.Pow(lvl*3f, 1f/3f)) + 1 - 4;
     }
 
-    private bool Between(this int num, int lower, int upper, bool inclusive = true)
-    {
-        return inclusive
-            ? lower <= num && num <= upper
-            : lower < num && num < upper;
-    }
-
 
     public int StarsToSpend
     {

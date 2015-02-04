@@ -167,12 +167,16 @@ public class MazeBuilder
             return list;
         List<T> outher = new List<T>();
         int index = 0;
+        List<int> indexes = new List<int>();
         while (outher.Count <= count)
         {
             index = random.Next(0, list.Count);
             var rndelement = list[index];
-            if (!outher.Contains(rndelement));
+            if (!indexes.Contains(index))
+            {
+                indexes.Add(index);
                 outher.Add(rndelement);
+            }
         }
         return outher;
     }
