@@ -51,7 +51,7 @@ public class GameController : MonoBehaviour
         ball.Init(this);
         WindowManager.Init(allWindows,this);
         WindowManager.WindowOn(startWindow);
-        Screen.sleepTimeout = 120;
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
         faceBook = new FaceBookController();
     }
 

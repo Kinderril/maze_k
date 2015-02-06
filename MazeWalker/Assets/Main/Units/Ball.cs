@@ -110,8 +110,13 @@ public class Ball : MonoBehaviour
 
     public void HitWall(BlockElement block)
     {
-        WallElement w = (WallElement) block;
+        /*
+        if (m_Rigidbody.angularVelocity.sqrMagnitude > 17)
+        {
+            Handheld.Vibrate();
+        }*/
+        //WallElement w = (WallElement) block;
         //m_Rigidbody.AddForce(new Vector3(andVelocity.x, 0, andVelocity.z) * -0.5f, ForceMode.Impulse);
-        w.ChangeColor();
+        //w.ChangeColor();
     }
 }
