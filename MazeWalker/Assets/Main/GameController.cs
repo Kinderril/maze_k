@@ -97,7 +97,7 @@ public class GameController : MonoBehaviour
         if (withExitWindow)
         {
             endTime = Time.time;
-            resultController.AddResult(endTime - startTime, maze.seed, ctype,curStars);
+            resultController.AddResult(endTime - startTime, maze.seed, ctype, curStars);
             GameStage = GameStage.end;
         }
         else

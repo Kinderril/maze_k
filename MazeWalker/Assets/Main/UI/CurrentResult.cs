@@ -32,6 +32,7 @@ public class CurrentResult : MonoBehaviour {
         if (r != null)
         {
             int starsCount = r.GetBestStars();
+            float time = r.time;
             for (int i = 0; i < stars.Count; i++)
             {
                 if (i < starsCount)

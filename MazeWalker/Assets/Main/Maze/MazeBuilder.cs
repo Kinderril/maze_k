@@ -55,6 +55,8 @@ public class GridInfo
         pos = new IntPos(i,j);
     }
 
+    
+
     public CellType Cell
     {
         get { return cell; }
@@ -145,7 +147,8 @@ public class MazeBuilder
         /*
         var exits = GetrandomList(2-1, GetFreePos());
         foreach (var a in exits)
-            a.cell = CellType.end;
+          6
+         * a.cell = CellType.end;
         */
 
         var teleports = GetrandomList(1, GetFreePos());

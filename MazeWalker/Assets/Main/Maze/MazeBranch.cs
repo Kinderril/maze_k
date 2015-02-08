@@ -54,6 +54,7 @@ public class MazeBranch
 
     private IntPos SetNewStepT2(IntPos curPos, IntPos fromPos, int c = 0)
     {
+        //Debug.Log("SetNewStepT2: " + curPos + "  " + fromPos);
         if (c > 1)
         {
             directions = directions.OrderBy(x => random.Next()).ToArray();
@@ -67,27 +68,40 @@ public class MazeBranch
             //Debug.Log("CheckCell  " + directions[i] + " res " + res + "  :   " + (res != curPos) + " cur:pos " + curPos + "  from " + fromPos);
             if (res != curPos)
             {
-
                 fromPos = curPos;
                 curPos = res;
-
-                if (random.Next(0, 100) < 4)
+                bool isObstalce = false;
+                int xx = 3;
+                if (curPos.I > xx && curPos.J > xx && curPos.I < size - xx && curPos.J < size - xx)
                 {
+                    isObstalce = true;
+                }
+                if (isObstalce)
+                    isObstalce = random.Next(0, 100) < 6;
+                if (isObstalce)
+                {
+                    //Debug.Log("Do Obstacle: " + curPos + "  " + directions[i].intPos + " " + fromPos);
                     var resObs = DoOstacle(curPos, fromPos, directions[i].side);
                     if (resObs != curPos)
                     {
                         fromPos = curPos;
                         curPos = resObs;
-                        //grid[curPos.I, curPos.J].cell = CellType.free;
                         SetNewStepT2(curPos, fromPos, c);
+                        isObstalce = true;
                         break;
                     }
+                    else
+                    {
+                        //Debug.Log("smt wrong " + curPos);
+                        isObstalce = false;
+                    }
                 }
-                else
+                if (!isObstalce)
                 {
 
                     grid[curPos.I, curPos.J].Cell = CellType.free;
                     history.Add(grid[curPos.I, curPos.J]);
+                   // Debug.Log("DoBranch: " + curPos + "  " + directions[i].intPos + " " + fromPos);
                     SetNewStepT2(curPos, fromPos, c);
                     findSmt = true;
                     break;
@@ -97,7 +111,7 @@ public class MazeBranch
         
         if (!findSmt)
         {
-            //Debug.Log("branch is over " + history.Count);
+          //  Debug.Log("branch is over " + history.Count);
             for (int i = 0; i < history.Count; i+=4)
             //for (int i = history.Count - 1; i > 0; --i)
             {
@@ -126,12 +140,12 @@ public class MazeBranch
 
         int c = mazeController.Obstacles.Count;
         int index = random.Next(0, c);
-        //Debug.Log("c " + c + "   index " + index);
         Obstacle o = mazeController.Obstacles[index];
         ObstacleParameters obsP = o.GetParams();
         //o.LoadDefaut();
         obsP.Rotate(side);
         bool b = obsP.Check(curPos, grid);
+        //Debug.Log("c " + c + "   index " + index + " " + b);
         if (b)
         {
             return obsP.FillGrid(curPos, grid);

@@ -90,30 +90,36 @@ public class ResultController
 
     public void AddResult(float levelTime, int levelId, ControlType controlType, int starsCount)
     {
-        StarsCollected += starsCount;
         StarsToSpend += starsCount;
+        var bsetResult = GetBestResultResult(levelId);
+        int bestStars = starsCount;
+        if (bsetResult != null)
+            bestStars = bsetResult.GetBestStars();
+        starsCount = Mathf.Clamp(starsCount - bestStars, 0, 9999);
+        StarsCollected += starsCount;
+
 
         var r = results.FirstOrDefault(x => x.levelId == levelId);
         if (r == null)
         {
             var result = new Result(levelId);
-            result.AddResultLevel(controlType, levelTime, starsCount);
+            result.AddResultLevel(controlType, levelTime, starsCount, bestStars);
             results.Add(result);
             r = result;
         }
         else
         {
-            r.AddResultLevel(controlType, levelTime, starsCount);
+            r.AddResultLevel(controlType, levelTime, starsCount, bestStars);
         }
         var lresult = new Result(levelId);
-        lresult.AddResultLevel(controlType, levelTime, starsCount);
+        lresult.AddResultLevel(controlType, levelTime, starsCount, bestStars);
         lastResult = lresult;
     }
 
 
     public void Save()
     {
-        string ss = results.Aggregate("", (current, result) => current + (result.GetSaveString() + DELEMITER_HIGH));
+        string ss = results.Aggregate("", (x, result) => x + (result.GetSaveString() + DELEMITER_HIGH));
         PlayerPrefs.SetString(RESULT_SAVE, ss);
     }
 

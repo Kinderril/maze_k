@@ -5,6 +5,8 @@ public class WindowEnd : BaseWindow
 {
     public Text cureentResult;
     public Text bestResult;
+    public Text addStars;
+    public Text addPoints;
 
     public void OnOkClicked()
     {
@@ -18,6 +20,8 @@ public class WindowEnd : BaseWindow
         cureentResult.text = "Current:\n"+r.ToString();
         bestResult.text = "Best:\n" + gc.ResultController.GetBestResultResult(r.levelId).ToString();
         gc.ResultController.Save();
+        addStars.text = " " + r.addStars;
+        addPoints.text =" "+ r.GetBestStars();
     }
 
     public void OnFBClicked()
