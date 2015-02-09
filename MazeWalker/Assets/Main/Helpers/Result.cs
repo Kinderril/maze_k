@@ -10,7 +10,6 @@ public class Result
     public const char DELEMITER = ';';
     public int levelId;
     public float time;
-    public int addStars;
  
     public Result(int level)
     {
@@ -43,7 +42,7 @@ public class Result
         return r;
     }
 
-    public void AddResultLevel(ControlType control, float time, int starsCount, int bestStars)
+    public void AddResultLevel(ControlType control, float time, int starsCount )
     {
         if (!list.ContainsKey(control))
             list.Add(control, starsCount);
@@ -52,7 +51,6 @@ public class Result
             list[control] = Mathf.Max(starsCount, list[control]);
         }
         this.time = time;
-        this.addStars = bestStars;
     }
 
     public override string ToString()

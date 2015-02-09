@@ -15,13 +15,13 @@ public class ResultController
     public const string RESULT_SAVE_STARSCOLLECTED = "RESULT_SAVE_STARSCOLLECTED";
     public int lastLevelNumber = 1;
     private int starsCollected;
-    private int starsToSpend;
+    private int _pointsToSpend;
 
 
 
 
-    private Result lastResult;
-    public Result LastResult
+    private LastResult lastResult;
+    public LastResult LastResult
     {
         get { return lastResult; }
     }
@@ -65,12 +65,12 @@ public class ResultController
     }
 
 
-    public int StarsToSpend
+    public int PointsToSpend
     {
-        get { return starsToSpend; }
+        get { return _pointsToSpend; }
         set {
-            starsToSpend = value;
-            PlayerPrefs.SetInt(RESULT_SAVE_STARS2SPEND, starsToSpend);
+            _pointsToSpend = value;
+            PlayerPrefs.SetInt(RESULT_SAVE_STARS2SPEND, _pointsToSpend);
         }
     }
     private void LoadResults()
@@ -83,19 +83,21 @@ public class ResultController
             list.AddRange(from item in s.Split(DELEMITER_HIGH) where item.Length > 5 select new Result(item));
         }
         results = list;
-        starsToSpend = PlayerPrefs.GetInt(RESULT_SAVE_STARS2SPEND, 0);
+        _pointsToSpend = PlayerPrefs.GetInt(RESULT_SAVE_STARS2SPEND, 0);
         starsCollected = PlayerPrefs.GetInt(RESULT_SAVE_STARSCOLLECTED, 0);
         CalcPosibleLevel();
     }
 
     public void AddResult(float levelTime, int levelId, ControlType controlType, int starsCount)
     {
-        StarsToSpend += starsCount;
+        PointsToSpend += starsCount;
         var bsetResult = GetBestResultResult(levelId);
-        int bestStars = starsCount;
+        int taken = starsCount;
         if (bsetResult != null)
-            bestStars = bsetResult.GetBestStars();
-        starsCount = Mathf.Clamp(starsCount - bestStars, 0, 9999);
+        {
+            int addStars = bsetResult.GetBestStars();
+            starsCount = Mathf.Clamp(starsCount - addStars, 0, 9999);
+        }
         StarsCollected += starsCount;
 
 
@@ -103,17 +105,16 @@ public class ResultController
         if (r == null)
         {
             var result = new Result(levelId);
-            result.AddResultLevel(controlType, levelTime, starsCount, bestStars);
+            result.AddResultLevel(controlType, levelTime, taken);
             results.Add(result);
             r = result;
         }
         else
         {
-            r.AddResultLevel(controlType, levelTime, starsCount, bestStars);
+            r.AddResultLevel(controlType, levelTime, taken);
         }
-        var lresult = new Result(levelId);
-        lresult.AddResultLevel(controlType, levelTime, starsCount, bestStars);
-        lastResult = lresult;
+        lastResult = new LastResult(levelId, levelTime, starsCount, taken);
+    //    lastResult.AddResultLevel(controlType, levelTime, starsCount, taken);
     }
 
 
@@ -160,7 +161,7 @@ public class ResultController
     public string GetOverview()
     {
         string ss = "Stars:" + starsCollected;
-        ss += "\n Points:" + starsToSpend;
+        ss += "\n Points:" + _pointsToSpend;
         ss += "\n Level:" + (1+lastLevelNumber);
         ss += "\n Next:" + NextLevelStarsNeed(lastLevelNumber + 1);
         return ss;

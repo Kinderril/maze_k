@@ -55,7 +55,7 @@ public class MainUI : BaseWindow
 
     private void UpdateSpendLabel()
     {
-        spendLabel.text = GameController.ResultController.StarsToSpend + "";
+        spendLabel.text = GameController.ResultController.PointsToSpend + "";
     }
 
     public override void Dispose()
@@ -106,11 +106,11 @@ public class MainUI : BaseWindow
 
     public void OnClickZoom(Button btn)
     {
-        if (GameController.ResultController.StarsToSpend < 5)
+        if (GameController.ResultController.PointsToSpend < 5)
         {
             return;
         }
-        GameController.ResultController.StarsToSpend -= 5;
+        GameController.ResultController.PointsToSpend -= 5;
 
         //btn.gameObject.SetActive(false);
         Time.timeScale = 1;
