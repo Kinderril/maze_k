@@ -85,9 +85,9 @@ public class MazeController : MonoBehaviour {
                 var b = blocks.FirstOrDefault(x => x.Id == gi.Id);
                 if (b != null)
                 {
-                    if (b.type != CellType.wall && b.type != CellType.obstacle) 
+                    if (b.type != CellType.wall && b.type != CellType.obstacle && b.type != CellType.free) 
                     {
-                        GameObject go1 = Instantiate(f.gameObject, new Vector3(i, 0, j), Quaternion.identity) as GameObject;
+                        var go1 = Instantiate(f.gameObject, new Vector3(i, 0, j), Quaternion.identity) as GameObject;
                         go1.transform.parent = FreeContainer;
                     }
                     Transform parent = transform;
@@ -102,9 +102,11 @@ public class MazeController : MonoBehaviour {
                             break;
                         case CellType.star:
                             parent = StarContainer;
+
                             break;
                         case CellType.free:
                             parent = FreeContainer;
+                            
                             break;
                         default:
                             parent = OtherContainer;

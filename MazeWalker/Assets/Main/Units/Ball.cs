@@ -106,6 +106,7 @@ public class Ball : MonoBehaviour
     public void StartGame()
     {
         power = Mathf.Abs(power);
+        StopVelocity();
     }
 
     public void HitWall(BlockElement block)
