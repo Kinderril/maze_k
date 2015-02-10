@@ -80,8 +80,7 @@ public class GameController : MonoBehaviour
         }
         ball.StartGame();
         maze.Init(onComplete);
-        size = resultController.GetMazeSize();
-        Debug.Log("Maze zise " + size);
+        size = resultController.GetMazeSize(p);
         maze.BuildMaze(size, maxStars,p);
     }
 

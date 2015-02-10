@@ -77,7 +77,7 @@ public class MazeBranch
                     isObstalce = true;
                 }
                 if (isObstalce)
-                    isObstalce = random.Next(0, 100) < 6;
+                    isObstalce = random.Next(0, 100) < 9;
                 if (isObstalce)
                 {
                     //Debug.Log("Do Obstacle: " + curPos + "  " + directions[i].intPos + " " + fromPos);
@@ -120,7 +120,7 @@ public class MazeBranch
                     IntPos res = CheckCell(history[i].pos, history[i].pos, directions[j].intPos, 1);
                     if (res != curPos)
                     {
-                        if (brachLevel < 4 && childBranchNumber < 22)
+                        if (brachLevel < 4 && childBranchNumber < 30)
                         {
                             MazeBranch mb = new MazeBranch(grid, random, size, brachLevel,mazeController);
                             childBranchNumber++;

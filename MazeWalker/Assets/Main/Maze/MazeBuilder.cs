@@ -130,6 +130,12 @@ public class MazeBuilder
         startPos = new IntPos(random.Next(size / 4, size / 2), random.Next(size / 4, size / 2));
         grid[startPos.I, startPos.J].Cell = CellType.free;
         branch.DoBranch(grid[startPos.I, startPos.J]);
+        
+        MazeBranch branch1 = new MazeBranch(grid, random, size, 0, mcontroller);
+        var startPos2 = new IntPos(random.Next(size / 4, size / 2), random.Next(size / 4, size / 2));
+        grid[startPos2.I, startPos2.J].Cell = CellType.free;
+        branch1.DoBranch(grid[startPos2.I, startPos2.J]);
+         
         /*
         grid[startPos.I, startPos.J].cell = CellType.free;
         history.Add(grid[startPos.I, startPos.J]);
@@ -164,21 +170,33 @@ public class MazeBuilder
         onBuildComplete(grid, startPos);
     }
 
-    public List<T> GetrandomList<T>(int count, List<T> list)
+    public List<T> GetrandomList<T>(int count, List<T> list, bool evenly = true)
     {
         if (list.Count < count)
             return list;
-        List<T> outher = new List<T>();
-        int index = 0;
-        List<int> indexes = new List<int>();
-        while (outher.Count <= count)
+        var outher = new List<T>();
+        if (evenly)
         {
-            index = random.Next(0, list.Count);
-            var rndelement = list[index];
-            if (!indexes.Contains(index))
+            int step = list.Count/(count+1);
+            for (int i = 0; i <= count; i++)
             {
-                indexes.Add(index);
+                int index = step * i + random.Next(step/3, step*2/3);
+                var rndelement = list[index];
                 outher.Add(rndelement);
+            }
+        }
+        else
+        {
+            var indexes = new List<int>();
+            while (outher.Count <= count)
+            {
+                int index = random.Next(0, list.Count);
+                var rndelement = list[index];
+                if (!indexes.Contains(index))
+                {
+                    indexes.Add(index);
+                    outher.Add(rndelement);
+                }
             }
         }
         return outher;

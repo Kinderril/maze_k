@@ -149,9 +149,11 @@ public class ResultController
         return m/i;
     }
 
-    public int GetMazeSize()
+    public int GetMazeSize(int number)
     {
-        return (int)(Mathf.Pow(Mathf.Log(lastLevelNumber + 3), 2) * 1.3f + 14);
+        int r = (int)(Mathf.Pow(Mathf.Log(number + 3), 2) * 1.45f + 14);
+        Debug.Log("Maze zise " + r + "   " + number);
+        return r;
     }
     public Result GetBestResultResult(int levelId)
     {
