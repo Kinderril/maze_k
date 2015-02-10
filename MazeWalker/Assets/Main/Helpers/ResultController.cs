@@ -161,9 +161,9 @@ public class ResultController
     public string GetOverview()
     {
         string ss = "Stars:" + starsCollected;
-        ss += "\n Points:" + _pointsToSpend;
-        ss += "\n Level:" + (1+lastLevelNumber);
-        ss += "\n Next:" + NextLevelStarsNeed(lastLevelNumber + 1);
+        ss += "\nPoints:" + _pointsToSpend;
+        ss += "\nLevel:" + (1+lastLevelNumber);
+        ss += "\nNext:" + NextLevelStarsNeed(lastLevelNumber + 1);
         return ss;
 
     }
