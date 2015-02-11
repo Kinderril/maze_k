@@ -104,6 +104,11 @@ public class MainUI : BaseWindow
         }
     }
 
+    public void OnBombClicked()
+    {
+        GameController.ball.BombActivate();
+    }
+
     public void OnClickZoom(Button btn)
     {
         if (GameController.ResultController.PointsToSpend < 5)

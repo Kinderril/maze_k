@@ -19,6 +19,9 @@ public class MazeController : MonoBehaviour {
     private List<Obstacle> obstacles;
     private Action<Vector3> onComplete;
     public GameObject connector;
+    private BlockElement freeBlock;
+    public ParticleSystem wallDestroyEffect;
+
 
     private Dictionary<CellType, List<BlockElement>> currentBlocks;
 
@@ -74,7 +77,7 @@ public class MazeController : MonoBehaviour {
     private void OnBuildComplete(GridInfo[,] grid_maze,IntPos startPos)
     {
         currentBlocks = new Dictionary<CellType, List<BlockElement>>();
-        var f = blocks.FirstOrDefault(x => x.type == CellType.free);
+        freeBlock = blocks.FirstOrDefault(x => x.type == CellType.free);
         for (int i = 0; i < size; i++)
         {
             for (int j = 0; j < size; j++)
@@ -87,7 +90,7 @@ public class MazeController : MonoBehaviour {
                 {
                     if (b.type != CellType.wall && b.type != CellType.obstacle && b.type != CellType.free) 
                     {
-                        var go1 = Instantiate(f.gameObject, new Vector3(i, 0, j), Quaternion.identity) as GameObject;
+                        var go1 = Instantiate(freeBlock.gameObject, new Vector3(i, 0, j), Quaternion.identity) as GameObject;
                         go1.transform.parent = FreeContainer;
                     }
                     Transform parent = transform;
@@ -140,7 +143,7 @@ public class MazeController : MonoBehaviour {
                     else
                     {
                         return;
-                       // go = SetWall(gi,v,q);
+                       // go = SetFree(gi,v,q);
                        // go.transform.parent = parent;
                     }
 
@@ -201,6 +204,15 @@ public class MazeController : MonoBehaviour {
         //Debug.Log("Set connector " + vector2 + "   p"+p);
     }
 
+    public void SetFree(Transform transform)
+    {
+        wallDestroyEffect.transform.position = transform.position + new Vector3(0,1.7f,0);
+        wallDestroyEffect.enableEmission = true;
+        wallDestroyEffect.Play();
+        var go = Instantiate(freeBlock.gameObject, transform.position, Quaternion.identity) as GameObject;
+        go.transform.parent = FreeContainer;
+    }
+
 
     private GameObject SetWall(GridInfo gi,GridInfo[,] obj,Vector3 v,Quaternion q)
     {
@@ -254,4 +266,5 @@ public class MazeController : MonoBehaviour {
 	void Update () {
 	
 	}
+
 }

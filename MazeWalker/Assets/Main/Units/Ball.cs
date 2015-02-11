@@ -15,6 +15,19 @@ public class Ball : MonoBehaviour
     public Vector3 andVelocity;
     public float emitRate = 15f;
     private float p_emitRate = 15f;
+    private bool isPowerfull = false;
+    private float endBombTime;
+    public GameObject bombBall;
+
+    public bool IsPowerfull
+    {
+        get { return isPowerfull; }
+        set
+        {
+            isPowerfull = value;
+            bombBall.SetActive(isPowerfull);
+        }
+    }
 
     void Awake()
     {
@@ -22,6 +35,8 @@ public class Ball : MonoBehaviour
     }
     private void Start()
     {
+        //bombBall = GetComponentInChildren<MeshFilter>().gameObject;
+        bombBall.SetActive(false);
         m_Rigidbody = GetComponent<Rigidbody>();
         emmiter = GetComponentInChildren<ParticleSystem>();
         // Set the maximum angular velocity.
@@ -58,6 +73,7 @@ public class Ball : MonoBehaviour
     void Update()
     {
         andVelocity = m_Rigidbody.angularVelocity;
+        //CheckBomb();
     }
 
     public void Init(GameController gameController)
@@ -107,10 +123,17 @@ public class Ball : MonoBehaviour
     {
         power = Mathf.Abs(power);
         StopVelocity();
+        IsPowerfull = false;
     }
 
     public void HitWall(BlockElement block)
     {
+        if (isPowerfull)
+        {
+            Destroy(block.gameObject);
+            gameController.maze.SetFree(block.transform);
+            IsPowerfull = false;
+        }
         /*
         if (m_Rigidbody.angularVelocity.sqrMagnitude > 17)
         {
@@ -120,4 +143,23 @@ public class Ball : MonoBehaviour
         //m_Rigidbody.AddForce(new Vector3(andVelocity.x, 0, andVelocity.z) * -0.5f, ForceMode.Impulse);
         //w.ChangeColor();
     }
+
+    public void BombActivate()
+    {
+       // endBombTime = Time.time + 3f;
+        IsPowerfull = true;
+        //Debug.Log("BombActivate " + endBombTime);
+    }
+    /*
+    private void CheckBomb()
+    {
+        if (isPowerfull)
+        {
+            if (endBombTime < Time.time)
+            {
+                Debug.Log("Bomb   DEActivate");
+                IsPowerfull = false;
+            }
+        }
+    }*/
 }
