@@ -13,7 +13,7 @@ public class Ball : MonoBehaviour
     private ParticleSystem emmiter;
     private Vector3 respawnPoint;
     public Vector3 andVelocity;
-    public float emitRate = 15f;
+    public float emitRate = 10f;
     private float p_emitRate = 15f;
     private bool isPowerfull = false;
     private float endBombTime;
@@ -111,7 +111,7 @@ public class Ball : MonoBehaviour
         respawnPoint = startPos;
         if (control == ControlType.gyroscope)
         {
-            p_emitRate = emitRate*1.5f;
+            p_emitRate = emitRate*1.4f;
         }
         else
         {
