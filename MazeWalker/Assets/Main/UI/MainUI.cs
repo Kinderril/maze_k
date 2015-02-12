@@ -106,23 +106,32 @@ public class MainUI : BaseWindow
 
     public void OnBombClicked()
     {
-        GameController.ball.BombActivate();
+        if (CheckStars(7))
+        {
+            GameController.ball.BombActivate();
+        }
     }
 
     public void OnClickZoom(Button btn)
     {
-        if (GameController.ResultController.PointsToSpend < 5)
+        if (CheckStars(5))
         {
-            return;
+            Time.timeScale = 1;
+            buttonExit.gameObject.SetActive(false);
+            StartCoroutine(zooming());
         }
-        GameController.ResultController.PointsToSpend -= 5;
-
-        //btn.gameObject.SetActive(false);
-        Time.timeScale = 1;
-        buttonExit.gameObject.SetActive(false);
-        StartCoroutine(zooming());
-        UpdateSpendLabel();
     }
+
+    private bool CheckStars(int count )
+    {
+        if (GameController.ResultController.PointsToSpend < count)
+        {
+            return false;
+        }
+        GameController.ResultController.PointsToSpend -= count;
+        UpdateSpendLabel();
+        return true;
+    } 
 
     IEnumerator zooming()
     {

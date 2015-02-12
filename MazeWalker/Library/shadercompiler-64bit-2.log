@@ -1,64 +1,6 @@
 Base path: C:/Unity 5.0.0b14/Editor/Data
-Pipe name: \\.\pipe\UnityShaderCompiler-64bit-2-1060
+Pipe name: \\.\pipe\UnityShaderCompiler-64bit-2-6576
 Cmd: getPlatforms
-Cmd: compileSnippet
-  api=9 type=0 insize=1108 outsize=9039 kw=DIRECTIONAL SHADOWS_SCREEN SHADOWS_NATIVE LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF VERTEXLIGHT_ON _ALPHABLEND_ON ok=1
-Cmd: compileSnippet
-  api=9 type=0 insize=1025 outsize=6052 kw=DIRECTIONAL SHADOWS_OFF _ALPHABLEND_ON ok=1
-Cmd: compileSnippet
-  api=9 type=0 insize=1025 outsize=7861 kw=POINT_COOKIE SHADOWS_CUBE _ALPHABLEND_ON ok=1
-Cmd: compileSnippet
-  api=9 type=0 insize=1025 outsize=6829 kw=DIRECTIONAL SHADOWS_SCREEN SHADOWS_NATIVE _ALPHABLEND_ON ok=1
-Cmd: compileSnippet
-  api=9 type=1 insize=1025 outsize=7 kw=DIRECTIONAL SHADOWS_OFF _ALPHABLEND_ON ok=1
-Cmd: compileSnippet
-  api=9 type=1 insize=1025 outsize=7 kw=SPOT SHADOWS_DEPTH SHADOWS_NATIVE _ALPHABLEND_ON ok=1
-Cmd: compileSnippet
-  api=9 type=1 insize=1025 outsize=7 kw=POINT_COOKIE SHADOWS_CUBE SHADOWS_SOFT _ALPHABLEND_ON ok=1
-Cmd: compileSnippet
-  api=9 type=0 insize=836 outsize=1196 kw=SHADOWS_CUBE _ALPHABLEND_ON ok=1
-Cmd: compileSnippet
-  api=9 type=1 insize=836 outsize=7 kw=SHADOWS_CUBE _ALPHABLEND_ON ok=1
-Cmd: compileSnippet
-  api=9 type=1 insize=1278 outsize=7 kw=LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF _ALPHABLEND_ON ok=1
-Cmd: compileSnippet
-  api=5 type=0 insize=1019 outsize=7258 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF _ALPHABLEND_ON ok=1
-Cmd: compileSnippet
-  api=5 type=0 insize=1019 outsize=7282 kw=DIRECTIONAL SHADOWS_SCREEN SHADOWS_NATIVE LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF _ALPHABLEND_ON ok=1
-Cmd: compileSnippet
-  api=9 type=0 insize=1019 outsize=8662 kw=DIRECTIONAL SHADOWS_SCREEN SHADOWS_NATIVE LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF VERTEXLIGHT_ON _ALPHABLEND_ON ok=1
-Cmd: compileSnippet
-  api=5 type=1 insize=1019 outsize=6 kw=DIRECTIONAL SHADOWS_SCREEN SHADOWS_NATIVE LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF _ALPHABLEND_ON ok=1
-Cmd: compileSnippet
-  api=9 type=0 insize=903 outsize=5990 kw=DIRECTIONAL SHADOWS_OFF _ALPHABLEND_ON ok=1
-Cmd: compileSnippet
-  api=9 type=0 insize=903 outsize=6942 kw=SPOT SHADOWS_OFF _ALPHABLEND_ON ok=1
-Cmd: compileSnippet
-  api=5 type=0 insize=903 outsize=7830 kw=SPOT SHADOWS_DEPTH SHADOWS_NONATIVE _ALPHABLEND_ON ok=1
-Cmd: compileSnippet
-  api=5 type=0 insize=903 outsize=7250 kw=DIRECTIONAL_COOKIE SHADOWS_SCREEN _ALPHABLEND_ON ok=1
-Cmd: compileSnippet
-  api=5 type=0 insize=903 outsize=7888 kw=POINT_COOKIE SHADOWS_CUBE _ALPHABLEND_ON ok=1
-Cmd: compileSnippet
-  api=9 type=0 insize=903 outsize=6767 kw=DIRECTIONAL SHADOWS_SCREEN SHADOWS_NATIVE _ALPHABLEND_ON ok=1
-Cmd: compileSnippet
-  api=5 type=1 insize=903 outsize=6 kw=DIRECTIONAL SHADOWS_OFF _ALPHABLEND_ON ok=1
-Cmd: compileSnippet
-  api=5 type=1 insize=903 outsize=6 kw=POINT_COOKIE SHADOWS_OFF _ALPHABLEND_ON ok=1
-Cmd: compileSnippet
-  api=5 type=1 insize=903 outsize=6 kw=SPOT SHADOWS_DEPTH SHADOWS_NONATIVE _ALPHABLEND_ON ok=1
-Cmd: compileSnippet
-  api=5 type=1 insize=903 outsize=6 kw=DIRECTIONAL SHADOWS_SCREEN _ALPHABLEND_ON ok=1
-Cmd: compileSnippet
-  api=9 type=1 insize=903 outsize=7 kw=POINT SHADOWS_CUBE _ALPHABLEND_ON ok=1
-Cmd: compileSnippet
-  api=5 type=1 insize=903 outsize=6 kw=POINT_COOKIE SHADOWS_CUBE _ALPHABLEND_ON ok=1
-Cmd: compileSnippet
-  api=9 type=1 insize=903 outsize=7 kw=DIRECTIONAL SHADOWS_SCREEN SHADOWS_NATIVE _ALPHABLEND_ON ok=1
-Cmd: compileSnippet
-  api=5 type=0 insize=685 outsize=1058 kw=SHADOWS_DEPTH _ALPHABLEND_ON ok=1
-Cmd: compileSnippet
-  api=5 type=1 insize=685 outsize=6 kw=SHADOWS_DEPTH _ALPHABLEND_ON ok=1
 Unhandled exception: Readfile from pipe failed. GLE=Канал был закрыт.
 
 

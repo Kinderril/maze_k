@@ -39,6 +39,7 @@ public class MazeController : MonoBehaviour {
 
 	void Start ()
 	{
+	    blocks = blocks.Where(x => x != null).ToList();
         obstacles = new List<Obstacle>();
         foreach (var block in blocks)
         {
