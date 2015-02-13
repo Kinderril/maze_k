@@ -108,10 +108,11 @@ public class GameController : MonoBehaviour
     }
 
 
-    private void onComplete(Vector3 startPos)
+    private void onComplete(Vector3 startPos,int sizeStatus)
     {
         ball.StartPlay(startPos,ctype);
         main_UI.InitUI(maze.seed);
+        Sec2Level = sizeStatus;
         //StartCoroutine(EndByTime(20));
     }
 
@@ -126,6 +127,12 @@ public class GameController : MonoBehaviour
                 EndGame();
             }
         }
+    }
+
+    public void PlusTime(int pl)
+    {
+        endTime += pl;
+        Sec2Level += pl;
     }
     
     public void GetStar()
@@ -145,7 +152,7 @@ public class GameController : MonoBehaviour
 
     public string GetCurSpendTime()
     {
-        return (Sec2Level -( Time.time - startTime)).ToString("00.0");
+        return (Sec2Level - (Time.time - startTime)).ToString("00.0");
     }
 
 

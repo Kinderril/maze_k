@@ -105,9 +105,10 @@ public class MazeBuilder
     private System.Random random;
     private int step = 0;
     private List<GridInfo> history = new List<GridInfo>();
+    public int mazeDifficalty = 1;
 
 
-    public MazeBuilder(Action<GridInfo[,], IntPos> onBuildComplete, int seed, int size, int maxStarCount,MazeController mcontroller)
+    public MazeBuilder(Action<GridInfo[,], IntPos,int> onBuildComplete, int seed, int size, int maxStarCount,MazeController mcontroller)
     {
         this.size = size;
         random = new System.Random(seed);
@@ -142,6 +143,23 @@ public class MazeBuilder
         SetNewStepT2(startPos, startPos);
         */
         //setting BlockElement
+        int wallsCount = 0;
+        int obstacleCount = 0;
+        for (int i = 0; i < size; i++)
+        {
+            for (int j = 0; j < size; j++)
+            {
+                if (grid[i, j].Cell == CellType.free)
+                    wallsCount++;
+                if (grid[i, j].obsParams != null)
+                {
+                    obstacleCount++;
+                }
+            }
+            
+        }
+        mazeDifficalty = wallsCount/5 + obstacleCount*2;
+        Debug.Log("wallsCount: " + wallsCount + " obstacleCount: " + obstacleCount + "  mazeDifficalty:" + mazeDifficalty);
         var stars = GetrandomList(maxStarCount-1,GetFreePos());
         if (stars.Count != maxStarCount)
         {
@@ -167,7 +185,7 @@ public class MazeBuilder
         
         Debug.Log("MazeBuilder start from " + startPos);
         //Debug.Log("finsish " + step);
-        onBuildComplete(grid, startPos);
+        onBuildComplete(grid, startPos, mazeDifficalty);
     }
 
     public List<T> GetrandomList<T>(int count, List<T> list, bool evenly = true)

@@ -131,7 +131,15 @@ public class MainUI : BaseWindow
         GameController.ResultController.PointsToSpend -= count;
         UpdateSpendLabel();
         return true;
-    } 
+    }
+
+    public void OnTimeClick()
+    {
+        if (CheckStars(9))
+        {
+            GameController.PlusTime(5);
+        }
+    }
 
     IEnumerator zooming()
     {

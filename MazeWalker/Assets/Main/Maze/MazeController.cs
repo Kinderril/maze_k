@@ -17,7 +17,7 @@ public class MazeController : MonoBehaviour {
     public int seed;
     private int size;
     private List<Obstacle> obstacles;
-    private Action<Vector3> onComplete;
+    private Action<Vector3,int> onComplete;
     public GameObject connector;
     private BlockElement freeBlock;
     public ParticleSystem wallDestroyEffect;
@@ -59,7 +59,7 @@ public class MazeController : MonoBehaviour {
 //        Debug.Log("Obstacle count = " + obstacles.Count);
 	}
 
-    public void Init(Action<Vector3> onComplete)
+    public void Init(Action<Vector3,int> onComplete)
     {
         this.onComplete = onComplete;
      //   if (block == null || Star == null)
@@ -75,7 +75,7 @@ public class MazeController : MonoBehaviour {
         mazeGrid = new MazeBuilder(OnBuildComplete, seed, size, stars,this);
     }
 
-    private void OnBuildComplete(GridInfo[,] grid_maze,IntPos startPos)
+    private void OnBuildComplete(GridInfo[,] grid_maze,IntPos startPos,int difficalty)
     {
         currentBlocks = new Dictionary<CellType, List<BlockElement>>();
         freeBlock = blocks.FirstOrDefault(x => x.type == CellType.free);
@@ -171,7 +171,7 @@ public class MazeController : MonoBehaviour {
             
         }
        // SeconProcess(grid_maze);
-        onComplete(new Vector3(startPos.I, 2, startPos.J));
+        onComplete(new Vector3(startPos.I, 2, startPos.J), difficalty);
         //SBall.transform.position = new Vector3(startPos.I ,2,startPos.J);
     }
 
