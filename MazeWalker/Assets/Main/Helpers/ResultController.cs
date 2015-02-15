@@ -10,6 +10,7 @@ public class ResultController
   //  public Dictionary<int, ResultLevel> list = new Dictionary<int, ResultLevel>(); 
 
     public const string RESULT_SAVE = "save_key";
+    public const string POSSIBLE_LEVEL = "POSSIBLE_LEVEL";
     public const char DELEMITER_HIGH = ':';
     public const string RESULT_SAVE_STARS2SPEND = "RESULT_SAVE_STARS2SPEND";
     public const string RESULT_SAVE_STARSCOLLECTED = "RESULT_SAVE_STARSCOLLECTED";
@@ -44,7 +45,7 @@ public class ResultController
         {
             starsCollected = value;
             PlayerPrefs.SetInt(RESULT_SAVE_STARSCOLLECTED, starsCollected);
-            CalcPosibleLevel();
+            //CalcPosibleLevel();
         }
     }
 
@@ -85,11 +86,19 @@ public class ResultController
         results = list;
         _pointsToSpend = PlayerPrefs.GetInt(RESULT_SAVE_STARS2SPEND, 0);
         starsCollected = PlayerPrefs.GetInt(RESULT_SAVE_STARSCOLLECTED, 0);
-        CalcPosibleLevel();
+        lastLevelNumber = PlayerPrefs.GetInt(POSSIBLE_LEVEL, 1);
+        //CalcPosibleLevel();
     }
 
     public void AddResult(float levelTime, int levelId, ControlType controlType, int starsCount)
     {
+        if (levelId == lastLevelNumber)
+        {
+            if (starsCount >= 4)
+            {
+                lastLevelNumber++;
+            }
+        }
         PointsToSpend += starsCount;
         var bsetResult = GetBestResultResult(levelId);
         int taken = starsCount;
@@ -113,6 +122,7 @@ public class ResultController
         {
             r.AddResultLevel(controlType, levelTime, taken);
         }
+
         lastResult = new LastResult(levelId, levelTime, starsCount, taken);
     //    lastResult.AddResultLevel(controlType, levelTime, starsCount, taken);
     }
@@ -122,6 +132,7 @@ public class ResultController
     {
         string ss = results.Aggregate("", (x, result) => x + (result.GetSaveString() + DELEMITER_HIGH));
         PlayerPrefs.SetString(RESULT_SAVE, ss);
+        PlayerPrefs.SetInt(POSSIBLE_LEVEL, lastLevelNumber);
     }
 
     public List<Result> Load()
@@ -164,8 +175,8 @@ public class ResultController
     {
         string ss = "Stars:" + starsCollected;
         ss += "\nPoints:" + _pointsToSpend;
-        ss += "\nLevel:" + (1+lastLevelNumber);
-        ss += "\nNext:" + NextLevelStarsNeed(lastLevelNumber + 1);
+        ss += "\nLevel:" + (lastLevelNumber);
+       // ss += "\nNext:" + NextLevelStarsNeed(lastLevelNumber + 1);
         return ss;
 
     }

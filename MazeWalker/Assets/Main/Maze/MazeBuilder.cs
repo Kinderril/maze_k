@@ -143,14 +143,14 @@ public class MazeBuilder
         SetNewStepT2(startPos, startPos);
         */
         //setting BlockElement
-        int wallsCount = 0;
+        int freeCount = 0;
         int obstacleCount = 0;
         for (int i = 0; i < size; i++)
         {
             for (int j = 0; j < size; j++)
             {
                 if (grid[i, j].Cell == CellType.free)
-                    wallsCount++;
+                    freeCount++;
                 if (grid[i, j].obsParams != null)
                 {
                     obstacleCount++;
@@ -158,8 +158,8 @@ public class MazeBuilder
             }
             
         }
-        mazeDifficalty = wallsCount/5 + obstacleCount*2;
-        Debug.Log("wallsCount: " + wallsCount + " obstacleCount: " + obstacleCount + "  mazeDifficalty:" + mazeDifficalty);
+        mazeDifficalty = freeCount/5 + obstacleCount*2;
+        Debug.Log("wallsCount: " + freeCount + " obstacleCount: " + obstacleCount + "  mazeDifficalty:" + mazeDifficalty);
         var stars = GetrandomList(maxStarCount-1,GetFreePos());
         if (stars.Count != maxStarCount)
         {

@@ -137,7 +137,7 @@ public class MainUI : BaseWindow
     {
         if (CheckStars(9))
         {
-            GameController.PlusTime(5);
+            GameController.PlusTime(10);
         }
     }
 
