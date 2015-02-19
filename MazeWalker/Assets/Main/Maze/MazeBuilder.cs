@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using Debug = UnityEngine.Debug;
 
 public struct IntPos
@@ -158,8 +159,8 @@ public class MazeBuilder
             }
             
         }
-        mazeDifficalty = (int)(freeCount/9f + obstacleCount*2.2f);
-        Debug.Log("wallsCount: " + freeCount + " obstacleCount: " + obstacleCount + "  mazeDifficalty:" + mazeDifficalty);
+        mazeDifficalty = (int)(freeCount/9f + obstacleCount*2.2f) + Mathf.Clamp(15 - seed,0,99);
+        Debug.Log("seed:" + seed + "wallsCount: " + freeCount + " obstacleCount: " + obstacleCount + "  mazeDifficalty:" + mazeDifficalty);
         var stars = GetrandomList(maxStarCount-1,GetFreePos());
         if (stars.Count != maxStarCount)
         {
