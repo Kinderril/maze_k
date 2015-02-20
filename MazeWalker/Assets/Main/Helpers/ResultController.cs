@@ -162,7 +162,7 @@ public class ResultController
 
     public int GetMazeSize(int number)
     {
-        int r = (int)(Mathf.Pow(Mathf.Log(number + 3), 2) * 1.45f + 14);
+        int r = (int)(Mathf.Pow(Mathf.Log(number + 3), 2) * 1.65f + 14);
         Debug.Log("Maze zise " + r + "   " + number);
         return r;
     }

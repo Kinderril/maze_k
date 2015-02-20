@@ -36,7 +36,8 @@ public class WindowStart : BaseWindow
     {
        // currentLevelField.text = curLevel + "";
         Result r = GameController.ResultController.GetBestResultResult(curLevel);
-        uiResultWindow.SetResult(r, curLevel);
+        int diff = GameController.ResultController.GetMazeSize(curLevel);
+        uiResultWindow.SetResult(r, curLevel, diff);
         /*
         if (r != null)
             selectedLevel.text = r.ToString();

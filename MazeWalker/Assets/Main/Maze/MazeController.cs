@@ -21,7 +21,8 @@ public class MazeController : MonoBehaviour {
     public GameObject connector;
     private BlockElement freeBlock;
     public ParticleSystem wallDestroyEffect;
-
+    public List<GameObject> currentWalls; 
+    private bool noWalls = false;
 
     private Dictionary<CellType, List<BlockElement>> currentBlocks;
 
@@ -77,6 +78,8 @@ public class MazeController : MonoBehaviour {
 
     private void OnBuildComplete(GridInfo[,] grid_maze,IntPos startPos,int difficalty)
     {
+        currentWalls = new List<GameObject>();
+        noWalls = Random.RandomRange(0f, 100f) <= 4f;
         currentBlocks = new Dictionary<CellType, List<BlockElement>>();
         freeBlock = blocks.FirstOrDefault(x => x.type == CellType.free);
         for (int i = 0; i < size; i++)
@@ -158,12 +161,14 @@ public class MazeController : MonoBehaviour {
                 {
                     if (gi.Id == 1)
                     {
+
                         GameObject go;
                         go = SetWall(gi,grid_maze, v, q);
                         if (go != null)
                         {
                             gi.isBuild = true;
                             go.transform.parent = WallContainer;
+                            currentWalls.Add(go);
                         }
                     }
                 }
@@ -217,6 +222,10 @@ public class MazeController : MonoBehaviour {
 
     private GameObject SetWall(GridInfo gi,GridInfo[,] obj,Vector3 v,Quaternion q)
     {
+        if (noWalls)
+        {
+            return null;
+        }
         int index;
         if (gi.pos.I > 0 && gi.pos.J > 0 && gi.pos.I < size-1 && gi.pos.J < size-1)
         {

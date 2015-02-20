@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -108,7 +109,23 @@ public class MainUI : BaseWindow
     {
         if (CheckStars(7))
         {
-            GameController.ball.BombActivate();
+            var pos = GameController.ball.transform.position;
+            
+            var list =
+                GameController.maze.currentWalls.Where(
+                    x => (x.transform.position - pos).sqrMagnitude < 2f).ToArray();
+           // Debug.Log("list " + list.Length + "    " + GameController.maze.walls.Count);
+            for (int i = 0; i < list.Length; i++)
+            {
+                var block = list[i];
+                Destroy(block.gameObject);
+                GameController.maze.SetFree(block.transform);
+                GameController.maze.currentWalls.Remove(block);
+                
+                //i--;
+                //IsPowerfull = false;
+            }
+            //GameController.ball.BombActivate();
         }
     }
 

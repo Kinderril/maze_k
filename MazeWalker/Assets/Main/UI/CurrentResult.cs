@@ -25,10 +25,11 @@ public class CurrentResult : MonoBehaviour {
         }
 
     }
-    public void SetResult(Result r,int levl)
+    public void SetResult(Result r,int levl,int size)
     {
        // Debug.Log("rrr " + levl);
-        levelNumber.text = "Level:" + levl;
+        
+        levelNumber.text = "Stage:" + levl + "("  +size+ ")";
         if (r != null)
         {
             int starsCount = r.GetBestStars();

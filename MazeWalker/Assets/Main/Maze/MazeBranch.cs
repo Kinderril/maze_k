@@ -27,6 +27,7 @@ public enum Side
 
 public class MazeBranch
 {
+    private const int ObstacleChance = 10;
     private GridInfo[,] grid;
     private Direction[] directions = new Direction[4] { new Direction(new IntPos(0, 1), Side.up), new Direction(new IntPos(1, 0), Side.right), new Direction(new IntPos(0, -1),Side.down), new Direction(new IntPos(-1, 0),Side.left) };
     private System.Random random;
@@ -77,7 +78,7 @@ public class MazeBranch
                     isObstalce = true;
                 }
                 if (isObstalce)
-                    isObstalce = random.Next(0, 100) < 9;
+                    isObstalce = random.Next(0, 100) < ObstacleChance;
                 if (isObstalce)
                 {
                     //Debug.Log("Do Obstacle: " + curPos + "  " + directions[i].intPos + " " + fromPos);
