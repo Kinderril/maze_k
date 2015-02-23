@@ -18,6 +18,7 @@ public class Ball : MonoBehaviour
     private bool isPowerfull = false;
     private float endBombTime;
     public GameObject bombBall;
+    public GameObject respawnObject;
 
     public bool IsPowerfull
     {
@@ -90,8 +91,15 @@ public class Ball : MonoBehaviour
     public void GetStar(BlockElement star)
     {
         gameController.GetStar();
-        respawnPoint = new Vector3(star.transform.position.x, star.transform.position.y + 4, star.transform.position.z); ;
+        SetRespawnPoint(star);
     }
+
+    public void SetRespawnPoint(BlockElement element)
+    {
+        respawnPoint = new Vector3(element.transform.position.x, element.transform.position.y + 4, element.transform.position.z);
+        respawnObject.transform.position = respawnPoint;
+        respawnObject.gameObject.SetActive(true);
+    } 
 
     public void ToRespawn()
     {
@@ -124,6 +132,7 @@ public class Ball : MonoBehaviour
         power = Mathf.Abs(power);
         StopVelocity();
         IsPowerfull = false;
+        respawnObject.gameObject.SetActive(false);
     }
 
     public void HitWall(BlockElement block)
