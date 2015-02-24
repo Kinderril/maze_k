@@ -1,0 +1,13 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# http://www.codeandweb.com/texturepacker/unity
+#
+# Sprite sheet: rv10.png (2048 x 2048)
+# $TexturePacker:SmartUpdate:02f0a566a1b7649619fca197760e7a59:22c8d5efb7414729ae5d821e638eb89f:81ee2e56814f384acc989f31d0086c5b$
+#
+
+raccoon Moving2;2;691;849;1355;0.5005889281507656;0.4988929889298893
+raccoon Moving3;853;691;849;1355;0.5005889281507656;0.4988929889298893
+raccoon Moving4;2;691;849;1355;0.5005889281507656;0.4988929889298893

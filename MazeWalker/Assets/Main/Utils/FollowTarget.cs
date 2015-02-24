@@ -9,6 +9,7 @@ using UnityEngine;
         private Action action;
         public Animator anim;
         private bool isAnim = false;
+        private Rigidbody targetRig;
 
         void Awake()
         {
@@ -20,6 +21,19 @@ using UnityEngine;
                     break;
                 case FollowType.xy:
                     action = XZFollow;
+                    break;
+                case FollowType.fullLook:
+                    targetRig = target.GetComponent<Rigidbody>();
+                    if (targetRig != null)
+                    {
+
+                        action = FullFollowLook;
+                    }
+                    else
+                    {
+                        action = FullFollow;
+                        
+                    }
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -35,6 +49,11 @@ using UnityEngine;
         private void FullFollow()
         {
             transform.position = target.position + offset;
+        }
+        private void FullFollowLook()
+        {
+            transform.position = target.position + offset;
+            transform.LookAt(new Vector3(transform.position.x + targetRig.angularVelocity.x, 0, transform.position.z + targetRig.angularVelocity.z));
         }
 
         private void XZFollow()
@@ -60,4 +79,5 @@ public enum FollowType
 {
     full,
     xy,
+    fullLook,
 }
