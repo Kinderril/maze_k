@@ -18,7 +18,6 @@ public class MainUI : BaseWindow
     public Text levelIdLabel;
     public Text TimeLabel;
     public Text spendLabel;
-    public Button buttonScale;
     public Button buttonExit;
 
 	// Update is called once per frame
@@ -26,11 +25,7 @@ public class MainUI : BaseWindow
 	{
 	    TimeLabel.text = GameController.GetCurSpendTime();
 	}
-
-    void OnEnable()
-    {
-        buttonScale.gameObject.SetActive(true);
-    }
+    
 
     public override void Init(GameController gc)
     {
@@ -136,6 +131,25 @@ public class MainUI : BaseWindow
             Time.timeScale = 1;
             buttonExit.gameObject.SetActive(false);
             StartCoroutine(zooming());
+        }
+    }
+
+    public void OnRespawnClick()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(GameController.ball.transform.position, -Vector3.up, out hit))
+        {
+            var wall = hit.collider.gameObject.GetComponent<BlockElement>();
+            if (wall != null)
+            {
+                if (wall.type == CellType.free)
+                {
+                    if (CheckStars(2))
+                    {
+                        GameController.ball.SetRespawnPoint(wall);
+                    }
+                }
+            }
         }
     }
 
