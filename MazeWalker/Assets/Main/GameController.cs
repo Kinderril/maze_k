@@ -59,7 +59,6 @@ public class GameController : MonoBehaviour
     {
         startTime = Time.time;
         curStars = 0;
-        ball.gameObject.SetActive(true);
         Debug.Log("StartGame " + ctype);
         bControls.enabled = sControls.enabled = gControls.enabled = false;
         switch (ctype)
@@ -77,7 +76,6 @@ public class GameController : MonoBehaviour
                 sControls.Init(ball);
                 break;
         }
-        ball.StartGame();
         maze.Init(onComplete);
         size = resultController.GetMazeSize(p);
         maze.BuildMaze(size, maxStars, p);
@@ -111,6 +109,8 @@ public class GameController : MonoBehaviour
 
     private void onComplete(Vector3 startPos,int sizeStatus)
     {
+        ball.gameObject.SetActive(true);
+        ball.StartGame();
         ball.StartPlay(startPos,ctype);
         main_UI.InitUI(maze.seed);
         Sec2Level = sizeStatus;

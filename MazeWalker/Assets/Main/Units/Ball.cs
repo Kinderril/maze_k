@@ -110,7 +110,11 @@ public class Ball : MonoBehaviour
     public void StopVelocity()
     {
         if (m_Rigidbody != null)
+        {
+            //m_Rigidbody.drag = Vector3.zero;
             m_Rigidbody.velocity = Vector3.zero;
+            m_Rigidbody.angularVelocity = Vector3.zero;
+        }
     }
 
     public void StartPlay(Vector3 startPos,ControlType control)
@@ -130,9 +134,9 @@ public class Ball : MonoBehaviour
     public void StartGame()
     {
         power = Mathf.Abs(power);
-        StopVelocity();
         IsPowerfull = false;
         respawnObject.gameObject.SetActive(false);
+        StopVelocity();
     }
 
     public void HitWall(BlockElement block)
