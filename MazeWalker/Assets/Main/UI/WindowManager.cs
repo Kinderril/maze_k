@@ -34,5 +34,10 @@ public class WindowManager
             item.gameObject.SetActive(false);
         }
     }
+
+    public static BaseWindow GetCurrent()
+    {
+        return curWindow;
+    }
 }
 

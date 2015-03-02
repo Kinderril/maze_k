@@ -159,7 +159,7 @@ public class MazeBuilder
             }
             
         }
-        mazeDifficalty = (int)(freeCount/9f + obstacleCount*2.6f) + Mathf.Clamp(15 - seed,0,99);
+        mazeDifficalty = (int)(freeCount/9f + obstacleCount*2.6f) + (int)(Mathf.Clamp(30 - seed,0,199)/1.7f) + 3;
         Debug.Log("seed:" + seed + "wallsCount: " + freeCount + " obstacleCount: " + obstacleCount + "  mazeDifficalty:" + mazeDifficalty);
         var stars = GetrandomList(maxStarCount-1,GetFreePos());
         if (stars.Count != maxStarCount)

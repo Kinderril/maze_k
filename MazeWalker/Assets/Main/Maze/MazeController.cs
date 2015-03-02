@@ -233,18 +233,34 @@ public class MazeController : MonoBehaviour {
         {
             return null;
         }
-        int index;
+        int index = 0;
         if (gi.pos.I > 0 && gi.pos.J > 0 && gi.pos.I < size-1 && gi.pos.J < size-1)
         {
-            if (obj[gi.pos.I + 1, gi.pos.J].Cell == CellType.wall && 
-                obj[gi.pos.I, gi.pos.J + 1].Cell == CellType.wall &&
-                obj[gi.pos.I - 1, gi.pos.J].Cell == CellType.wall && 
-                obj[gi.pos.I, gi.pos.J - 1].Cell == CellType.wall)
+            int boolCount = 0;
+            bool b1 = obj[gi.pos.I + 1, gi.pos.J].Cell == CellType.wall;
+            bool b2 = obj[gi.pos.I, gi.pos.J + 1].Cell == CellType.wall;
+            bool b3 = obj[gi.pos.I - 1, gi.pos.J].Cell == CellType.wall;
+            bool b4 = obj[gi.pos.I, gi.pos.J - 1].Cell == CellType.wall;
+            if (b1)
+                boolCount++;
+            if (b2)
+                boolCount++;
+            if (b3)
+                boolCount++;
+            if (b4)
+                boolCount++;
+            if (boolCount ==4)
             {
                 return null;
             }
+            if (boolCount == 0)
+            {
+                index = 1;
+            }
+
         }
-        index = Random.Range(0, walls.Count);
+
+
         //GameObject go  = ;
         //go.GetComponent<WallElement>().SetBuild(gi.pos.I, gi.pos.J);
         return Instantiate(walls[index].gameObject, v, q) as GameObject;

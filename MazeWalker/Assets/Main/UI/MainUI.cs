@@ -22,6 +22,7 @@ public class MainUI : BaseWindow
     public GameObject mainPart;
     public TimeOutPanel timeOutPart;
 
+    private bool isPause = false;
 	// Update is called once per frame
 	void Update ()
 	{
@@ -32,26 +33,33 @@ public class MainUI : BaseWindow
     public override void Init(GameController gc)
     {
         base.Init(gc);
-        for (int i = 0; i < gc.maxStars; i++)
+        if (!isPause)
         {
-            GameObject star2 = Instantiate(star.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
-            star2.transform.parent = starsParent.transform;
-            star2.transform.localPosition = new Vector3(47 * i - 100, -4.6f, 0);
-            allStars.Add(star2.GetComponent<StarContainer>());
-        }
-        foreach (var starContainer in allStars)
-        {
-            starContainer.Close();
-        }
-        for (int i = 0; i < gc.curStars; i++)
-        {
-            allStars[i].Open();
-        } 
-        UpdateSpendLabel();
+            for (int i = 0; i < gc.maxStars; i++)
+            {
+                GameObject star2 = Instantiate(star.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
+                star2.transform.parent = starsParent.transform;
+                star2.transform.localPosition = new Vector3(47 * i - 100, -4.6f, 0);
+                allStars.Add(star2.GetComponent<StarContainer>());
+            }
+            foreach (var starContainer in allStars)
+            {
+                starContainer.Close();
+            }
+            for (int i = 0; i < gc.curStars; i++)
+            {
+                allStars[i].Open();
+            }
+            UpdateSpendLabel();
 
-        mainPart.gameObject.SetActive(false);
-        timeOutPart.gameObject.SetActive(true);
-        timeOutPart.Init(gc, CountDown);
+            mainPart.gameObject.SetActive(false);
+            timeOutPart.gameObject.SetActive(true);
+            timeOutPart.Init(gc, CountDown);
+        }
+        else
+        {
+            isPause = false;
+        }
     }
 
     private void CountDown()
@@ -84,6 +92,7 @@ public class MainUI : BaseWindow
     public void OnPauseClick()
     {
         Debug.Log("OnPauseClick");
+        isPause = true;
         GameController.Pause();
     }
 
@@ -195,5 +204,10 @@ public class MainUI : BaseWindow
         GameController.mainCameraHolder.EndFly();
         GameController.mainCameraHolder.transform.position = new Vector3(a.x, yy, a.z);
     
-    }  
+    }
+
+    public void UnPause()
+    {
+        isPause = false;
+    }
 }

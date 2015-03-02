@@ -91,6 +91,7 @@ public class GameController : MonoBehaviour
 
     public void EndGame(bool withExitWindow = true)
     {
+        main_UI.UnPause();
         ball.gameObject.SetActive(false);
         if (withExitWindow)
         {
@@ -109,13 +110,19 @@ public class GameController : MonoBehaviour
 
     private void onComplete(Vector3 startPos,int sizeStatus)
     {
+
+        ball.StartPlay(startPos, ctype);
+        StartCoroutine(WaitStart(sizeStatus));
+    }
+
+    IEnumerator WaitStart(int sizeStatus)
+    {
+        yield return new WaitForSeconds(3);
         ball.gameObject.SetActive(true);
         ball.StartGame();
-        ball.StartPlay(startPos,ctype);
         main_UI.InitUI(maze.seed);
         Sec2Level = sizeStatus;
-        //StartCoroutine(EndByTime(20));
-    }
+    } 
 
    
     
