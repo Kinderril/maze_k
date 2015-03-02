@@ -27,7 +27,7 @@ public enum Side
 
 public class MazeBranch
 {
-    private const int ObstacleChance = 10;
+    private float ObstacleChance = 10;
     private GridInfo[,] grid;
     private Direction[] directions = new Direction[4] { new Direction(new IntPos(0, 1), Side.up), new Direction(new IntPos(1, 0), Side.right), new Direction(new IntPos(0, -1),Side.down), new Direction(new IntPos(-1, 0),Side.left) };
     private System.Random random;
@@ -45,6 +45,7 @@ public class MazeBranch
         this.random = random;
         this.size = size;
         brachLevel = prevBranchLevel + 1;
+        ObstacleChance = Mathf.Clamp(mazeController.seed - 20, 0f, 26f)/2f;
     }
 
     public void DoBranch(GridInfo curPos)

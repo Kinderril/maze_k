@@ -1,12 +1,15 @@
 ﻿
+using UnityEngine;
 using UnityEngine.UI;
 
 public class WindowEnd : BaseWindow
 {
     public Text cureentResult;
-    //public Text bestResult;
-    //public Text addStars;
-   // public Text addPoints;
+    public Text TimeText;
+    public Text pointsText;
+    public Text nextLevel;
+    public Color goodColor;
+    public Color badColor;
 
     public void OnOkClicked()
     {
@@ -24,9 +27,22 @@ public class WindowEnd : BaseWindow
         string str_best = " Best:" + best.GetBestStars();
         string points = "Points:" + gc.ResultController.PointsToSpend + "(+" + lastResult.addPoints + ")";
         string stars = "Stars:" + gc.ResultController.StarsCollected + "(+" + lastResult.addStars + ")";
+        if (best.GetBestStars() >= 4)
+        {
+            stars = "Great";
+            nextLevel.color = goodColor;
+        }
+        else
+        {
+            stars = "Try again";
+            nextLevel.color = badColor;
 
+        }
+        TimeText.text = time;
+        pointsText.text = points;
+        nextLevel.text = stars;
         string nn = "\n";
-        cureentResult.text = str_id +nn+ time+nn + stars +nn+ points + nn + str_best;
+        cureentResult.text = str_id;// +nn+ time+nn + stars +nn+ points + nn + str_best;
         //cureentResult.text = "Current:\n" + lastResult.ToString();
        // bestResult.text = "Best:\n" + best.ToString();
         gc.ResultController.Save();

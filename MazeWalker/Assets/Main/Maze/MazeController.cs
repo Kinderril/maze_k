@@ -73,13 +73,13 @@ public class MazeController : MonoBehaviour {
         this.size = size;
        // this.stars = stars;
         seed = isRandom <= 0 ? Random.Range(1, 99999) : isRandom;
+        noWalls = Random.Range(0f, 100f) <= 3f;
         mazeGrid = new MazeBuilder(OnBuildComplete, seed, size, stars,this);
     }
 
     private void OnBuildComplete(GridInfo[,] grid_maze,IntPos startPos,int difficalty)
     {
         currentWalls = new List<GameObject>();
-        noWalls = Random.RandomRange(0f, 100f) <= 4f;
         currentBlocks = new Dictionary<CellType, List<BlockElement>>();
         freeBlock = blocks.FirstOrDefault(x => x.type == CellType.free);
         for (int i = 0; i < size; i++)
@@ -176,6 +176,8 @@ public class MazeController : MonoBehaviour {
             
         }
        // SeconProcess(grid_maze);
+        if (noWalls)
+            difficalty = 999;
         onComplete(new Vector3(startPos.I, 2, startPos.J), difficalty);
         //SBall.transform.position = new Vector3(startPos.I ,2,startPos.J);
     }
@@ -201,6 +203,11 @@ public class MazeController : MonoBehaviour {
                 }
             }
         }
+    }
+
+    public bool IsBonusLevel()
+    {
+        return noWalls;
     }
 
     private void SetConnector(Vector3 p, bool side)

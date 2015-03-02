@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -58,9 +59,7 @@ public class WindowStart : BaseWindow
         //curLevel = Convert.ToInt32(currentLevelField.text);
         try
         {
-
             var results = gc.LoadResults();
-            //string r = results.Aggregate("", (current, result) => current + (result.ToStringAlternative() + "\n"));
             resultsText.text = gc.ResultController.GetOverview();
         }
         catch (Exception)

@@ -19,6 +19,8 @@ public class MainUI : BaseWindow
     public Text TimeLabel;
     public Text spendLabel;
     public Button buttonExit;
+    public GameObject mainPart;
+    public TimeOutPanel timeOutPart;
 
 	// Update is called once per frame
 	void Update ()
@@ -47,7 +49,17 @@ public class MainUI : BaseWindow
         } 
         UpdateSpendLabel();
 
+        mainPart.gameObject.SetActive(false);
+        timeOutPart.gameObject.SetActive(true);
+        timeOutPart.Init(gc, CountDown);
     }
+
+    private void CountDown()
+    {
+        mainPart.gameObject.SetActive(true);
+        timeOutPart.gameObject.SetActive(false);
+    }
+
 
     private void UpdateSpendLabel()
     {

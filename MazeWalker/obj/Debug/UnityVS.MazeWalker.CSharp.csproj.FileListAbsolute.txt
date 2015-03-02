@@ -20,3 +20,4 @@ C:\Rep_MazeK\MazeWalker\Temp\UnityVS_bin\Debug\UnityEngine.UI.xml
 C:\Rep_MazeK\MazeWalker\obj\Debug\UnityVS.MazeWalker.CSharp.csprojResolveAssemblyReference.cache
 C:\Rep_MazeK\MazeWalker\obj\Debug\Assembly-CSharp.dll
 C:\Rep_MazeK\MazeWalker\obj\Debug\Assembly-CSharp.pdb
+C:\Rep_MazeK\MazeWalker\Temp\UnityVS_bin\Debug\IFacebook.dll

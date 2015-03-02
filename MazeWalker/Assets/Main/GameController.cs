@@ -59,7 +59,6 @@ public class GameController : MonoBehaviour
     {
         startTime = Time.time;
         curStars = 0;
-        GameStage = GameStage.game;
         ball.gameObject.SetActive(true);
         Debug.Log("StartGame " + ctype);
         bControls.enabled = sControls.enabled = gControls.enabled = false;
@@ -81,7 +80,9 @@ public class GameController : MonoBehaviour
         ball.StartGame();
         maze.Init(onComplete);
         size = resultController.GetMazeSize(p);
-        maze.BuildMaze(size, maxStars,p);
+        maze.BuildMaze(size, maxStars, p);
+
+        GameStage = GameStage.game;
     }
 
     IEnumerator EndByTime(float waitTime)
