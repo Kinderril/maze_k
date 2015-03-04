@@ -45,7 +45,7 @@ public class MazeBranch
         this.random = random;
         this.size = size;
         brachLevel = prevBranchLevel + 1;
-        ObstacleChance = Mathf.Clamp(mazeController.seed - 20, 0f, 26f)/2f;
+        ObstacleChance = Mathf.Clamp(mazeController.seed - 3, 0f, 26f)/2f;
     }
 
     public void DoBranch(GridInfo curPos)
