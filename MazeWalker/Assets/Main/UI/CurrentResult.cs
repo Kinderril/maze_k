@@ -7,26 +7,23 @@ public class CurrentResult : MonoBehaviour {
 
     public Text levelNumber;
     public StarContainer star;
-    private List<StarContainer> stars = new List<StarContainer>();
+    public List<StarContainer> stars = new List<StarContainer>();
     public float step = 40f;
     public int starCount = 5;
     public float y_offset = 0f;
+    private bool isInited = false;
 
-    void Awake()
-    {
-        float leftOffset = -step * (starCount - 1) / 2;
-        for (int i = 0; i < starCount; i++)
-        {
-            StarContainer s = Instantiate(star);
-            s.transform.parent = this.transform;
-            stars.Add(s);
-            s.transform.localPosition = new Vector3(leftOffset + i * step, y_offset, 0);
-            s.Close();
-        }
-
-    }
     public void SetResult(Result r,int levl,int size)
     {
+        if (!isInited)
+        {
+            foreach (var starContainer in stars)
+            {
+                starContainer.Close();
+            }
+            isInited = true;
+
+        }
        // Debug.Log("rrr " + levl);
 
         levelNumber.text = "Stage:" + levl;// + "("  +size+ ")";

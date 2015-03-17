@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour
     private UIControls bControls;
     private GControls gControls;
     private SwipeControls sControls;
-    private ControlType ctype = ControlType.border;
+    private ControlType ctype = ControlType.gyroscope;
     public List<BaseWindow> allWindows = new List<BaseWindow>();
     private GameStage gameStage = GameStage.mainMenu;
     private float startTime;

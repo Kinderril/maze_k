@@ -11,9 +11,9 @@ public class MainUI : BaseWindow
     //public Text starlabel;
     //private int maxStars;
     //private GameController gameController;
-    public GameObject starsParent;
-    public StarContainer star = null;
-    List<StarContainer> allStars = new List<StarContainer>();
+    //public GameObject starsParent;
+    //public StarContainer star = null;
+    public List<StarContainer> allStars = new List<StarContainer>();
 
     public Text levelIdLabel;
     public Text TimeLabel;
@@ -35,6 +35,7 @@ public class MainUI : BaseWindow
         base.Init(gc);
         if (!isPause)
         {
+            /*
             for (int i = 0; i < gc.maxStars; i++)
             {
                 GameObject star2 = Instantiate(star.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
@@ -42,6 +43,8 @@ public class MainUI : BaseWindow
                 star2.transform.localPosition = new Vector3(47 * i - 100, -4.6f, 0);
                 allStars.Add(star2.GetComponent<StarContainer>());
             }
+            */
+
             foreach (var starContainer in allStars)
             {
                 starContainer.Close();
@@ -77,11 +80,13 @@ public class MainUI : BaseWindow
     public override void Dispose()
     {
         base.Dispose();
+        /*
         foreach (var a in allStars)
         {
             Destroy(a.gameObject);
         }
         allStars.Clear();
+         */ 
     }
 
     public void OnStartClick(Button btn)
