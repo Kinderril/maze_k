@@ -8,6 +8,7 @@ public class BlockElement : MonoBehaviour
     public int J;
     public int Id;
     public ParticleSystem psystem;
+    public Material material;
 
     public void Init(int i,int j)
     {
@@ -16,6 +17,10 @@ public class BlockElement : MonoBehaviour
         if (psystem != null)
         {
             psystem.gameObject.transform.parent = transform.parent;
+        }
+        if (type == CellType.free)
+        {
+            material = GetComponentInChildren<Renderer>().materials[1];
         }
     }
 

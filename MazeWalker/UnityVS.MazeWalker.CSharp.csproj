@@ -103,6 +103,7 @@
     <Compile Include="Assets\Main\Units\Ball.cs" />
     <Compile Include="Assets\Main\Units\BallChecker.cs" />
     <Compile Include="Assets\Main\Units\BlockElement.cs" />
+    <Compile Include="Assets\Main\Units\ShaderChecker.cs" />
     <Compile Include="Assets\Main\Units\WallContainer.cs" />
     <Compile Include="Assets\Main\Units\WallElement.cs" />
     <Compile Include="Assets\Main\Utils\CheckList.cs" />
@@ -178,6 +179,7 @@
     <None Include="Assets\Plugins\Android\facebook\res\values-ldpi\dimens.xml" />
     <None Include="Assets\Plugins\Android\facebook\res\values-mdpi\dimens.xml" />
     <None Include="Assets\Plugins\Android\facebook\res\values-xhdpi\dimens.xml" />
+    <None Include="Assets\Resorses\Shaders\PlaneShader.shader" />
     <None Include="Assets\SampleAssets\Effects\ToonShading\Shaders\ToonBasic.shader" />
     <None Include="Assets\SampleAssets\Effects\ToonShading\Shaders\ToonBasicOutline.shader" />
     <None Include="Assets\SampleAssets\Effects\ToonShading\Shaders\ToonLit.shader" />

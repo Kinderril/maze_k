@@ -175,6 +175,7 @@
     <None Include="Assets\Plugins\Android\facebook\res\values-ldpi\dimens.xml" />
     <None Include="Assets\Plugins\Android\facebook\res\values-mdpi\dimens.xml" />
     <None Include="Assets\Plugins\Android\facebook\res\values-xhdpi\dimens.xml" />
+    <None Include="Assets\Resorses\Shaders\PlaneShader.shader" />
     <None Include="Assets\SampleAssets\Effects\ToonShading\Shaders\ToonBasic.shader" />
     <None Include="Assets\SampleAssets\Effects\ToonShading\Shaders\ToonBasicOutline.shader" />
     <None Include="Assets\SampleAssets\Effects\ToonShading\Shaders\ToonLit.shader" />

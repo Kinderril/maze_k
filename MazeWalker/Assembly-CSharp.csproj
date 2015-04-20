@@ -39,10 +39,10 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>D:/Unity_RC4/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>E:/Unity5_RC4/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>D:/Unity_RC4/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>E:/Unity5_RC4/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +89,7 @@
      <Compile Include="Assets\Main\Units\Ball.cs" />
      <Compile Include="Assets\Main\Units\BallChecker.cs" />
      <Compile Include="Assets\Main\Units\BlockElement.cs" />
+     <Compile Include="Assets\Main\Units\ShaderChecker.cs" />
      <Compile Include="Assets\Main\Units\WallContainer.cs" />
      <Compile Include="Assets\Main\Units\WallElement.cs" />
      <Compile Include="Assets\Main\Utils\CheckList.cs" />
@@ -148,6 +149,7 @@
      <None Include="Assets\SampleAssets\ParticleSystems\Shaders\PriorityParticleAlpha.shader" />
      <None Include="Assets\Plugins\Android\facebook\res\values\drawables.xml" />
      <None Include="Assets\SampleAssets\ParticleSystems\ParticleSystemsGuidelines.txt" />
+     <None Include="Assets\Resorses\Shaders\PlaneShader.shader" />
      <None Include="Assets\Plugins\Android\facebook\res\values-iw\strings.xml" />
      <None Include="Assets\Plugins\Android\facebook\build.xml" />
      <None Include="Assets\SampleAssets\PhysicsMaterials\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
@@ -172,10 +174,10 @@
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_search_box.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_list_row.xml" />
  <Reference Include="UnityEngine.UI">
- <HintPath>D:/Unity_RC4/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ <HintPath>E:/Unity5_RC4/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="IFacebook">
- <HintPath>D:/Rep_MazeK/MazeWalker/Assets/Facebook/Scripts/IFacebook.dll</HintPath>
+ <HintPath>E:/UnityProjects/maze_k.git/MazeWalker/Assets/Facebook/Scripts/IFacebook.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -35,7 +35,7 @@ public class ResultController
         }
         catch (Exception)
         {
-            
+
         }
     }
     public int StarsCollected
@@ -76,7 +76,6 @@ public class ResultController
     }
     private void LoadResults()
     {
-        
         var list = new List<Result>();
         if (PlayerPrefs.HasKey(RESULT_SAVE))
         {
@@ -143,6 +142,7 @@ public class ResultController
 
     public void Clear()
     {
+        PlayerPrefs.SetInt(POSSIBLE_LEVEL, 1);
         PlayerPrefs.SetString(RESULT_SAVE, "");
         PlayerPrefs.SetInt(RESULT_SAVE_STARS2SPEND, 0);
         PlayerPrefs.SetInt(RESULT_SAVE_STARSCOLLECTED, 0);

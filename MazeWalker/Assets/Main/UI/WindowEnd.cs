@@ -10,6 +10,9 @@ public class WindowEnd : BaseWindow
     public Text nextLevel;
     public Color goodColor;
     public Color badColor;
+    public GameObject badResult;
+    public GameObject goodResult;
+    public GameObject greatResult;
 
     public void OnOkClicked()
     {
@@ -27,13 +30,30 @@ public class WindowEnd : BaseWindow
         string str_best = " Best:" + best.GetBestStars();
         string points = "Points:" + gc.ResultController.PointsToSpend + "(+" + lastResult.addPoints + ")";
         string stars = "Stars:" + gc.ResultController.StarsCollected + "(+" + lastResult.addStars + ")";
-        if (best.GetBestStars() >= 4)
+
+
+        greatResult.gameObject.SetActive(false);
+        goodResult.gameObject.SetActive(false);
+
+        if (lastResult.addStars >= 4)
         {
-            stars = "Great";
+            if (lastResult.addStars == 5)
+            {
+
+                stars = "Great";
+                greatResult.gameObject.SetActive(true);
+            }
+            else
+            {
+                stars = "Good";
+                greatResult.gameObject.SetActive(true);
+
+            }
             nextLevel.color = goodColor;
         }
         else
         {
+            goodResult.gameObject.SetActive(true);
             stars = "Try again";
             nextLevel.color = badColor;
 

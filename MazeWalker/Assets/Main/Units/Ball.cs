@@ -79,6 +79,7 @@ public class Ball : MonoBehaviour
 
     public void Init(GameController gameController)
     {
+        m_Rigidbody = GetComponent<Rigidbody>();
         StopVelocity();
         this.gameController = gameController;
     }
