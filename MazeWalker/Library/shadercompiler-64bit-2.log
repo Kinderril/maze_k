@@ -1,36 +1,6 @@
 Base path: D:/Unity_RC4/Editor/Data
-Pipe name: \\.\pipe\UnityShaderCompiler-64bit-2-2712
+Pipe name: \\.\pipe\UnityShaderCompiler-64bit-2-8524
 Cmd: getPlatforms
-Cmd: compileSnippet
-  api=9 type=0 insize=7614 outsize=4774 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF ok=1
-Cmd: compileSnippet
-  api=5 type=0 insize=7614 outsize=7159 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF VERTEXLIGHT_ON ok=1
-Cmd: compileSnippet
-  api=9 type=0 insize=7614 outsize=7101 kw=DIRECTIONAL SHADOWS_SCREEN SHADOWS_NATIVE LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF VERTEXLIGHT_ON ok=1
-Cmd: compileSnippet
-  api=5 type=1 insize=7614 outsize=6 kw=DIRECTIONAL SHADOWS_SCREEN SHADOWS_NATIVE LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF ok=1
-Cmd: compileSnippet
-  api=5 type=0 insize=4323 outsize=3761 kw=POINT ok=1
-Cmd: compileSnippet
-  api=5 type=0 insize=4323 outsize=3853 kw=POINT_COOKIE ok=1
-Cmd: compileSnippet
-  api=9 type=0 insize=4323 outsize=3679 kw=DIRECTIONAL_COOKIE ok=1
-Cmd: compileSnippet
-  api=9 type=1 insize=4323 outsize=7 kw=DIRECTIONAL ok=1
-Cmd: compileSnippet
-  api=9 type=1 insize=4323 outsize=7 kw=SPOT ok=1
-Cmd: compileSnippet
-  api=9 type=1 insize=4323 outsize=7 kw=DIRECTIONAL_COOKIE ok=1
-Cmd: compileSnippet
-  api=9 type=0 insize=3395 outsize=1455 kw= ok=1
-Cmd: compileSnippet
-  api=9 type=0 insize=6985 outsize=5854 kw=LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF HDR_LIGHT_PREPASS_OFF ok=1
-Cmd: compileSnippet
-  api=5 type=1 insize=6985 outsize=6 kw=LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF UNITY_HDR_ON ok=1
-Cmd: compileSnippet
-  api=9 type=0 insize=6651 outsize=4708 kw=LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF HDR_LIGHT_PREPASS_OFF ok=1
-Cmd: compileSnippet
-  api=9 type=1 insize=6651 outsize=7 kw=LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF HDR_LIGHT_PREPASS_OFF ok=1
 Unhandled exception: Readfile from pipe failed. GLE=Канал был закрыт.
 
 
