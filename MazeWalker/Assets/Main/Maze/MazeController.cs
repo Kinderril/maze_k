@@ -89,6 +89,7 @@ public class MazeController : MonoBehaviour {
                 GridInfo gi = grid_maze[i, j];
                 Quaternion q = Quaternion.identity;
                 Vector3 v = new Vector3(i, 0, j);
+
                 var b = blocks.FirstOrDefault(x => x.Id == gi.Id);
                 if (b != null)
                 {

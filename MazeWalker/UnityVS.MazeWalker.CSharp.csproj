@@ -52,9 +52,6 @@
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="IFacebook">
       <HintPath>Assets\Facebook\Scripts\IFacebook.dll</HintPath>
     </Reference>
@@ -103,6 +100,7 @@
     <Compile Include="Assets\Main\Units\Ball.cs" />
     <Compile Include="Assets\Main\Units\BallChecker.cs" />
     <Compile Include="Assets\Main\Units\BlockElement.cs" />
+    <Compile Include="Assets\Main\Units\FreeElement.cs" />
     <Compile Include="Assets\Main\Units\ShaderChecker.cs" />
     <Compile Include="Assets\Main\Units\WallContainer.cs" />
     <Compile Include="Assets\Main\Units\WallElement.cs" />
@@ -181,6 +179,7 @@
     <None Include="Assets\Plugins\Android\facebook\res\values-xhdpi\dimens.xml" />
     <None Include="Assets\Resorses\Shaders\Frensel.shader" />
     <None Include="Assets\Resorses\Shaders\PlaneShader.shader" />
+    <None Include="Assets\Resorses\Shaders\TimeDependesColor.shader" />
     <None Include="Assets\SampleAssets\Effects\ToonShading\Shaders\ToonBasic.shader" />
     <None Include="Assets\SampleAssets\Effects\ToonShading\Shaders\ToonBasicOutline.shader" />
     <None Include="Assets\SampleAssets\Effects\ToonShading\Shaders\ToonLit.shader" />

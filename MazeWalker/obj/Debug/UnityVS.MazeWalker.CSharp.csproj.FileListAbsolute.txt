@@ -21,3 +21,15 @@ C:\Rep_MazeK\MazeWalker\obj\Debug\UnityVS.MazeWalker.CSharp.csprojResolveAssembl
 C:\Rep_MazeK\MazeWalker\obj\Debug\Assembly-CSharp.dll
 C:\Rep_MazeK\MazeWalker\obj\Debug\Assembly-CSharp.pdb
 C:\Rep_MazeK\MazeWalker\Temp\UnityVS_bin\Debug\IFacebook.dll
+D:\Rep_MazeK\MazeWalker\Temp\UnityVS_bin\Debug\Assembly-CSharp.dll
+D:\Rep_MazeK\MazeWalker\Temp\UnityVS_bin\Debug\Assembly-CSharp.pdb
+D:\Rep_MazeK\MazeWalker\Temp\UnityVS_bin\Debug\IFacebook.dll
+D:\Rep_MazeK\MazeWalker\Temp\UnityVS_bin\Debug\UnityEditor.dll
+D:\Rep_MazeK\MazeWalker\Temp\UnityVS_bin\Debug\UnityEngine.dll
+D:\Rep_MazeK\MazeWalker\Temp\UnityVS_bin\Debug\UnityEngine.UI.dll
+D:\Rep_MazeK\MazeWalker\Temp\UnityVS_bin\Debug\UnityEngine.xml
+D:\Rep_MazeK\MazeWalker\Temp\UnityVS_bin\Debug\UnityEditor.xml
+D:\Rep_MazeK\MazeWalker\Temp\UnityVS_bin\Debug\UnityEngine.UI.xml
+D:\Rep_MazeK\MazeWalker\obj\Debug\UnityVS.MazeWalker.CSharp.csprojResolveAssemblyReference.cache
+D:\Rep_MazeK\MazeWalker\obj\Debug\Assembly-CSharp.dll
+D:\Rep_MazeK\MazeWalker\obj\Debug\Assembly-CSharp.pdb

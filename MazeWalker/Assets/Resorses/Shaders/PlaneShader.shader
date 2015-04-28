@@ -25,6 +25,7 @@
 			uniform float4 _ColorB;
 
             #include "UnityCG.cginc"
+
 			struct vertexInput {
 				float4 vertex : POSITION;
 			};

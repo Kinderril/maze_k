@@ -6,50 +6,36 @@ public class ShaderChecker : MonoBehaviour
 {
     public Material m;
     float time = 0;
-    /*void Update()
-    {
-        m.SetVector("_Pos", transform.position);
-    }*/
-	// Use this for initialization
-    public List<Material> materials = new List<Material>();
+
+    //public List<FreeElement> elements = new List<FreeElement>();
+
+
     void OnTriggerEnter(Collider other)
     {
         CheckAndDo(other,true);
     }
     
-    /*
+    
     void OnTriggerExit(Collider other)
     {
-        CheckAndDo(other,false);
+        //CheckAndDo(other,false);
     }
-    */
+    
     private void CheckAndDo(Collider other, bool add)
     {
-        
-        var block = other.GetComponent<BlockElement>();
+
+        var block = other.GetComponent<FreeElement>();
         if (block != null && block.type == CellType.free)
         {
+            block.DoAction(add);
+            /*
             if (add){
-                materials.Add(block.material);
+                elements.Add(block);
             }else{
-                materials.Remove(block.material);
-            }
+                elements.Remove(block);
+            }*/
         }
     }
 
-    void Update(){
-        time += Time.deltaTime * 10;
-        if (time > Mathf.PI*2){
-            time = 0;
-        }
-
-        foreach(var a in materials){
-            if (a != null)
-            {
-                a.SetVector("_Pos", transform.position);
-                //a.SetFloat("_TimeM", time);
-            }
-        }
-    }
     
 }
