@@ -133,6 +133,7 @@
     <Compile Include="Assets\SampleAssets\PhysicsMaterials\CrossPlatformInput\Scripts\VirtualInput.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\KY_effects\MagicEffectsPackFree\ReadMe.txt" />
     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
     <None Include="Assets\Plugins\Android\facebook\AndroidManifest.xml" />
     <None Include="Assets\Plugins\Android\facebook\bin\AndroidManifest.xml" />

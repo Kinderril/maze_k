@@ -10,7 +10,7 @@ public class Ball : MonoBehaviour
     private const float k_GroundRayLength = 1f; // The length of the ray to check if the ball is grounded.
     private Rigidbody m_Rigidbody;
     public GameController gameController;
-    private ParticleSystem emmiter;
+    public ParticleSystem emmiter;
     private Vector3 respawnPoint;
     public Vector3 andVelocity;
     public float emitRate = 10f;
@@ -39,7 +39,8 @@ public class Ball : MonoBehaviour
         //bombBall = GetComponentInChildren<MeshFilter>().gameObject;
         bombBall.SetActive(false);
         m_Rigidbody = GetComponent<Rigidbody>();
-        emmiter = GetComponentInChildren<ParticleSystem>();
+        if (emmiter == null)
+            emmiter = GetComponentInChildren<ParticleSystem>();
         // Set the maximum angular velocity.
         m_Rigidbody.maxAngularVelocity = m_MaxAngularVelocity;
     }

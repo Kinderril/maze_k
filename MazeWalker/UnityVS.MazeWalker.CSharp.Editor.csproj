@@ -94,6 +94,9 @@
     <Reference Include="UnityVS.VersionSpecific">
       <HintPath>Assets\Plugins\UnityVS\Editor\UnityVS.VersionSpecific.dll</HintPath>
     </Reference>
+    <Reference Include="Assembly-UnityScript">
+      <HintPath>Library\ScriptAssemblies\Assembly-UnityScript.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="UnityVS.MazeWalker.CSharp.csproj">
@@ -128,6 +131,7 @@
     <Compile Include="Assets\SampleAssets\PhysicsMaterials\CrossPlatformInput\Scripts\Editor\InputAxisScrollbarCI.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\KY_effects\MagicEffectsPackFree\ReadMe.txt" />
     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
     <None Include="Assets\Plugins\Android\facebook\AndroidManifest.xml" />
     <None Include="Assets\Plugins\Android\facebook\bin\AndroidManifest.xml" />

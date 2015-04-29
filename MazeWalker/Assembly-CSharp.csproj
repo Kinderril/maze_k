@@ -152,6 +152,7 @@
      <None Include="Assets\SampleAssets\ParticleSystems\Shaders\PriorityParticleAlpha.shader" />
      <None Include="Assets\Plugins\Android\facebook\res\values\drawables.xml" />
      <None Include="Assets\SampleAssets\ParticleSystems\ParticleSystemsGuidelines.txt" />
+     <None Include="Assets\KY_effects\MagicEffectsPackFree\ReadMe.txt" />
      <None Include="Assets\Resorses\Shaders\PlaneShader.shader" />
      <None Include="Assets\Plugins\Android\facebook\res\values-iw\strings.xml" />
      <None Include="Assets\Plugins\Android\facebook\build.xml" />

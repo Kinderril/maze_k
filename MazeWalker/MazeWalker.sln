@@ -5,6 +5,8 @@ Project("{40D45751-95F1-6DF6-3330-33AAEA102E42}") = "MazeWalker", "Assembly-CSha
 EndProject
 Project("{40D45751-95F1-6DF6-3330-33AAEA102E42}") = "MazeWalker", "Assembly-CSharp-Editor.csproj", "{5840DF47-B307-700B-80D4-F16163D58058}"
 EndProject
+Project("{40D45751-95F1-6DF6-3330-33AAEA102E42}") = "MazeWalker", "Assembly-UnityScript.unityproj", "{CE1E682E-5A91-8B1F-40A0-C651C7B79287}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,11 +21,15 @@ Global
 		{5840DF47-B307-700B-80D4-F16163D58058}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5840DF47-B307-700B-80D4-F16163D58058}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5840DF47-B307-700B-80D4-F16163D58058}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE1E682E-5A91-8B1F-40A0-C651C7B79287}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE1E682E-5A91-8B1F-40A0-C651C7B79287}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE1E682E-5A91-8B1F-40A0-C651C7B79287}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE1E682E-5A91-8B1F-40A0-C651C7B79287}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																																																																																																																														GlobalSection(MonoDevelopProperties) = preSolution
+																																																																																																																																																																GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
