@@ -23,6 +23,7 @@ public class GameController : MonoBehaviour
     private ResultController resultController;
     public FollowTarget mainCameraHolder;
     public FaceBookController faceBook;
+    public SettingsBeh settings;
     public int Sec2Level = 60;
    // private ResultLevel _lastLevelResultLevel;
 
@@ -47,6 +48,7 @@ public class GameController : MonoBehaviour
         bControls = maze.GetComponent<UIControls>();
         gControls = maze.GetComponent<GControls>();
         sControls = maze.GetComponent<SwipeControls>();
+        settings.gameController = this;
         resultController =new ResultController();
         ball.Init(this);
         WindowManager.Init(allWindows,this);
@@ -191,5 +193,14 @@ public class GameController : MonoBehaviour
         resultController.Clear();
     }
 
+    public void SettingsOn()
+    {
+        GameStage = GameStage.setting;
+    }
+
+    public void OnMainMenu()
+    {
+        GameStage = GameStage.mainMenu;
+    }
 }
 

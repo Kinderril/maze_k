@@ -8,6 +8,7 @@
 public enum GameStage
 {
     mainMenu,
+    setting,
     game,
     end,
     pause,

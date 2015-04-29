@@ -17,10 +17,7 @@ public class ResultController
     public int lastLevelNumber = 1;
     private int starsCollected;
     private int _pointsToSpend;
-
-
-
-
+    
     private LastResult lastResult;
     public LastResult LastResult
     {

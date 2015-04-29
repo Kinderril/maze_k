@@ -19,6 +19,11 @@ public class WindowStart : BaseWindow
         GameController.StartGame(curLevel);//randomButton.isOn?-1:Convert.ToInt32(randomNumberText.text));
     }
 
+    public void SettingOn()
+    {
+        GameController.SettingsOn();
+    }
+
     public void OnUpLevel()
     {
         if (curLevel < GameController.ResultController.lastLevelNumber)

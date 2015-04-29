@@ -39,10 +39,10 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>D:/Unity_RC4/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>E:/Unity5_RC4/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>D:/Unity_RC4/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>E:/Unity5_RC4/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +69,7 @@
      <Compile Include="Assets\Main\Helpers\LastResult.cs" />
      <Compile Include="Assets\Main\Helpers\Result.cs" />
      <Compile Include="Assets\Main\Helpers\ResultController.cs" />
+     <Compile Include="Assets\Main\Helpers\SettingsBeh.cs" />
      <Compile Include="Assets\Main\Maze\MazeBranch.cs" />
      <Compile Include="Assets\Main\Maze\MazeBuilder.cs" />
      <Compile Include="Assets\Main\Maze\MazeController.cs" />
@@ -79,12 +80,14 @@
      <Compile Include="Assets\Main\Maze\Obstacles\WhirlWind.cs" />
      <Compile Include="Assets\Main\UI\BaseWindow.cs" />
      <Compile Include="Assets\Main\UI\CurrentResult.cs" />
+     <Compile Include="Assets\Main\UI\IntBeh.cs" />
      <Compile Include="Assets\Main\UI\MainUI.cs" />
      <Compile Include="Assets\Main\UI\StarContainer.cs" />
      <Compile Include="Assets\Main\UI\TimeOutPanel.cs" />
      <Compile Include="Assets\Main\UI\WindowEnd.cs" />
      <Compile Include="Assets\Main\UI\WindowManager.cs" />
      <Compile Include="Assets\Main\UI\WindowPause.cs" />
+     <Compile Include="Assets\Main\UI\WindowSettings.cs" />
      <Compile Include="Assets\Main\UI\WindowStart.cs" />
      <Compile Include="Assets\Main\Units\Ball.cs" />
      <Compile Include="Assets\Main\Units\BallChecker.cs" />
@@ -178,10 +181,10 @@
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_search_box.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_list_row.xml" />
  <Reference Include="UnityEngine.UI">
- <HintPath>D:/Unity_RC4/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ <HintPath>E:/Unity5_RC4/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="IFacebook">
- <HintPath>D:/Rep_MazeK/MazeWalker/Assets/Facebook/Scripts/IFacebook.dll</HintPath>
+ <HintPath>E:/UnityProjects/maze_k.git/MazeWalker/Assets/Facebook/Scripts/IFacebook.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -80,6 +80,7 @@
     <Compile Include="Assets\Main\Helpers\LastResult.cs" />
     <Compile Include="Assets\Main\Helpers\Result.cs" />
     <Compile Include="Assets\Main\Helpers\ResultController.cs" />
+    <Compile Include="Assets\Main\Helpers\SettingsBeh.cs" />
     <Compile Include="Assets\Main\Maze\MazeBranch.cs" />
     <Compile Include="Assets\Main\Maze\MazeBuilder.cs" />
     <Compile Include="Assets\Main\Maze\MazeController.cs" />
@@ -90,12 +91,14 @@
     <Compile Include="Assets\Main\Maze\Obstacles\WhirlWind.cs" />
     <Compile Include="Assets\Main\UI\BaseWindow.cs" />
     <Compile Include="Assets\Main\UI\CurrentResult.cs" />
+    <Compile Include="Assets\Main\UI\IntBeh.cs" />
     <Compile Include="Assets\Main\UI\MainUI.cs" />
     <Compile Include="Assets\Main\UI\StarContainer.cs" />
     <Compile Include="Assets\Main\UI\TimeOutPanel.cs" />
     <Compile Include="Assets\Main\UI\WindowEnd.cs" />
     <Compile Include="Assets\Main\UI\WindowManager.cs" />
     <Compile Include="Assets\Main\UI\WindowPause.cs" />
+    <Compile Include="Assets\Main\UI\WindowSettings.cs" />
     <Compile Include="Assets\Main\UI\WindowStart.cs" />
     <Compile Include="Assets\Main\Units\Ball.cs" />
     <Compile Include="Assets\Main\Units\BallChecker.cs" />

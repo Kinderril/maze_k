@@ -136,6 +136,7 @@ public class Ball : MonoBehaviour
     public void StartGame()
     {
         power = Mathf.Abs(power);
+        GetComponent<Renderer>().material = gameController.settings.ballMaterials[gameController.settings.BallIndex];
         IsPowerfull = false;
         respawnObject.gameObject.SetActive(false);
         StopVelocity();
