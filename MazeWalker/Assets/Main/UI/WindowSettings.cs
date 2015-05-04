@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ public class WindowSettings : BaseWindow {
         var togglsList = ballToggle1.GetComponentsInChildren<Toggle>();
         foreach(var item in  togglsList)
         {
-            var pints2open = GameController.settings.pointsToOpen[i];
+            var pints2open = GameController.settings.pointsToOpen * i;
             bool isAvalable = (pints2open <= GameController.ResultController.StarsCollected);
             item.isOn = (i == GameController.settings.BallIndex && isAvalable);
             item.interactable = isAvalable;
@@ -35,7 +36,7 @@ public class WindowSettings : BaseWindow {
         var togglsList2 = trailToggle.GetComponentsInChildren<Toggle>();
         foreach (var item in togglsList2)
         {
-            var pints2open = GameController.settings.pointsToOpenTrails[i];
+            var pints2open = GameController.settings.pointsToOpenTrails * i;
             bool isAvalable = (pints2open <= GameController.ResultController.StarsCollected);
             item.isOn = (i == GameController.settings.TrailIndex && isAvalable);
             item.interactable = isAvalable;

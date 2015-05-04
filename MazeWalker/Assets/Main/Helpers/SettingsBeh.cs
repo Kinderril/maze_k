@@ -9,8 +9,8 @@ public class SettingsBeh : MonoBehaviour
     public GameController gameController;
     public List<Material> ballMaterials = new List<Material>();
     public List<GameObject> trails = new List<GameObject>();
-    public List<int> pointsToOpen = new List<int>();
-    public List<int> pointsToOpenTrails = new List<int>();
+    public int pointsToOpen = 10;
+    public int pointsToOpenTrails = 20;
     private int ballIndex = 0;
     private int trailIndex = 0;
 
