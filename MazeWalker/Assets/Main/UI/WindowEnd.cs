@@ -1,5 +1,6 @@
 ﻿
 using UnityEngine;
+using UnityEngine.Advertisements;
 using UnityEngine.UI;
 
 public class WindowEnd : BaseWindow
@@ -39,7 +40,6 @@ public class WindowEnd : BaseWindow
         {
             if (lastResult.addStars == 5)
             {
-
                 stars = "Great";
                 greatResult.gameObject.SetActive(true);
             }
@@ -68,11 +68,26 @@ public class WindowEnd : BaseWindow
         gc.ResultController.Save();
       //  addStars.text = " addStars:" + lastResult.addStars + "  addPoints:" + lastResult.addPoints;
       //  addPoints.text = " GetBestStars:" + best.GetBestStars();
+        int o = GameController.ResultController.StarsCollected % 4;
+        Debug.Log("lastResult.levelId % 2   " + o + "   Advertisement:" + Advertisement.isReady());
+        if (o == 0)
+        {
+            if (Advertisement.isReady())
+            {
+                Advertisement.Show();
+            }
+        }
     }
 
     public void OnFBClicked()
     {
         GameController.faceBook.SendImage();
+    }
+
+    public void OnRetryClicked()
+    {
+        var lastResult = GameController.ResultController.LastResult;
+        GameController.StartGame(lastResult.levelId);
     }
 }
 

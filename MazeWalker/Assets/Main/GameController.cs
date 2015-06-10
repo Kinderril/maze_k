@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Advertisements;
 
 public class GameController : MonoBehaviour
 {
@@ -55,6 +56,7 @@ public class GameController : MonoBehaviour
         WindowManager.WindowOn(startWindow);
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         faceBook = new FaceBookController();
+        Advertisement.Initialize("23042");
     }
 
     public void StartGame(int p)

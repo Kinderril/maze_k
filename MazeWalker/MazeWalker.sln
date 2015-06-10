@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 
 Project("{40D45751-95F1-6DF6-3330-33AAEA102E42}") = "MazeWalker", "Assembly-CSharp.csproj", "{438C37FE-2EAB-ECE5-141D-D47D8F8A4ECF}"
 EndProject
+Project("{40D45751-95F1-6DF6-3330-33AAEA102E42}") = "MazeWalker", "Assembly-CSharp-Editor-firstpass.csproj", "{F08D3445-6EC4-F249-701B-821FA71A34AC}"
+EndProject
 Project("{40D45751-95F1-6DF6-3330-33AAEA102E42}") = "MazeWalker", "Assembly-CSharp-Editor.csproj", "{5840DF47-B307-700B-80D4-F16163D58058}"
 EndProject
 Project("{40D45751-95F1-6DF6-3330-33AAEA102E42}") = "MazeWalker", "Assembly-UnityScript.unityproj", "{CE1E682E-5A91-8B1F-40A0-C651C7B79287}"
@@ -17,6 +19,10 @@ Global
 		{438C37FE-2EAB-ECE5-141D-D47D8F8A4ECF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{438C37FE-2EAB-ECE5-141D-D47D8F8A4ECF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{438C37FE-2EAB-ECE5-141D-D47D8F8A4ECF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F08D3445-6EC4-F249-701B-821FA71A34AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F08D3445-6EC4-F249-701B-821FA71A34AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F08D3445-6EC4-F249-701B-821FA71A34AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F08D3445-6EC4-F249-701B-821FA71A34AC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5840DF47-B307-700B-80D4-F16163D58058}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5840DF47-B307-700B-80D4-F16163D58058}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5840DF47-B307-700B-80D4-F16163D58058}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -29,7 +35,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																																																																																																																																			GlobalSection(MonoDevelopProperties) = preSolution
+			GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
@@ -42,6 +48,7 @@ Global
 		$0.TextStylePolicy = $3
 		$3.FileWidth = 120
 		$3.TabWidth = 4
+		$3.IndentWidth = 4
 		$3.EolMarker = Unix
 		$3.inheritsSet = Mono
 		$3.inheritsScope = text/plain
