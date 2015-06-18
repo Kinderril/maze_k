@@ -30,7 +30,7 @@ public class WindowEnd : BaseWindow
         string time = "Time:" + lastResult.levelTime.ToString("00.00");
         string str_best = " Best:" + best.GetBestStars();
         string points = "Points:" + gc.ResultController.PointsToSpend + "(+" + lastResult.addPoints + ")";
-        string stars = "Stars:" + gc.ResultController.StarsCollected + "(+" + lastResult.addStars + ")";
+        string stars = "Cookies:" + gc.ResultController.StarsCollected + "(+" + lastResult.addStars + ")";
 
 
         greatResult.gameObject.SetActive(false);

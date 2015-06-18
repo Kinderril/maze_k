@@ -170,7 +170,7 @@ public class ResultController
 
     public string GetOverview()
     {
-        string ss = "Stars: " + starsCollected;
+        string ss = "Cookies: " + starsCollected;
         ss += "\nPoints: " + _pointsToSpend;
        // ss += "\nLevel:" + (lastLevelNumber);
        // ss += "\nNext:" + NextLevelStarsNeed(lastLevelNumber + 1);
