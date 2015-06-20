@@ -15,6 +15,8 @@ public class ResultController
     public const string RESULT_SAVE_STARS2SPEND = "RESULT_SAVE_STARS2SPEND";
     public const string RESULT_SAVE_STARSCOLLECTED = "RESULT_SAVE_STARSCOLLECTED";
     public int lastLevelNumber = 1;
+    private int lastLevelNumberAds = 1;
+    private bool isSameLvl = false;
     private int starsCollected;
     private int _pointsToSpend;
     
@@ -46,6 +48,7 @@ public class ResultController
         }
     }
 
+    /*
     private void CalcPosibleLevel()
     {
         if (starsCollected == 0)
@@ -55,7 +58,7 @@ public class ResultController
             lastLevelNumber = (int) (Mathf.Pow(Mathf.Log(starsCollected + 4), 3)/3f);
           //  Debug.Log("lastLevelNumber " + lastLevelNumber + "  " + starsCollected);
         }
-    }
+    }*/
 
     private int NextLevelStarsNeed(int lvl)
     {
@@ -88,6 +91,15 @@ public class ResultController
 
     public void AddResult(float levelTime, int levelId, ControlType controlType, int starsCount)
     {
+        if (lastLevelNumberAds == levelId)
+        {
+            isSameLvl = true;
+        }
+        else
+        {
+            lastLevelNumberAds = levelId;
+            isSameLvl = false;
+        }
         if (levelId == lastLevelNumber)
         {
             if (starsCount >= 4)
@@ -123,6 +135,10 @@ public class ResultController
     //    lastResult.AddResultLevel(controlType, levelTime, starsCount, taken);
     }
 
+    public bool ShowAds()
+    {
+        return (!isSameLvl) && (lastLevelNumberAds%3 == 0);
+    }
 
     public void Save()
     {

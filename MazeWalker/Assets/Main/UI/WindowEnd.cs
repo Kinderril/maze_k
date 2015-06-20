@@ -62,15 +62,9 @@ public class WindowEnd : BaseWindow
         pointsText.text = points;
         nextLevel.text = stars;
         string nn = "\n";
-        cureentResult.text = str_id;// +nn+ time+nn + stars +nn+ points + nn + str_best;
-        //cureentResult.text = "Current:\n" + lastResult.ToString();
-       // bestResult.text = "Best:\n" + best.ToString();
+        cureentResult.text = str_id;
         gc.ResultController.Save();
-      //  addStars.text = " addStars:" + lastResult.addStars + "  addPoints:" + lastResult.addPoints;
-      //  addPoints.text = " GetBestStars:" + best.GetBestStars();
-        int o = GameController.ResultController.StarsCollected % 4;
-        Debug.Log("lastResult.levelId % 2   " + o + "   Advertisement:" + Advertisement.isReady());
-        if (o == 0)
+        if (GameController.ResultController.ShowAds())
         {
             if (Advertisement.isReady())
             {
